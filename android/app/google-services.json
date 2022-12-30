@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1030773986452",
+    "project_id": "electrokart-270ff",
+    "storage_bucket": "electrokart-270ff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1030773986452:android:2bd879af03c71c52c45081",
+        "android_client_info": {
+          "package_name": "com.mycompany.electrokart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1030773986452-5tefck9os11rrtgrt5h09jll3j8nt64q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.electrokart",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "1030773986452-2ivtcuorbkq0p8ri7lkafjsoq18mug6p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwqJy_E6_I_-qIp7ZFEsCNr2UfQpxuwLg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1030773986452-2ivtcuorbkq0p8ri7lkafjsoq18mug6p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1030773986452-jg9g1abir2huqi2ppup9t9qs2v4tvdrj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.electrokart"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
