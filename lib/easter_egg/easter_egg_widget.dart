@@ -68,8 +68,8 @@ class _EasterEggWidgetState extends State<EasterEggWidget>
             color: FlutterFlowTheme.of(context).primaryText,
             size: 30,
           ),
-          onPressed: () {
-            print('IconButton pressed ...');
+          onPressed: () async {
+            context.pop();
           },
         ),
         actions: [],
@@ -83,7 +83,7 @@ class _EasterEggWidgetState extends State<EasterEggWidget>
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 150, 0, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -105,7 +105,8 @@ class _EasterEggWidgetState extends State<EasterEggWidget>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     GradientText(
-                      'ElectroKart Developed By Stevevhan Myers',
+                      'ElectroKart Developed By \nStevevhan Myers',
+                      textAlign: TextAlign.center,
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
                             fontSize: 16,
@@ -127,9 +128,9 @@ class _EasterEggWidgetState extends State<EasterEggWidget>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(10, 0, 30, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
                       child: Text(
-                        'ElectroKart is a personal marketplace \ndesigned  to facilitate the resale of new \nand used tech and foster ommunication \nbetween buyers an sellers.',
+                        'ElectroKart is a personal marketplace \ndesigned  to facilitate the resale of new \nand used tech and foster communication \nbetween buyers an sellers.',
                         maxLines: 5,
                         style: FlutterFlowTheme.of(context).bodyText1,
                       ),
@@ -138,13 +139,13 @@ class _EasterEggWidgetState extends State<EasterEggWidget>
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'AND MAYBE ALSO HELP TO REDUCE\n OUR CARBON FOOT PRINT? : )',
+                      'AND MAYBE ALSO HELP TO REDUCE\n OUR CARBON FOOT PRINT : )',
                       maxLines: 4,
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Poppins',
