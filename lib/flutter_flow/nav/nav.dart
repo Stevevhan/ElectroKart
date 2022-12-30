@@ -169,6 +169,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'searchpage',
               path: 'searchpage',
               builder: (context, params) => SearchpageWidget(),
+            ),
+            FFRoute(
+              name: 'Easter_Egg',
+              path: 'easterEgg',
+              builder: (context, params) => EasterEggWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

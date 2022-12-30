@@ -12,3 +12,4 @@ export 'chat_page/chat_page_widget.dart' show ChatPageWidget;
 export 'all_chats/all_chats_widget.dart' show AllChatsWidget;
 export 'cart_page/cart_page_widget.dart' show CartPageWidget;
 export 'searchpage/searchpage_widget.dart' show SearchpageWidget;
+export 'easter_egg/easter_egg_widget.dart' show EasterEggWidget;

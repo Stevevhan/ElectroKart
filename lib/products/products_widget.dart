@@ -72,11 +72,25 @@ class _ProductsWidgetState extends State<ProductsWidget> {
         automaticallyImplyLeading: false,
         title: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
-          child: Image.asset(
-            'assets/images/LogoMakr-6UzfuU.png',
-            width: 254.7,
-            height: 65.2,
-            fit: BoxFit.scaleDown,
+          child: InkWell(
+            onLongPress: () async {
+              context.pushNamed(
+                'Easter_Egg',
+                extra: <String, dynamic>{
+                  kTransitionInfoKey: TransitionInfo(
+                    hasTransition: true,
+                    transitionType: PageTransitionType.scale,
+                    alignment: Alignment.bottomCenter,
+                  ),
+                },
+              );
+            },
+            child: Image.asset(
+              'assets/images/LogoMakr-6UzfuU.png',
+              width: 254.7,
+              height: 65.2,
+              fit: BoxFit.scaleDown,
+            ),
           ),
         ),
         actions: [
