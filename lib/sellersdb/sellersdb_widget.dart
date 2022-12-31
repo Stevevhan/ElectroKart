@@ -332,7 +332,7 @@ class _SellersdbWidgetState extends State<SellersdbWidget> {
                                                                 .spaceBetween,
                                                         children: [
                                                           Text(
-                                                            listViewSoldRecord
+                                                            menuItemProductsRecord
                                                                 .status!,
                                                             style: FlutterFlowTheme
                                                                     .of(context)

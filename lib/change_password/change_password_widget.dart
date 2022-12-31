@@ -168,7 +168,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                       controller: emaillinkController,
                       obscureText: false,
                       decoration: InputDecoration(
-                        labelText: 'Email adress here',
+                        labelText: 'Email address here',
                         labelStyle:
                             FlutterFlowTheme.of(context).bodyText2.override(
                                   fontFamily: 'Poppins',

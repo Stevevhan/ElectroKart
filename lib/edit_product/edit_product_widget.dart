@@ -304,7 +304,7 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                       : null;
                               return FlutterFlowDropDown<String>(
                                 initialOption: statusDropDownValue ??=
-                                    statusDropDownSoldRecord!.status,
+                                    editProductProductsRecord.status,
                                 options: [
                                   'Available',
                                   'Sold',
