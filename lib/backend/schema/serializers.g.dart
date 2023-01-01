@@ -14,6 +14,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(PurchasedRecord.serializer)
       ..add(ReviewsRecord.serializer)
       ..add(SoldRecord.serializer)
+      ..add(TosRecord.serializer)
       ..add(UsersRecord.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [

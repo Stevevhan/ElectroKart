@@ -805,8 +805,23 @@ class _LoginWidgetState extends State<LoginWidget> {
                                               .doc(user.uid)
                                               .update(usersCreateData);
 
-                                          context.goNamedAuth(
-                                              'Products', mounted);
+                                          await Future.delayed(const Duration(
+                                              milliseconds: 500));
+
+                                          context.pushNamedAuth(
+                                            'termsOfservice',
+                                            mounted,
+                                            extra: <String, dynamic>{
+                                              kTransitionInfoKey:
+                                                  TransitionInfo(
+                                                hasTransition: true,
+                                                transitionType:
+                                                    PageTransitionType.fade,
+                                                duration:
+                                                    Duration(milliseconds: 0),
+                                              ),
+                                            },
+                                          );
                                         },
                                         text: 'Create Account',
                                         options: FFButtonOptions(

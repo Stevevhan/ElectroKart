@@ -174,6 +174,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'Easter_Egg',
               path: 'easterEgg',
               builder: (context, params) => EasterEggWidget(),
+            ),
+            FFRoute(
+              name: 'termsOfservice',
+              path: 'termsOfservice',
+              builder: (context, params) => TermsOfserviceWidget(),
+            ),
+            FFRoute(
+              name: 'termsOfserviceCopy',
+              path: 'termsOfserviceCopy',
+              builder: (context, params) => TermsOfserviceCopyWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),
