@@ -15,3 +15,5 @@ export 'searchpage/searchpage_widget.dart' show SearchpageWidget;
 export 'easter_egg/easter_egg_widget.dart' show EasterEggWidget;
 export 'terms_ofservice/terms_ofservice_widget.dart' show TermsOfserviceWidget;
 export 'verify_email/verify_email_widget.dart' show VerifyEmailWidget;
+export 'onboarding/onboarding_widget.dart' show OnboardingWidget;
+export 'report/report_widget.dart' show ReportWidget;

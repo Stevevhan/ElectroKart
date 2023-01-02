@@ -184,6 +184,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'Verify_Email',
               path: 'verifyEmail',
               builder: (context, params) => VerifyEmailWidget(),
+            ),
+            FFRoute(
+              name: 'Onboarding',
+              path: 'onboarding',
+              builder: (context, params) => OnboardingWidget(),
+            ),
+            FFRoute(
+              name: 'Report',
+              path: 'report',
+              builder: (context, params) => ReportWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

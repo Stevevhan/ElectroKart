@@ -1,4 +1,5 @@
 import '../auth/auth_util.dart';
+import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -27,6 +28,20 @@ class _VerifyEmailWidgetState extends State<VerifyEmailWidget> {
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         automaticallyImplyLeading: false,
+        leading: FlutterFlowIconButton(
+          borderColor: Colors.transparent,
+          borderRadius: 30,
+          borderWidth: 1,
+          buttonSize: 60,
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: FlutterFlowTheme.of(context).primaryText,
+            size: 30,
+          ),
+          onPressed: () async {
+            context.pop();
+          },
+        ),
         title: Text(
           'Email Verification',
           style: FlutterFlowTheme.of(context).title2.override(
@@ -63,8 +78,6 @@ class _VerifyEmailWidgetState extends State<VerifyEmailWidget> {
             child: FFButtonWidget(
               onPressed: () async {
                 await sendEmailVerification();
-                GoRouter.of(context).prepareAuthEvent();
-                await signOut();
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(
@@ -78,7 +91,7 @@ class _VerifyEmailWidgetState extends State<VerifyEmailWidget> {
                   ),
                 );
 
-                context.goNamedAuth('Login', mounted);
+                context.pushNamed('Login');
               },
               text: 'Verify',
               options: FFButtonOptions(

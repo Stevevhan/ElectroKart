@@ -825,21 +825,12 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                         currentUserReference!)
                                                     .set(tosCreateData);
                                                 if (!currentUserEmailVerified) {
+                                                  GoRouter.of(context)
+                                                      .prepareAuthEvent();
+                                                  await signOut();
+
                                                   context.pushNamedAuth(
-                                                    'Verify_Email',
-                                                    mounted,
-                                                    extra: <String, dynamic>{
-                                                      kTransitionInfoKey:
-                                                          TransitionInfo(
-                                                        hasTransition: true,
-                                                        transitionType:
-                                                            PageTransitionType
-                                                                .fade,
-                                                        duration: Duration(
-                                                            milliseconds: 0),
-                                                      ),
-                                                    },
-                                                  );
+                                                      'Verify_Email', mounted);
                                                 }
                                               },
                                         text: 'Create Account',

@@ -407,7 +407,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 5),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -453,6 +453,37 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget> {
                                 },
                               ),
                             ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (productDetailsProductsRecord.sellerid !=
+                                currentUserReference)
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(15, 0, 0, 0),
+                                child: InkWell(
+                                  onTap: () async {
+                                    context.pushNamed('Report');
+                                  },
+                                  child: Text(
+                                    'REPORT',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Poppins',
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
+                                        ),
+                                  ),
+                                ),
+                              ),
                           ],
                         ),
                       ),
