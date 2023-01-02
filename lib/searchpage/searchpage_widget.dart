@@ -1,5 +1,4 @@
 import '../backend/backend.dart';
-import '../components/empty_list_widget.dart';
 import '../flutter_flow/flutter_flow_autocomplete_options_list.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -69,142 +68,146 @@ class _SearchpageWidgetState extends State<SearchpageWidget> {
                       ),
                     ),
                     Expanded(
-                      child: StreamBuilder<List<ProductsRecord>>(
-                        stream: queryProductsRecord(
-                          singleRecord: true,
-                        ),
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: SpinKitCubeGrid(
-                                  color: Color(0xFFFFCA00),
-                                  size: 20,
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
+                        child: StreamBuilder<List<ProductsRecord>>(
+                          stream: queryProductsRecord(
+                            singleRecord: true,
+                          ),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 30,
+                                  height: 30,
+                                  child: SpinKitDualRing(
+                                    color: Color(0xFFFFCA00),
+                                    size: 30,
+                                  ),
                                 ),
-                              ),
+                              );
+                            }
+                            List<ProductsRecord> textFieldProductsRecordList =
+                                snapshot.data!;
+                            // Return an empty Container when the item does not exist.
+                            if (snapshot.data!.isEmpty) {
+                              return Container();
+                            }
+                            final textFieldProductsRecord =
+                                textFieldProductsRecordList.isNotEmpty
+                                    ? textFieldProductsRecordList.first
+                                    : null;
+                            return Autocomplete<String>(
+                              initialValue: TextEditingValue(),
+                              optionsBuilder: (textEditingValue) {
+                                if (textEditingValue.text == '') {
+                                  return const Iterable<String>.empty();
+                                }
+                                return ['Option 1'].where((option) {
+                                  final lowercaseOption = option.toLowerCase();
+                                  return lowercaseOption.contains(
+                                      textEditingValue.text.toLowerCase());
+                                });
+                              },
+                              optionsViewBuilder:
+                                  (context, onSelected, options) {
+                                return AutocompleteOptionsList(
+                                  textFieldKey: textFieldKey,
+                                  textController: textController!,
+                                  options: options.toList(),
+                                  onSelected: onSelected,
+                                  textStyle:
+                                      FlutterFlowTheme.of(context).bodyText1,
+                                  textHighlightStyle: TextStyle(),
+                                  elevation: 4,
+                                  optionBackgroundColor:
+                                      FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                  optionHighlightColor:
+                                      FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                  maxHeight: 200,
+                                );
+                              },
+                              onSelected: (String selection) {
+                                setState(
+                                    () => textFieldSelectedOption = selection);
+                                FocusScope.of(context).unfocus();
+                              },
+                              fieldViewBuilder: (
+                                context,
+                                textEditingController,
+                                focusNode,
+                                onEditingComplete,
+                              ) {
+                                textController = textEditingController;
+                                return TextFormField(
+                                  key: textFieldKey,
+                                  controller: textEditingController,
+                                  focusNode: focusNode,
+                                  onEditingComplete: onEditingComplete,
+                                  onChanged: (_) => EasyDebounce.debounce(
+                                    'textController',
+                                    Duration(milliseconds: 2000),
+                                    () => setState(() {}),
+                                  ),
+                                  autofocus: true,
+                                  obscureText: false,
+                                  decoration: InputDecoration(
+                                    hintText: 'Search...',
+                                    hintStyle:
+                                        FlutterFlowTheme.of(context).bodyText2,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    suffixIcon: textController!.text.isNotEmpty
+                                        ? InkWell(
+                                            onTap: () async {
+                                              textController?.clear();
+                                              setState(() {});
+                                            },
+                                            child: Icon(
+                                              Icons.clear,
+                                              color: Color(0xFFF5BC2E),
+                                              size: 22,
+                                            ),
+                                          )
+                                        : null,
+                                  ),
+                                  style: FlutterFlowTheme.of(context).bodyText1,
+                                );
+                              },
                             );
-                          }
-                          List<ProductsRecord> textFieldProductsRecordList =
-                              snapshot.data!;
-                          // Return an empty Container when the item does not exist.
-                          if (snapshot.data!.isEmpty) {
-                            return Container();
-                          }
-                          final textFieldProductsRecord =
-                              textFieldProductsRecordList.isNotEmpty
-                                  ? textFieldProductsRecordList.first
-                                  : null;
-                          return Autocomplete<String>(
-                            initialValue: TextEditingValue(),
-                            optionsBuilder: (textEditingValue) {
-                              if (textEditingValue.text == '') {
-                                return const Iterable<String>.empty();
-                              }
-                              return ['Option 1'].where((option) {
-                                final lowercaseOption = option.toLowerCase();
-                                return lowercaseOption.contains(
-                                    textEditingValue.text.toLowerCase());
-                              });
-                            },
-                            optionsViewBuilder: (context, onSelected, options) {
-                              return AutocompleteOptionsList(
-                                textFieldKey: textFieldKey,
-                                textController: textController!,
-                                options: options.toList(),
-                                onSelected: onSelected,
-                                textStyle:
-                                    FlutterFlowTheme.of(context).bodyText1,
-                                textHighlightStyle: TextStyle(),
-                                elevation: 4,
-                                optionBackgroundColor:
-                                    FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                optionHighlightColor:
-                                    FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                maxHeight: 200,
-                              );
-                            },
-                            onSelected: (String selection) {
-                              setState(
-                                  () => textFieldSelectedOption = selection);
-                              FocusScope.of(context).unfocus();
-                            },
-                            fieldViewBuilder: (
-                              context,
-                              textEditingController,
-                              focusNode,
-                              onEditingComplete,
-                            ) {
-                              textController = textEditingController;
-                              return TextFormField(
-                                key: textFieldKey,
-                                controller: textEditingController,
-                                focusNode: focusNode,
-                                onEditingComplete: onEditingComplete,
-                                onChanged: (_) => EasyDebounce.debounce(
-                                  'textController',
-                                  Duration(milliseconds: 2000),
-                                  () => setState(() {}),
-                                ),
-                                autofocus: true,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  hintText: 'Search...',
-                                  hintStyle:
-                                      FlutterFlowTheme.of(context).bodyText2,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryColor,
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryColor,
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                  suffixIcon: textController!.text.isNotEmpty
-                                      ? InkWell(
-                                          onTap: () async {
-                                            textController?.clear();
-                                            setState(() {});
-                                          },
-                                          child: Icon(
-                                            Icons.clear,
-                                            color: Color(0xFFF5BC2E),
-                                            size: 22,
-                                          ),
-                                        )
-                                      : null,
-                                ),
-                                style: FlutterFlowTheme.of(context).bodyText1,
-                              );
-                            },
-                          );
-                        },
+                          },
+                        ),
                       ),
                     ),
                     FlutterFlowIconButton(
@@ -281,11 +284,11 @@ class _SearchpageWidgetState extends State<SearchpageWidget> {
                                   if (!snapshot.hasData) {
                                     return Center(
                                       child: SizedBox(
-                                        width: 20,
-                                        height: 20,
-                                        child: SpinKitCubeGrid(
+                                        width: 30,
+                                        height: 30,
+                                        child: SpinKitDualRing(
                                           color: Color(0xFFFFCA00),
-                                          size: 20,
+                                          size: 30,
                                         ),
                                       ),
                                     );
@@ -293,13 +296,6 @@ class _SearchpageWidgetState extends State<SearchpageWidget> {
                                   List<ProductsRecord>
                                       listViewProductsRecordList =
                                       snapshot.data!;
-                                  if (listViewProductsRecordList.isEmpty) {
-                                    return EmptyListWidget(
-                                      message1: 'No Ads',
-                                      message2: 'You haven\'t listed any Ads.',
-                                      buttontext: 'Post Ad',
-                                    );
-                                  }
                                   return ListView.builder(
                                     padding: EdgeInsets.zero,
                                     primary: false,
@@ -323,11 +319,11 @@ class _SearchpageWidgetState extends State<SearchpageWidget> {
                                             if (!snapshot.hasData) {
                                               return Center(
                                                 child: SizedBox(
-                                                  width: 20,
-                                                  height: 20,
-                                                  child: SpinKitCubeGrid(
+                                                  width: 30,
+                                                  height: 30,
+                                                  child: SpinKitDualRing(
                                                     color: Color(0xFFFFCA00),
-                                                    size: 20,
+                                                    size: 30,
                                                   ),
                                                 ),
                                               );

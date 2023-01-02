@@ -3,6 +3,7 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,6 +21,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   TextEditingController? emailAddressCreateController;
   TextEditingController? passwordCreateController;
   late bool passwordCreateVisibility;
+  bool? tOFcheckValue;
   TextEditingController? emailAddressController;
   TextEditingController? passwordController;
   late bool passwordVisibility;
@@ -330,8 +332,13 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                   return;
                                                 }
 
-                                                context.goNamedAuth(
-                                                    'Products', mounted);
+                                                if (currentUserEmailVerified) {
+                                                  context.pushNamedAuth(
+                                                      'Products', mounted);
+                                                } else {
+                                                  context.pushNamedAuth(
+                                                      'Verify_Email', mounted);
+                                                }
                                               },
                                               text: 'Sign In',
                                               options: FFButtonOptions(
@@ -450,7 +457,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      24, 24, 24, 24),
+                                      24, 24, 24, 0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
@@ -782,47 +789,59 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         ),
                                       ),
                                       FFButtonWidget(
-                                        onPressed: () async {
-                                          GoRouter.of(context)
-                                              .prepareAuthEvent();
+                                        onPressed: tOFcheckValue != true
+                                            ? null
+                                            : () async {
+                                                GoRouter.of(context)
+                                                    .prepareAuthEvent();
 
-                                          final user =
-                                              await createAccountWithEmail(
-                                            context,
-                                            emailAddressCreateController!.text,
-                                            passwordCreateController!.text,
-                                          );
-                                          if (user == null) {
-                                            return;
-                                          }
+                                                final user =
+                                                    await createAccountWithEmail(
+                                                  context,
+                                                  emailAddressCreateController!
+                                                      .text,
+                                                  passwordCreateController!
+                                                      .text,
+                                                );
+                                                if (user == null) {
+                                                  return;
+                                                }
 
-                                          final usersCreateData =
-                                              createUsersRecordData(
-                                            displayName:
-                                                displayNameController!.text,
-                                          );
-                                          await UsersRecord.collection
-                                              .doc(user.uid)
-                                              .update(usersCreateData);
+                                                final usersCreateData =
+                                                    createUsersRecordData(
+                                                  displayName:
+                                                      displayNameController!
+                                                          .text,
+                                                );
+                                                await UsersRecord.collection
+                                                    .doc(user.uid)
+                                                    .update(usersCreateData);
 
-                                          await Future.delayed(const Duration(
-                                              milliseconds: 500));
-
-                                          context.pushNamedAuth(
-                                            'termsOfservice',
-                                            mounted,
-                                            extra: <String, dynamic>{
-                                              kTransitionInfoKey:
-                                                  TransitionInfo(
-                                                hasTransition: true,
-                                                transitionType:
-                                                    PageTransitionType.fade,
-                                                duration:
-                                                    Duration(milliseconds: 0),
-                                              ),
-                                            },
-                                          );
-                                        },
+                                                final tosCreateData =
+                                                    createTosRecordData(
+                                                  termsofservice: tOFcheckValue,
+                                                );
+                                                await TosRecord.createDoc(
+                                                        currentUserReference!)
+                                                    .set(tosCreateData);
+                                                if (!currentUserEmailVerified) {
+                                                  context.pushNamedAuth(
+                                                    'Verify_Email',
+                                                    mounted,
+                                                    extra: <String, dynamic>{
+                                                      kTransitionInfoKey:
+                                                          TransitionInfo(
+                                                        hasTransition: true,
+                                                        transitionType:
+                                                            PageTransitionType
+                                                                .fade,
+                                                        duration: Duration(
+                                                            milliseconds: 0),
+                                                      ),
+                                                    },
+                                                  );
+                                                }
+                                              },
                                         text: 'Create Account',
                                         options: FFButtonOptions(
                                           width: 230,
@@ -844,16 +863,83 @@ class _LoginWidgetState extends State<LoginWidget> {
                                             color: Colors.transparent,
                                             width: 1,
                                           ),
+                                          disabledColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .grayIcon,
                                         ),
                                       ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            20, 0, 20, 12),
+                                            20, 20, 20, 0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [],
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(20, 0, 0, 0),
+                                              child: Theme(
+                                                data: ThemeData(
+                                                  checkboxTheme:
+                                                      CheckboxThemeData(
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              0),
+                                                    ),
+                                                  ),
+                                                  unselectedWidgetColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .grayIcon,
+                                                ),
+                                                child: Checkbox(
+                                                  value: tOFcheckValue ??=
+                                                      false,
+                                                  onChanged: (newValue) async {
+                                                    setState(() =>
+                                                        tOFcheckValue =
+                                                            newValue!);
+                                                  },
+                                                  activeColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primaryColor,
+                                                ),
+                                              ),
+                                            ),
+                                            InkWell(
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                  'termsOfservice',
+                                                  extra: <String, dynamic>{
+                                                    kTransitionInfoKey:
+                                                        TransitionInfo(
+                                                      hasTransition: true,
+                                                      transitionType:
+                                                          PageTransitionType
+                                                              .fade,
+                                                    ),
+                                                  },
+                                                );
+                                              },
+                                              child: Text(
+                                                'I\'ve read and agree to these \nTerms Of Service',
+                                                maxLines: 2,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          decoration:
+                                                              TextDecoration
+                                                                  .underline,
+                                                        ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],

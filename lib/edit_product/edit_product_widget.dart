@@ -55,11 +55,11 @@ class _EditProductWidgetState extends State<EditProductWidget> {
         if (!snapshot.hasData) {
           return Center(
             child: SizedBox(
-              width: 20,
-              height: 20,
-              child: SpinKitCubeGrid(
+              width: 30,
+              height: 30,
+              child: SpinKitDualRing(
                 color: Color(0xFFFFCA00),
-                size: 20,
+                size: 30,
               ),
             ),
           );
@@ -77,11 +77,11 @@ class _EditProductWidgetState extends State<EditProductWidget> {
               if (!snapshot.hasData) {
                 return Center(
                   child: SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: SpinKitCubeGrid(
+                    width: 30,
+                    height: 30,
+                    child: SpinKitDualRing(
                       color: Color(0xFFFFCA00),
-                      size: 20,
+                      size: 30,
                     ),
                   ),
                 );
@@ -283,11 +283,11 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                               if (!snapshot.hasData) {
                                 return Center(
                                   child: SizedBox(
-                                    width: 20,
-                                    height: 20,
-                                    child: SpinKitCubeGrid(
+                                    width: 30,
+                                    height: 30,
+                                    child: SpinKitDualRing(
                                       color: Color(0xFFFFCA00),
-                                      size: 20,
+                                      size: 30,
                                     ),
                                   ),
                                 );
@@ -539,11 +539,11 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                     if (!snapshot.hasData) {
                                       return Center(
                                         child: SizedBox(
-                                          width: 20,
-                                          height: 20,
-                                          child: SpinKitCubeGrid(
+                                          width: 30,
+                                          height: 30,
+                                          child: SpinKitDualRing(
                                             color: Color(0xFFFFCA00),
-                                            size: 20,
+                                            size: 30,
                                           ),
                                         ),
                                       );
@@ -611,11 +611,11 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                             if (!snapshot.hasData) {
                               return Center(
                                 child: SizedBox(
-                                  width: 20,
-                                  height: 20,
-                                  child: SpinKitCubeGrid(
+                                  width: 30,
+                                  height: 30,
+                                  child: SpinKitDualRing(
                                     color: Color(0xFFFFCA00),
-                                    size: 20,
+                                    size: 30,
                                   ),
                                 ),
                               );

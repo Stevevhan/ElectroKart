@@ -361,6 +361,55 @@ class _AccountWidgetState extends State<AccountWidget> {
                     ],
                   ),
                 ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        shape: BoxShape.rectangle,
+                      ),
+                      child: InkWell(
+                        onTap: () async {
+                          context.pushNamed(
+                            'termsOfservice',
+                            extra: <String, dynamic>{
+                              kTransitionInfoKey: TransitionInfo(
+                                hasTransition: true,
+                                transitionType: PageTransitionType.fade,
+                              ),
+                            },
+                          );
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(24, 0, 0, 0),
+                              child: Text(
+                                'Terms of Service',
+                                style: FlutterFlowTheme.of(context).bodyText1,
+                              ),
+                            ),
+                            Expanded(
+                              child: Align(
+                                alignment: AlignmentDirectional(0.9, 0),
+                                child: Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: Color(0xFF95A1AC),
+                                  size: 18,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 1, 0, 0),
                   child: Row(
@@ -460,55 +509,6 @@ class _AccountWidgetState extends State<AccountWidget> {
                       ),
                     ],
                   ),
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        shape: BoxShape.rectangle,
-                      ),
-                      child: InkWell(
-                        onTap: () async {
-                          context.pushNamed(
-                            'termsOfserviceCopy',
-                            extra: <String, dynamic>{
-                              kTransitionInfoKey: TransitionInfo(
-                                hasTransition: true,
-                                transitionType: PageTransitionType.fade,
-                              ),
-                            },
-                          );
-                        },
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(24, 0, 0, 0),
-                              child: Text(
-                                'Terms of Service',
-                                style: FlutterFlowTheme.of(context).bodyText1,
-                              ),
-                            ),
-                            Expanded(
-                              child: Align(
-                                alignment: AlignmentDirectional(0.9, 0),
-                                child: Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: Color(0xFF95A1AC),
-                                  size: 18,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),

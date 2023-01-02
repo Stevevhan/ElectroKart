@@ -181,9 +181,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => TermsOfserviceWidget(),
             ),
             FFRoute(
-              name: 'termsOfserviceCopy',
-              path: 'termsOfserviceCopy',
-              builder: (context, params) => TermsOfserviceCopyWidget(),
+              name: 'Verify_Email',
+              path: 'verifyEmail',
+              builder: (context, params) => VerifyEmailWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),
@@ -358,9 +358,12 @@ class FFRoute {
           final child = appStateNotifier.loading
               ? Container(
                   color: FlutterFlowTheme.of(context).primaryBackground,
-                  child: Image.asset(
-                    'assets/images/LogoMakr-8J2EEZ.png',
-                    fit: BoxFit.contain,
+                  child: Center(
+                    child: Image.asset(
+                      'assets/images/LogoMakr-8J2EEZ.png',
+                      width: MediaQuery.of(context).size.width * 0.7,
+                      fit: BoxFit.fitWidth,
+                    ),
                   ),
                 )
               : page;

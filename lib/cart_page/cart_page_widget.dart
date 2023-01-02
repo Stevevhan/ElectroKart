@@ -105,11 +105,11 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                                   if (!snapshot.hasData) {
                                     return Center(
                                       child: SizedBox(
-                                        width: 20,
-                                        height: 20,
-                                        child: SpinKitCubeGrid(
+                                        width: 30,
+                                        height: 30,
+                                        child: SpinKitDualRing(
                                           color: Color(0xFFFFCA00),
-                                          size: 20,
+                                          size: 30,
                                         ),
                                       ),
                                     );
@@ -313,13 +313,13 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                                                       if (!snapshot.hasData) {
                                                         return Center(
                                                           child: SizedBox(
-                                                            width: 20,
-                                                            height: 20,
+                                                            width: 30,
+                                                            height: 30,
                                                             child:
-                                                                SpinKitCubeGrid(
+                                                                SpinKitDualRing(
                                                               color: Color(
                                                                   0xFFFFCA00),
-                                                              size: 20,
+                                                              size: 30,
                                                             ),
                                                           ),
                                                         );
