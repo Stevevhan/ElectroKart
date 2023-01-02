@@ -1,3 +1,4 @@
+import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -37,10 +38,8 @@ class _ReportWidgetState extends State<ReportWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return StreamBuilder<List<ProductsRecord>>(
-      stream: queryProductsRecord(
-        singleRecord: true,
-      ),
+    return StreamBuilder<UsersRecord>(
+      stream: UsersRecord.getDocument(currentUserReference!),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -55,14 +54,7 @@ class _ReportWidgetState extends State<ReportWidget> {
             ),
           );
         }
-        List<ProductsRecord> reportProductsRecordList = snapshot.data!;
-        // Return an empty Container when the item does not exist.
-        if (snapshot.data!.isEmpty) {
-          return Container();
-        }
-        final reportProductsRecord = reportProductsRecordList.isNotEmpty
-            ? reportProductsRecordList.first
-            : null;
+        final reportUsersRecord = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -186,7 +178,7 @@ class _ReportWidgetState extends State<ReportWidget> {
                         scheme: 'mailto',
                         path: 'electrokart876@gmail.com',
                         query: {
-                          'subject': reportProductsRecord!.name!,
+                          'subject': reportUsersRecord.displayName!,
                           'body': textController!.text,
                         }
                             .entries
