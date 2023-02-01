@@ -78,6 +78,7 @@ class _VerifyEmailWidgetState extends State<VerifyEmailWidget> {
             child: FFButtonWidget(
               onPressed: () async {
                 await sendEmailVerification();
+                await Future.delayed(const Duration(milliseconds: 5000));
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(

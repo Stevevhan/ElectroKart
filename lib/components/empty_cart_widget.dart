@@ -31,7 +31,7 @@ class _EmptyCartWidgetState extends State<EmptyCartWidget> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(
-          Icons.remove_shopping_cart_outlined,
+          Icons.favorite_border,
           color: Color(0xFF7C8791),
           size: 90,
         ),

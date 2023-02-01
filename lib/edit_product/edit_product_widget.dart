@@ -68,58 +68,6 @@ class _EditProductWidgetState extends State<EditProductWidget> {
         return Scaffold(
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-          floatingActionButton: StreamBuilder<List<SoldRecord>>(
-            stream: querySoldRecord(
-              singleRecord: true,
-            ),
-            builder: (context, snapshot) {
-              // Customize what your widget looks like when it's loading.
-              if (!snapshot.hasData) {
-                return Center(
-                  child: SizedBox(
-                    width: 30,
-                    height: 30,
-                    child: SpinKitDualRing(
-                      color: Color(0xFFFFCA00),
-                      size: 30,
-                    ),
-                  ),
-                );
-              }
-              List<SoldRecord> floatingActionButtonSoldRecordList =
-                  snapshot.data!;
-              // Return an empty Container when the item does not exist.
-              if (snapshot.data!.isEmpty) {
-                return Container();
-              }
-              final floatingActionButtonSoldRecord =
-                  floatingActionButtonSoldRecordList.isNotEmpty
-                      ? floatingActionButtonSoldRecordList.first
-                      : null;
-              return FloatingActionButton(
-                onPressed: () async {
-                  await floatingActionButtonSoldRecord!.reference.delete();
-
-                  context.pushNamed(
-                    'sellersdb',
-                    extra: <String, dynamic>{
-                      kTransitionInfoKey: TransitionInfo(
-                        hasTransition: true,
-                        transitionType: PageTransitionType.fade,
-                      ),
-                    },
-                  );
-                },
-                backgroundColor: Color(0xFF2500FF),
-                elevation: 8,
-                child: Icon(
-                  Icons.delete,
-                  color: Color(0xFFF5BC2E),
-                  size: 30,
-                ),
-              );
-            },
-          ),
           appBar: AppBar(
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
             automaticallyImplyLeading: false,
@@ -343,7 +291,8 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                               'Smartphone',
                               'Laptop',
                               'Smartwatch',
-                              'Desktop PC'
+                              'Desktop PC',
+                              'Other'
                             ],
                             onChanged: (val) =>
                                 setState(() => categoryDropDownValue = val),

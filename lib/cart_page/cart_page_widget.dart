@@ -39,7 +39,7 @@ class _CartPageWidgetState extends State<CartPageWidget> {
         title: Align(
           alignment: AlignmentDirectional(0, 0),
           child: GradientText(
-            'My Cart',
+            'Favorites',
             textAlign: TextAlign.center,
             style: FlutterFlowTheme.of(context).title1.override(
                   fontFamily: 'Lato',
@@ -71,8 +71,9 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                     final products = FFAppState().cart.toList();
                     if (products.isEmpty) {
                       return EmptyCartWidget(
-                        message1: 'Empty',
-                        message2: 'You haven\'t added any items to your cart',
+                        message1: 'No Favorites',
+                        message2:
+                            'You haven\'t added any items to your favorites',
                         buttontext: 'add ',
                       );
                     }

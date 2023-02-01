@@ -117,29 +117,6 @@ class _ProductsWidgetState extends State<ProductsWidget> {
               );
             },
           ),
-          FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30,
-            borderWidth: 1,
-            buttonSize: 60,
-            fillColor: Color(0x00E0E3E7),
-            icon: Icon(
-              Icons.shopping_cart_outlined,
-              color: Color(0xFF2500FF),
-              size: 30,
-            ),
-            onPressed: () async {
-              context.pushNamed(
-                'cart_page',
-                extra: <String, dynamic>{
-                  kTransitionInfoKey: TransitionInfo(
-                    hasTransition: true,
-                    transitionType: PageTransitionType.fade,
-                  ),
-                },
-              );
-            },
-          ),
         ],
         centerTitle: false,
         elevation: 2,
@@ -270,7 +247,8 @@ class _ProductsWidgetState extends State<ProductsWidget> {
                         'Smartphone',
                         'Laptop',
                         'Smartwatch',
-                        'Desktop PC'
+                        'Desktop PC',
+                        'Other'
                       ],
                       onChanged: (val) => setState(() => dropDownValue2 = val),
                       width: 140,

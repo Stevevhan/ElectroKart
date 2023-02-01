@@ -32,6 +32,16 @@ export 'schema/cart_record.dart';
 export 'schema/tos_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
+Future<int> queryUsersRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      UsersRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
 Stream<List<UsersRecord>> queryUsersRecord({
   Query Function(Query)? queryBuilder,
   int limit = -1,
@@ -74,6 +84,16 @@ Future<FFFirestorePage<UsersRecord>> queryUsersRecordPage({
     );
 
 /// Functions to query ProductsRecords (as a Stream and as a Future).
+Future<int> queryProductsRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      ProductsRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
 Stream<List<ProductsRecord>> queryProductsRecord({
   Query Function(Query)? queryBuilder,
   int limit = -1,
@@ -116,6 +136,17 @@ Future<FFFirestorePage<ProductsRecord>> queryProductsRecordPage({
     );
 
 /// Functions to query ReviewsRecords (as a Stream and as a Future).
+Future<int> queryReviewsRecordCount({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      ReviewsRecord.collection(parent),
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
 Stream<List<ReviewsRecord>> queryReviewsRecord({
   DocumentReference? parent,
   Query Function(Query)? queryBuilder,
@@ -161,6 +192,17 @@ Future<FFFirestorePage<ReviewsRecord>> queryReviewsRecordPage({
     );
 
 /// Functions to query PurchasedRecords (as a Stream and as a Future).
+Future<int> queryPurchasedRecordCount({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      PurchasedRecord.collection(parent),
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
 Stream<List<PurchasedRecord>> queryPurchasedRecord({
   DocumentReference? parent,
   Query Function(Query)? queryBuilder,
@@ -206,6 +248,17 @@ Future<FFFirestorePage<PurchasedRecord>> queryPurchasedRecordPage({
     );
 
 /// Functions to query SoldRecords (as a Stream and as a Future).
+Future<int> querySoldRecordCount({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      SoldRecord.collection(parent),
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
 Stream<List<SoldRecord>> querySoldRecord({
   DocumentReference? parent,
   Query Function(Query)? queryBuilder,
@@ -251,6 +304,16 @@ Future<FFFirestorePage<SoldRecord>> querySoldRecordPage({
     );
 
 /// Functions to query ChatsRecords (as a Stream and as a Future).
+Future<int> queryChatsRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      ChatsRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
 Stream<List<ChatsRecord>> queryChatsRecord({
   Query Function(Query)? queryBuilder,
   int limit = -1,
@@ -293,6 +356,16 @@ Future<FFFirestorePage<ChatsRecord>> queryChatsRecordPage({
     );
 
 /// Functions to query ChatMessagesRecords (as a Stream and as a Future).
+Future<int> queryChatMessagesRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      ChatMessagesRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
 Stream<List<ChatMessagesRecord>> queryChatMessagesRecord({
   Query Function(Query)? queryBuilder,
   int limit = -1,
@@ -335,6 +408,16 @@ Future<FFFirestorePage<ChatMessagesRecord>> queryChatMessagesRecordPage({
     );
 
 /// Functions to query CartRecords (as a Stream and as a Future).
+Future<int> queryCartRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      CartRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
 Stream<List<CartRecord>> queryCartRecord({
   Query Function(Query)? queryBuilder,
   int limit = -1,
@@ -377,6 +460,17 @@ Future<FFFirestorePage<CartRecord>> queryCartRecordPage({
     );
 
 /// Functions to query TosRecords (as a Stream and as a Future).
+Future<int> queryTosRecordCount({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      TosRecord.collection(parent),
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
 Stream<List<TosRecord>> queryTosRecord({
   DocumentReference? parent,
   Query Function(Query)? queryBuilder,
@@ -420,6 +514,22 @@ Future<FFFirestorePage<TosRecord>> queryTosRecordPage({
       pageSize: pageSize,
       isStream: isStream,
     );
+
+Future<int> queryCollectionCount(
+  Query collection, {
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) {
+  final builder = queryBuilder ?? (q) => q;
+  var query = builder(collection);
+  if (limit > 0) {
+    query = query.limit(limit);
+  }
+
+  return query.count().get().catchError((err) {
+    print('Error querying $collection: $err');
+  }).then((value) => value.count);
+}
 
 Stream<List<T>> queryCollection<T>(Query collection, Serializer<T> serializer,
     {Query Function(Query)? queryBuilder,

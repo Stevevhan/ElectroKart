@@ -432,9 +432,6 @@ class _AccountWidgetState extends State<AccountWidget> {
                           ),
                           child: StreamBuilder<List<ProductsRecord>>(
                             stream: queryProductsRecord(
-                              queryBuilder: (productsRecord) =>
-                                  productsRecord.where('sellerid',
-                                      isEqualTo: currentUserReference),
                               singleRecord: true,
                             ),
                             builder: (context, snapshot) {
@@ -453,10 +450,6 @@ class _AccountWidgetState extends State<AccountWidget> {
                               }
                               List<ProductsRecord> rowProductsRecordList =
                                   snapshot.data!;
-                              // Return an empty Container when the item does not exist.
-                              if (snapshot.data!.isEmpty) {
-                                return Container();
-                              }
                               final rowProductsRecord =
                                   rowProductsRecordList.isNotEmpty
                                       ? rowProductsRecordList.first
@@ -493,7 +486,6 @@ class _AccountWidgetState extends State<AccountWidget> {
                                           false;
                                   if (confirmDialogResponse) {
                                     await deleteUser(context);
-                                    await rowProductsRecord!.reference.delete();
 
                                     context.pushNamed('Login');
                                   } else {

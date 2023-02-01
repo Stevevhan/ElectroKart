@@ -181,7 +181,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                                   uploadedFileUrl,
                                   width: double.infinity,
                                   height: double.infinity,
-                                  fit: BoxFit.fill,
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
@@ -344,7 +344,8 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                               'Smartphone',
                               'Laptop',
                               'Smartwatch',
-                              'Desktop PC'
+                              'Desktop PC',
+                              'Other'
                             ],
                             onChanged: (val) =>
                                 setState(() => categoryDropDownValue = val),

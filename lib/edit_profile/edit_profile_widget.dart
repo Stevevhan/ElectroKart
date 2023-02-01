@@ -11,6 +11,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
@@ -28,6 +29,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
 
   TextEditingController? yourNameController;
   TextEditingController? youremailaddressController;
+  TextEditingController? yourphoneController;
+  final yourphoneMask = MaskTextInputFormatter(mask: '(###) ###-##-##');
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -36,6 +39,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
     super.initState();
     yourNameController = TextEditingController(text: currentUserDisplayName);
     youremailaddressController = TextEditingController(text: currentUserEmail);
+    yourphoneController = TextEditingController(text: currentPhoneNumber);
   }
 
   @override
@@ -43,6 +47,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
     _unfocusNode.dispose();
     yourNameController?.dispose();
     youremailaddressController?.dispose();
+    yourphoneController?.dispose();
     super.dispose();
   }
 
@@ -347,6 +352,57 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                   maxLines: null,
                 ),
               ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 16),
+                child: AuthUserStreamWidget(
+                  builder: (context) => TextFormField(
+                    controller: yourphoneController,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      labelText: 'Phone',
+                      labelStyle: FlutterFlowTheme.of(context).bodyText2,
+                      hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).primaryBackground,
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).primaryBackground,
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0x00000000),
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      filled: true,
+                      fillColor:
+                          FlutterFlowTheme.of(context).secondaryBackground,
+                      contentPadding:
+                          EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyText1,
+                    maxLines: null,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [yourphoneMask],
+                  ),
+                ),
+              ),
               Align(
                 alignment: AlignmentDirectional(0, 0.05),
                 child: Padding(
@@ -357,6 +413,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         displayName: yourNameController!.text,
                         email: youremailaddressController!.text,
                         photoUrl: uploadedFileUrl,
+                        phoneNumber: '',
                       );
                       await currentUserReference!.update(usersUpdateData);
                       context.pop();
