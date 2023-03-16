@@ -1,12 +1,14 @@
-import '../flutter_flow/flutter_flow_theme.dart';
-import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'onboarding_model.dart';
+export 'onboarding_model.dart';
 
 class OnboardingWidget extends StatefulWidget {
   const OnboardingWidget({Key? key}) : super(key: key);
@@ -16,8 +18,22 @@ class OnboardingWidget extends StatefulWidget {
 }
 
 class _OnboardingWidgetState extends State<OnboardingWidget> {
-  PageController? pageViewController;
+  late OnboardingModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => OnboardingModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +46,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0, 60, 0, 0),
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 60.0, 0.0, 0.0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -47,15 +63,16 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                   child: Stack(
                     children: [
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
                         child: PageView(
-                          controller: pageViewController ??=
+                          controller: _model.pageViewController ??=
                               PageController(initialPage: 0),
                           scrollDirection: Axis.horizontal,
                           children: [
                             Container(
-                              width: 100,
-                              height: 100,
+                              width: 100.0,
+                              height: 100.0,
                               decoration: BoxDecoration(),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
@@ -67,11 +84,11 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                     children: [
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 20),
+                                            0.0, 0.0, 0.0, 20.0),
                                         child: Image.asset(
                                           'assets/images/onboarding_1.png',
-                                          width: 350,
-                                          height: 300,
+                                          width: 350.0,
+                                          height: 300.0,
                                           fit: BoxFit.fitWidth,
                                         ),
                                       ),
@@ -79,7 +96,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        20, 0, 20, 8),
+                                        20.0, 0.0, 20.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
@@ -96,7 +113,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        20, 0, 20, 8),
+                                        20.0, 0.0, 20.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
@@ -115,8 +132,8 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                               ),
                             ),
                             Container(
-                              width: 100,
-                              height: 100,
+                              width: 100.0,
+                              height: 100.0,
                               decoration: BoxDecoration(),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
@@ -128,11 +145,11 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                     children: [
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 20),
+                                            0.0, 0.0, 0.0, 20.0),
                                         child: Image.asset(
                                           'assets/images/onboarding_2.png',
-                                          width: 300,
-                                          height: 300,
+                                          width: 300.0,
+                                          height: 300.0,
                                           fit: BoxFit.fitWidth,
                                         ),
                                       ),
@@ -140,7 +157,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        20, 0, 20, 8),
+                                        20.0, 0.0, 20.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
@@ -157,7 +174,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        20, 0, 20, 8),
+                                        20.0, 0.0, 20.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
@@ -176,8 +193,8 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                               ),
                             ),
                             Container(
-                              width: 100,
-                              height: 100,
+                              width: 100.0,
+                              height: 100.0,
                               decoration: BoxDecoration(),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
@@ -189,11 +206,11 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                     children: [
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 30, 0, 30),
+                                            0.0, 30.0, 0.0, 30.0),
                                         child: Image.asset(
                                           'assets/images/onboarding_3.png',
-                                          width: 300,
-                                          height: 250,
+                                          width: 300.0,
+                                          height: 250.0,
                                           fit: BoxFit.fitWidth,
                                         ),
                                       ),
@@ -201,7 +218,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        20, 0, 20, 8),
+                                        20.0, 0.0, 20.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
@@ -218,7 +235,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        20, 0, 20, 8),
+                                        20.0, 0.0, 20.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
@@ -240,27 +257,28 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(0, 1),
+                        alignment: AlignmentDirectional(0.0, 1.0),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 10.0),
                           child: smooth_page_indicator.SmoothPageIndicator(
-                            controller: pageViewController ??=
+                            controller: _model.pageViewController ??=
                                 PageController(initialPage: 0),
                             count: 3,
                             axisDirection: Axis.horizontal,
                             onDotClicked: (i) {
-                              pageViewController!.animateToPage(
+                              _model.pageViewController!.animateToPage(
                                 i,
                                 duration: Duration(milliseconds: 500),
                                 curve: Curves.ease,
                               );
                             },
                             effect: smooth_page_indicator.ExpandingDotsEffect(
-                              expansionFactor: 2,
-                              spacing: 8,
-                              radius: 16,
-                              dotWidth: 16,
-                              dotHeight: 4,
+                              expansionFactor: 2.0,
+                              spacing: 8.0,
+                              radius: 16.0,
+                              dotWidth: 16.0,
+                              dotHeight: 4.0,
                               dotColor:
                                   FlutterFlowTheme.of(context).secondaryText,
                               activeDotColor:
@@ -277,33 +295,37 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
             ],
           ),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () {
                       print('Button pressed ...');
                     },
                     text: 'Continue',
                     options: FFButtonOptions(
-                      width: 200,
-                      height: 50,
+                      width: 200.0,
+                      height: 50.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primaryBackground,
                       textStyle:
                           FlutterFlowTheme.of(context).subtitle1.override(
                                 fontFamily: 'Lexend Deca',
                                 color: FlutterFlowTheme.of(context).primaryText,
-                                fontSize: 18,
+                                fontSize: 18.0,
                                 fontWeight: FontWeight.w500,
                               ),
-                      elevation: 2,
+                      elevation: 2.0,
                       borderSide: BorderSide(
                         color: Colors.transparent,
-                        width: 1,
+                        width: 1.0,
                       ),
                     ),
                   ),

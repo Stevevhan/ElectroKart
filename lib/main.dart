@@ -151,11 +151,11 @@ class _NavBarPageState extends State<NavBarPage> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home_outlined,
-              size: 24,
+              size: 24.0,
             ),
             activeIcon: Icon(
               Icons.home,
-              size: 30,
+              size: 30.0,
             ),
             label: 'Home',
             tooltip: '',
@@ -163,11 +163,11 @@ class _NavBarPageState extends State<NavBarPage> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.post_add,
-              size: 24,
+              size: 24.0,
             ),
             activeIcon: Icon(
               Icons.post_add,
-              size: 30,
+              size: 30.0,
             ),
             label: 'My Ads',
             tooltip: '',
@@ -175,11 +175,11 @@ class _NavBarPageState extends State<NavBarPage> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.person_outlined,
-              size: 24,
+              size: 24.0,
             ),
             activeIcon: Icon(
               Icons.location_history,
-              size: 50,
+              size: 50.0,
             ),
             label: 'Profile',
             tooltip: '',
@@ -187,23 +187,23 @@ class _NavBarPageState extends State<NavBarPage> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.chat_bubble_outline,
-              size: 24,
+              size: 24.0,
             ),
             activeIcon: Icon(
               Icons.chat_bubble_rounded,
-              size: 30,
+              size: 30.0,
             ),
             label: 'Chat',
             tooltip: '',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.favorite_border,
-              size: 24,
+              Icons.offline_bolt_outlined,
+              size: 24.0,
             ),
             activeIcon: Icon(
-              Icons.favorite_rounded,
-              size: 30,
+              Icons.offline_bolt_rounded,
+              size: 30.0,
             ),
             label: 'Favorites',
             tooltip: '',

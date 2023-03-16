@@ -1,7 +1,7 @@
-import '../flutter_flow/flutter_flow_animations.dart';
-import '../flutter_flow/flutter_flow_icon_button.dart';
-import '../flutter_flow/flutter_flow_theme.dart';
-import '../flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -9,6 +9,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
+import 'easter_egg_model.dart';
+export 'easter_egg_model.dart';
 
 class EasterEggWidget extends StatefulWidget {
   const EasterEggWidget({Key? key}) : super(key: key);
@@ -19,6 +21,10 @@ class EasterEggWidget extends StatefulWidget {
 
 class _EasterEggWidgetState extends State<EasterEggWidget>
     with TickerProviderStateMixin {
+  late EasterEggModel _model;
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
   final animationsMap = {
     'imageOnPageLoadAnimation': AnimationInfo(
       reverse: true,
@@ -28,23 +34,23 @@ class _EasterEggWidgetState extends State<EasterEggWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: 0,
-          end: 1,
+          begin: 0.0,
+          end: 1.0,
         ),
       ],
     ),
   };
-  final _unfocusNode = FocusNode();
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => EasterEggModel());
   }
 
   @override
   void dispose() {
-    _unfocusNode.dispose();
+    _model.dispose();
+
     super.dispose();
   }
 
@@ -60,13 +66,13 @@ class _EasterEggWidgetState extends State<EasterEggWidget>
         automaticallyImplyLeading: false,
         leading: FlutterFlowIconButton(
           borderColor: Colors.transparent,
-          borderRadius: 30,
-          borderWidth: 1,
-          buttonSize: 60,
+          borderRadius: 30.0,
+          borderWidth: 1.0,
+          buttonSize: 60.0,
           icon: Icon(
             Icons.arrow_back_ios,
             color: FlutterFlowTheme.of(context).primaryText,
-            size: 30,
+            size: 30.0,
           ),
           onPressed: () async {
             context.pop();
@@ -74,89 +80,87 @@ class _EasterEggWidgetState extends State<EasterEggWidget>
         ),
         actions: [],
         centerTitle: false,
-        elevation: 0,
+        elevation: 0.0,
       ),
       body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/images/LogoMakr-7pRxEy_(1).png',
-                      width: 166.6,
-                      height: 222.6,
-                      fit: BoxFit.cover,
-                    ).animateOnPageLoad(
-                        animationsMap['imageOnPageLoadAnimation']!),
-                  ],
-                ),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/LogoMakr-7pRxEy_(1).png',
+                    width: 166.6,
+                    height: 222.6,
+                    fit: BoxFit.cover,
+                  ).animateOnPageLoad(
+                      animationsMap['imageOnPageLoadAnimation']!),
+                ],
               ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GradientText(
-                      'ElectroKart Developed By \nStevevhan Myers',
-                      textAlign: TextAlign.center,
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'Poppins',
-                            fontSize: 16,
-                          ),
-                      colors: [
-                        FlutterFlowTheme.of(context).primaryColor,
-                        FlutterFlowTheme.of(context).secondaryColor
-                      ],
-                      gradientDirection: GradientDirection.ltr,
-                      gradientType: GradientType.linear,
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GradientText(
+                    'ElectroKart Developed By \nStevevhan Myers',
+                    textAlign: TextAlign.center,
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'Poppins',
+                          fontSize: 16.0,
+                        ),
+                    colors: [
+                      FlutterFlowTheme.of(context).primaryColor,
+                      FlutterFlowTheme.of(context).secondaryColor
+                    ],
+                    gradientDirection: GradientDirection.ltr,
+                    gradientType: GradientType.linear,
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                    child: Text(
+                      'ElectroKart is a personal marketplace \ndesigned  to facilitate the resale of new \nand used tech and foster communication \nbetween buyers an sellers.',
+                      maxLines: 5,
+                      style: FlutterFlowTheme.of(context).bodyText1,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
-                      child: Text(
-                        'ElectroKart is a personal marketplace \ndesigned  to facilitate the resale of new \nand used tech and foster communication \nbetween buyers an sellers.',
-                        maxLines: 5,
-                        style: FlutterFlowTheme.of(context).bodyText1,
-                      ),
-                    ),
-                  ],
-                ),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'AND MAYBE ALSO HELP TO REDUCE\n OUR CARBON FOOT PRINT : )',
+                    maxLines: 4,
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'Poppins',
+                          color: Color(0xFF3FAE06),
+                        ),
+                  ),
+                ],
               ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'AND MAYBE ALSO HELP TO REDUCE\n OUR CARBON FOOT PRINT : )',
-                      maxLines: 4,
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'Poppins',
-                            color: Color(0xFF3FAE06),
-                          ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

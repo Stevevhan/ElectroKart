@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'backend/backend.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/flutter_flow_util.dart';
-import 'flutter_flow/lat_lng.dart';
 
 class FFAppState extends ChangeNotifier {
   static final FFAppState _instance = FFAppState._internal();
@@ -17,6 +16,10 @@ class FFAppState extends ChangeNotifier {
 
   Future initializePersistedState() async {
     prefs = await SharedPreferences.getInstance();
+    _Likes = prefs.getInt('ff_Likes') ?? _Likes;
+    _Dislikes = prefs.getInt('ff_Dislikes') ?? _Dislikes;
+    _Darkmode = prefs.getBool('ff_Darkmode') ?? _Darkmode;
+    _Lightmode = prefs.getBool('ff_Lightmode') ?? _Lightmode;
   }
 
   void update(VoidCallback callback) {
@@ -40,10 +43,42 @@ class FFAppState extends ChangeNotifier {
     _cart.remove(_value);
   }
 
+  void removeAtIndexFromCart(int _index) {
+    _cart.removeAt(_index);
+  }
+
   bool _showFullList = true;
   bool get showFullList => _showFullList;
   set showFullList(bool _value) {
     _showFullList = _value;
+  }
+
+  int _Likes = 0;
+  int get Likes => _Likes;
+  set Likes(int _value) {
+    _Likes = _value;
+    prefs.setInt('ff_Likes', _value);
+  }
+
+  int _Dislikes = 0;
+  int get Dislikes => _Dislikes;
+  set Dislikes(int _value) {
+    _Dislikes = _value;
+    prefs.setInt('ff_Dislikes', _value);
+  }
+
+  bool _Darkmode = false;
+  bool get Darkmode => _Darkmode;
+  set Darkmode(bool _value) {
+    _Darkmode = _value;
+    prefs.setBool('ff_Darkmode', _value);
+  }
+
+  bool _Lightmode = false;
+  bool get Lightmode => _Lightmode;
+  set Lightmode(bool _value) {
+    _Lightmode = _value;
+    prefs.setBool('ff_Lightmode', _value);
   }
 }
 
