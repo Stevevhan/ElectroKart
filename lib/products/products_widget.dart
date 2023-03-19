@@ -427,12 +427,16 @@ class _ProductsWidgetState extends State<ProductsWidget>
                             color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
                           ),
-                          child: FlutterFlowAdBanner(
-                            showsTestAd: true,
-                            androidAdUnitID:
-                                'ca-app-pub-4840032926949336/8829177242',
-                          ).animateOnPageLoad(
-                              animationsMap['adBannerOnPageLoadAnimation']!),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                10.0, 10.0, 10.0, 10.0),
+                            child: FlutterFlowAdBanner(
+                              showsTestAd: true,
+                              androidAdUnitID:
+                                  'ca-app-pub-4840032926949336/8829177242',
+                            ).animateOnPageLoad(
+                                animationsMap['adBannerOnPageLoadAnimation']!),
+                          ),
                         ),
                       ],
                     ),
