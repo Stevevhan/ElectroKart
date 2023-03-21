@@ -118,11 +118,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   : AccountWidget(),
             ),
             FFRoute(
-              name: 'new_product',
-              path: 'newProduct',
-              builder: (context, params) => NewProductWidget(),
-            ),
-            FFRoute(
               name: 'edit_product',
               path: 'editProduct',
               builder: (context, params) => EditProductWidget(
@@ -130,6 +125,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                     ParamType.DocumentReference, false, ['Products']),
                 thumb: params.getParam('thumb', ParamType.String),
               ),
+            ),
+            FFRoute(
+              name: 'new_product',
+              path: 'newProduct',
+              builder: (context, params) => NewProductWidget(),
             ),
             FFRoute(
               name: 'edit_profile',

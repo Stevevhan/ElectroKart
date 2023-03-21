@@ -95,6 +95,12 @@ class _$ProductsRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.quantity;
+    if (value != null) {
+      result
+        ..add('Quantity')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -165,6 +171,10 @@ class _$ProductsRecordSerializer
           result.status = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'Quantity':
+          result.quantity = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -200,6 +210,8 @@ class _$ProductsRecord extends ProductsRecord {
   @override
   final String? status;
   @override
+  final int? quantity;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$ProductsRecord([void Function(ProductsRecordBuilder)? updates]) =>
@@ -216,6 +228,7 @@ class _$ProductsRecord extends ProductsRecord {
       this.likedBy,
       this.cart,
       this.status,
+      this.quantity,
       this.ffRef})
       : super._();
 
@@ -241,6 +254,7 @@ class _$ProductsRecord extends ProductsRecord {
         likedBy == other.likedBy &&
         cart == other.cart &&
         status == other.status &&
+        quantity == other.quantity &&
         ffRef == other.ffRef;
   }
 
@@ -255,16 +269,18 @@ class _$ProductsRecord extends ProductsRecord {
                             $jc(
                                 $jc(
                                     $jc(
-                                        $jc($jc(0, name.hashCode),
-                                            category.hashCode),
-                                        thumb.hashCode),
-                                    desc.hashCode),
-                                cost.hashCode),
-                            sellerid.hashCode),
-                        parish.hashCode),
-                    likedBy.hashCode),
-                cart.hashCode),
-            status.hashCode),
+                                        $jc(
+                                            $jc($jc(0, name.hashCode),
+                                                category.hashCode),
+                                            thumb.hashCode),
+                                        desc.hashCode),
+                                    cost.hashCode),
+                                sellerid.hashCode),
+                            parish.hashCode),
+                        likedBy.hashCode),
+                    cart.hashCode),
+                status.hashCode),
+            quantity.hashCode),
         ffRef.hashCode));
   }
 
@@ -281,6 +297,7 @@ class _$ProductsRecord extends ProductsRecord {
           ..add('likedBy', likedBy)
           ..add('cart', cart)
           ..add('status', status)
+          ..add('quantity', quantity)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -333,6 +350,10 @@ class ProductsRecordBuilder
   String? get status => _$this._status;
   set status(String? status) => _$this._status = status;
 
+  int? _quantity;
+  int? get quantity => _$this._quantity;
+  set quantity(int? quantity) => _$this._quantity = quantity;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -354,6 +375,7 @@ class ProductsRecordBuilder
       _likedBy = $v.likedBy?.toBuilder();
       _cart = $v.cart?.toBuilder();
       _status = $v.status;
+      _quantity = $v.quantity;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -389,6 +411,7 @@ class ProductsRecordBuilder
               likedBy: _likedBy?.build(),
               cart: _cart?.build(),
               status: status,
+              quantity: quantity,
               ffRef: ffRef);
     } catch (_) {
       late String _$failedField;

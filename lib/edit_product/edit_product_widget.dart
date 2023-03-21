@@ -313,6 +313,8 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                 'Laptop',
                                 'Smartwatch',
                                 'Desktop PC',
+                                'Game Console',
+                                'Accessories',
                                 'Other'
                               ],
                               onChanged: (val) => setState(
@@ -514,6 +516,71 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                           ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
+                                29.0, 20.0, 17.0, 0.0),
+                            child: Container(
+                              width: 200.0,
+                              child: TextFormField(
+                                controller:
+                                    _model.inputProductQuantityController ??=
+                                        TextEditingController(
+                                  text: editProductProductsRecord.quantity
+                                      ?.toString(),
+                                ),
+                                autofocus: true,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  labelText: 'Quantity',
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        color: Color(0xFFAB9B00),
+                                      ),
+                                  hintText: 'Quantity....',
+                                  hintStyle:
+                                      FlutterFlowTheme.of(context).bodyText2,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00FFCA00),
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(5.0),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(5.0),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(5.0),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(5.0),
+                                  ),
+                                  filled: true,
+                                  fillColor: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                ),
+                                style: FlutterFlowTheme.of(context).bodyText1,
+                                keyboardType: TextInputType.number,
+                                validator: _model
+                                    .inputProductQuantityControllerValidator
+                                    .asValidator(context),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 10.0, 0.0, 0.0, 30.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
@@ -637,6 +704,8 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                         _model.inputProductCostController.text),
                                     parish: _model.parishDropDownValue,
                                     status: _model.statusDropDownValue,
+                                    quantity: int.tryParse(_model
+                                        .inputProductQuantityController.text),
                                   );
                                   await editProductProductsRecord.reference
                                       .update(productsUpdateData);

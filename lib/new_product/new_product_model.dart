@@ -40,6 +40,10 @@ class NewProductModel extends FlutterFlowModel {
   // State field(s) for inputProductCost widget.
   TextEditingController? inputProductCostController;
   String? Function(BuildContext, String?)? inputProductCostControllerValidator;
+  // State field(s) for inputProductQuantity widget.
+  TextEditingController? inputProductQuantityController;
+  String? Function(BuildContext, String?)?
+      inputProductQuantityControllerValidator;
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
   ProductsRecord? productid;
 
@@ -51,6 +55,7 @@ class NewProductModel extends FlutterFlowModel {
     inputProductNameController?.dispose();
     inputProductDescController?.dispose();
     inputProductCostController?.dispose();
+    inputProductQuantityController?.dispose();
   }
 
   /// Additional helper methods are added here.

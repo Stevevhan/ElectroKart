@@ -80,6 +80,12 @@ class FFAppState extends ChangeNotifier {
     _Lightmode = _value;
     prefs.setBool('ff_Lightmode', _value);
   }
+
+  int _PriceRange = 0;
+  int get PriceRange => _PriceRange;
+  set PriceRange(int _value) {
+    _PriceRange = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

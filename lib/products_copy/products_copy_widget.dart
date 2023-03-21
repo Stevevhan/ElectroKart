@@ -156,52 +156,48 @@ class _ProductsCopyWidgetState extends State<ProductsCopyWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
-                        child: FlutterFlowDropDown<String>(
-                          controller: _model.dropDownController1 ??=
-                              FormFieldController<String>(null),
-                          options: [
-                            'St. Elizabeth',
-                            'Portland',
-                            'St. Andrew',
-                            'Kingston',
-                            'Hanover',
-                            'St. James',
-                            'Trelawney',
-                            'St. Catherine',
-                            'St. Ann',
-                            'St. Mary',
-                            'St. Thomas',
-                            'Westmoreland',
-                            'Clarendon',
-                            'Manchester'
-                          ],
-                          onChanged: (val) =>
-                              setState(() => _model.dropDownValue1 = val),
-                          width: 140.0,
-                          height: 50.0,
-                          textStyle: FlutterFlowTheme.of(context)
-                              .bodyText1
-                              .override(
-                                fontFamily: 'Poppins',
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                fontSize: 12.0,
-                              ),
-                          hintText: 'Parish...',
-                          fillColor:
-                              FlutterFlowTheme.of(context).primaryBackground,
-                          elevation: 2.0,
-                          borderColor: Color(0xFF2500FF),
-                          borderWidth: 0.0,
-                          borderRadius: 30.0,
-                          margin: EdgeInsetsDirectional.fromSTEB(
-                              12.0, 4.0, 12.0, 4.0),
-                          hidesUnderline: true,
-                        ),
+                      FlutterFlowDropDown<String>(
+                        controller: _model.dropDownController1 ??=
+                            FormFieldController<String>(null),
+                        options: [
+                          'St. Elizabeth',
+                          'Portland',
+                          'St. Andrew',
+                          'Kingston',
+                          'Hanover',
+                          'St. James',
+                          'Trelawney',
+                          'St. Catherine',
+                          'St. Ann',
+                          'St. Mary',
+                          'St. Thomas',
+                          'Westmoreland',
+                          'Clarendon',
+                          'Manchester'
+                        ],
+                        onChanged: (val) =>
+                            setState(() => _model.dropDownValue1 = val),
+                        width: 140.0,
+                        height: 50.0,
+                        textStyle: FlutterFlowTheme.of(context)
+                            .bodyText1
+                            .override(
+                              fontFamily: 'Poppins',
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              fontSize: 12.0,
+                            ),
+                        hintText: 'Parish...',
+                        fillColor:
+                            FlutterFlowTheme.of(context).primaryBackground,
+                        elevation: 2.0,
+                        borderColor: Color(0xFF2500FF),
+                        borderWidth: 0.0,
+                        borderRadius: 30.0,
+                        margin: EdgeInsetsDirectional.fromSTEB(
+                            12.0, 4.0, 12.0, 4.0),
+                        hidesUnderline: true,
                       ),
                       FlutterFlowDropDown<String>(
                         controller: _model.dropDownController2 ??=
@@ -211,6 +207,8 @@ class _ProductsCopyWidgetState extends State<ProductsCopyWidget> {
                           'Laptop',
                           'Smartwatch',
                           'Desktop PC',
+                          'Game Console',
+                          'Accessories',
                           'Other'
                         ],
                         onChanged: (val) =>
@@ -234,6 +232,15 @@ class _ProductsCopyWidgetState extends State<ProductsCopyWidget> {
                         hidesUnderline: true,
                       ),
                     ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 15.0, 5.0, 0.0),
+                  child: FlutterFlowAdBanner(
+                    width: MediaQuery.of(context).size.width * 1.0,
+                    height: 50.0,
+                    showsTestAd: true,
+                    androidAdUnitID: 'ca-app-pub-4840032926949336/8829177242',
                   ),
                 ),
                 Padding(
@@ -657,13 +664,6 @@ class _ProductsCopyWidgetState extends State<ProductsCopyWidget> {
                       height: 71.6,
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      child: FlutterFlowAdBanner(
-                        width: MediaQuery.of(context).size.width * 1.0,
-                        height: 50.0,
-                        showsTestAd: true,
-                        androidAdUnitID:
-                            'ca-app-pub-4840032926949336/8829177242',
                       ),
                     ),
                   ],

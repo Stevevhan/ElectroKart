@@ -357,57 +357,6 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 0.0, 0.0),
-                        child: Text(
-                          productDetailsProductsRecord.category!,
-                          style: FlutterFlowTheme.of(context).bodyText2,
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 0.0, 0.0),
-                        child: StreamBuilder<List<SoldRecord>>(
-                          stream: querySoldRecord(
-                            singleRecord: true,
-                          ),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 30.0,
-                                  height: 30.0,
-                                  child: SpinKitDualRing(
-                                    color: Color(0xFFFFCA00),
-                                    size: 30.0,
-                                  ),
-                                ),
-                              );
-                            }
-                            List<SoldRecord> textSoldRecordList =
-                                snapshot.data!;
-                            // Return an empty Container when the item does not exist.
-                            if (snapshot.data!.isEmpty) {
-                              return Container();
-                            }
-                            final textSoldRecord = textSoldRecordList.isNotEmpty
-                                ? textSoldRecordList.first
-                                : null;
-                            return GradientText(
-                              productDetailsProductsRecord.status!,
-                              style: FlutterFlowTheme.of(context).bodyText2,
-                              colors: [
-                                FlutterFlowTheme.of(context).primaryColor,
-                                FlutterFlowTheme.of(context).secondaryColor
-                              ],
-                              gradientDirection: GradientDirection.ltr,
-                              gradientType: GradientType.linear,
-                            );
-                          },
-                        ),
-                      ),
-                      Padding(
-                        padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
                         child: Container(
                           width: double.infinity,
@@ -427,30 +376,22 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                 child: ExpandablePanel(
                                   header: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 15.0, 0.0, 0.0),
-                                    child: GradientText(
+                                        4.0, 15.0, 0.0, 0.0),
+                                    child: Text(
                                       'Description',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
                                             fontFamily: 'Montserrat',
+                                            fontSize: 16.0,
                                           ),
-                                      colors: [
-                                        FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        FlutterFlowTheme.of(context)
-                                            .secondaryColor
-                                      ],
-                                      gradientDirection: GradientDirection.ltr,
-                                      gradientType: GradientType.linear,
                                     ),
                                   ),
                                   collapsed: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 5.0, 0.0, 0.0),
                                     child: Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          1.0,
+                                      width: 340.6,
                                       decoration: BoxDecoration(
                                         color: Color(0x1E95A1AC),
                                         borderRadius:
@@ -493,120 +434,168 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 0.0, 0.0, 12.0),
-                              child: StreamBuilder<UsersRecord>(
-                                stream: UsersRecord.getDocument(
-                                    productDetailsProductsRecord.sellerid!),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 30.0,
-                                        height: 30.0,
-                                        child: SpinKitDualRing(
-                                          color: Color(0xFFFFCA00),
-                                          size: 30.0,
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                  final textUsersRecord = snapshot.data!;
-                                  return GradientText(
-                                    'Seller: ${textUsersRecord.displayName}',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 16.0,
-                                        ),
-                                    colors: [
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                      FlutterFlowTheme.of(context)
-                                          .secondaryColor
-                                    ],
-                                    gradientDirection: GradientDirection.ltr,
-                                    gradientType: GradientType.linear,
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 0.0, 0.0, 12.0),
-                              child: StreamBuilder<UsersRecord>(
-                                stream: UsersRecord.getDocument(
-                                    productDetailsProductsRecord.sellerid!),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 30.0,
-                                        height: 30.0,
-                                        child: SpinKitDualRing(
-                                          color: Color(0xFFFFCA00),
-                                          size: 30.0,
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                  final textUsersRecord = snapshot.data!;
-                                  return GradientText(
-                                    'Joined: ${dateTimeFormat('yMMMd', textUsersRecord.createdTime)}',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 14.0,
-                                        ),
-                                    colors: [
-                                      FlutterFlowTheme.of(context).alternate,
-                                      FlutterFlowTheme.of(context).tertiaryColor
-                                    ],
-                                    gradientDirection: GradientDirection.ltr,
-                                    gradientType: GradientType.linear,
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 0.0, 0.0, 12.0),
+                            EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 5.0),
                         child: Text(
-                          productDetailsProductsRecord.parish!,
+                          'About this item',
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Montserrat',
+                                    fontFamily: 'Poppins',
                                     fontSize: 16.0,
                                   ),
                         ),
                       ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 340.6,
+                            height: 100.0,
+                            decoration: BoxDecoration(
+                              color: Color(0x1E95A1AC),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      10.0, 5.0, 0.0, 0.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 4.0, 0.0, 0.0),
+                                        child: Text(
+                                          'Category: ${productDetailsProductsRecord.category}',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText2,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      10.0, 5.0, 0.0, 0.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 4.0, 0.0, 0.0),
+                                        child: StreamBuilder<List<SoldRecord>>(
+                                          stream: querySoldRecord(
+                                            singleRecord: true,
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 30.0,
+                                                  height: 30.0,
+                                                  child: SpinKitDualRing(
+                                                    color: Color(0xFFFFCA00),
+                                                    size: 30.0,
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            List<SoldRecord>
+                                                textSoldRecordList =
+                                                snapshot.data!;
+                                            // Return an empty Container when the item does not exist.
+                                            if (snapshot.data!.isEmpty) {
+                                              return Container();
+                                            }
+                                            final textSoldRecord =
+                                                textSoldRecordList.isNotEmpty
+                                                    ? textSoldRecordList.first
+                                                    : null;
+                                            return Text(
+                                              'Quantity: ${productDetailsProductsRecord.quantity?.toString()}',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText2,
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      10.0, 5.0, 0.0, 0.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 4.0, 0.0, 0.0),
+                                        child: StreamBuilder<List<SoldRecord>>(
+                                          stream: querySoldRecord(
+                                            singleRecord: true,
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 30.0,
+                                                  height: 30.0,
+                                                  child: SpinKitDualRing(
+                                                    color: Color(0xFFFFCA00),
+                                                    size: 30.0,
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            List<SoldRecord>
+                                                textSoldRecordList =
+                                                snapshot.data!;
+                                            // Return an empty Container when the item does not exist.
+                                            if (snapshot.data!.isEmpty) {
+                                              return Container();
+                                            }
+                                            final textSoldRecord =
+                                                textSoldRecordList.isNotEmpty
+                                                    ? textSoldRecordList.first
+                                                    : null;
+                                            return GradientText(
+                                              'Status: ${productDetailsProductsRecord.status}',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText2,
+                                              colors: [
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryColor,
+                                                FlutterFlowTheme.of(context)
+                                                    .secondaryColor
+                                              ],
+                                              gradientDirection:
+                                                  GradientDirection.ltr,
+                                              gradientType: GradientType.linear,
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 5.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -614,84 +603,17 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                           children: [
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 0.0, 0.0, 12.0),
-                              child: StreamBuilder<UsersRecord>(
-                                stream: UsersRecord.getDocument(
-                                    productDetailsProductsRecord.sellerid!),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 30.0,
-                                        height: 30.0,
-                                        child: SpinKitDualRing(
-                                          color: Color(0xFFFFCA00),
-                                          size: 30.0,
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                  final textUsersRecord = snapshot.data!;
-                                  return InkWell(
-                                    onTap: () async {
-                                      await launchUrl(Uri(
-                                        scheme: 'tel',
-                                        path: textUsersRecord.phoneNumber!,
-                                      ));
-                                    },
-                                    child: GradientText(
-                                      textUsersRecord.phoneNumber!,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'Montserrat',
-                                            fontSize: 16.0,
-                                          ),
-                                      colors: [
-                                        FlutterFlowTheme.of(context)
-                                            .tertiaryColor,
-                                        FlutterFlowTheme.of(context).alternate
-                                      ],
-                                      gradientDirection: GradientDirection.ltr,
-                                      gradientType: GradientType.linear,
+                                  20.0, 0.0, 0.0, 0.0),
+                              child: Text(
+                                'Seller Information',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      fontSize: 16.0,
                                     ),
-                                  );
-                                },
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (productDetailsProductsRecord.sellerid !=
-                                currentUserReference)
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    15.0, 0.0, 0.0, 0.0),
-                                child: InkWell(
-                                  onTap: () async {
-                                    context.pushNamed('Report');
-                                  },
-                                  child: Text(
-                                    'REPORT Seller/Ad',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Poppins',
-                                          color: FlutterFlowTheme.of(context)
-                                              .alternate,
-                                        ),
-                                  ),
-                                ),
-                              ),
                           ],
                         ),
                       ),
@@ -703,44 +625,244 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Container(
+                              width: 340.7,
+                              height: 106.2,
+                              decoration: BoxDecoration(
+                                color: Color(0x1E95A1AC),
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        10.0, 8.0, 0.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        StreamBuilder<UsersRecord>(
+                                          stream: UsersRecord.getDocument(
+                                              productDetailsProductsRecord
+                                                  .sellerid!),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 30.0,
+                                                  height: 30.0,
+                                                  child: SpinKitDualRing(
+                                                    color: Color(0xFFFFCA00),
+                                                    size: 30.0,
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            final textUsersRecord =
+                                                snapshot.data!;
+                                            return GradientText(
+                                              'Seller: ${textUsersRecord.displayName}',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Montserrat',
+                                                        fontSize: 16.0,
+                                                      ),
+                                              colors: [
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryColor,
+                                                FlutterFlowTheme.of(context)
+                                                    .secondaryColor
+                                              ],
+                                              gradientDirection:
+                                                  GradientDirection.ltr,
+                                              gradientType: GradientType.linear,
+                                            );
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        10.0, 5.0, 0.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Text(
+                                          'Parish: ${productDetailsProductsRecord.parish}',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily: 'Montserrat',
+                                                fontSize: 16.0,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        10.0, 5.0, 0.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        StreamBuilder<UsersRecord>(
+                                          stream: UsersRecord.getDocument(
+                                              productDetailsProductsRecord
+                                                  .sellerid!),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 30.0,
+                                                  height: 30.0,
+                                                  child: SpinKitDualRing(
+                                                    color: Color(0xFFFFCA00),
+                                                    size: 30.0,
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            final textUsersRecord =
+                                                snapshot.data!;
+                                            return GradientText(
+                                              'Joined: ${dateTimeFormat('yMMMd', textUsersRecord.createdTime)}',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Montserrat',
+                                                        fontSize: 14.0,
+                                                      ),
+                                              colors: [
+                                                FlutterFlowTheme.of(context)
+                                                    .alternate,
+                                                FlutterFlowTheme.of(context)
+                                                    .tertiaryColor
+                                              ],
+                                              gradientDirection:
+                                                  GradientDirection.ltr,
+                                              gradientType: GradientType.linear,
+                                            );
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        10.0, 5.0, 0.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        StreamBuilder<UsersRecord>(
+                                          stream: UsersRecord.getDocument(
+                                              productDetailsProductsRecord
+                                                  .sellerid!),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 30.0,
+                                                  height: 30.0,
+                                                  child: SpinKitDualRing(
+                                                    color: Color(0xFFFFCA00),
+                                                    size: 30.0,
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            final textUsersRecord =
+                                                snapshot.data!;
+                                            return InkWell(
+                                              onTap: () async {
+                                                await launchUrl(Uri(
+                                                  scheme: 'tel',
+                                                  path: textUsersRecord
+                                                      .phoneNumber!,
+                                                ));
+                                              },
+                                              child: GradientText(
+                                                'Phone: ${textUsersRecord.phoneNumber}',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'Montserrat',
+                                                          fontSize: 16.0,
+                                                        ),
+                                                colors: [
+                                                  FlutterFlowTheme.of(context)
+                                                      .tertiaryColor,
+                                                  FlutterFlowTheme.of(context)
+                                                      .alternate
+                                                ],
+                                                gradientDirection:
+                                                    GradientDirection.ltr,
+                                                gradientType:
+                                                    GradientType.linear,
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            0.0, 15.0, 0.0, 30.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 10.0, 0.0, 0.0),
-                              child: GradientText(
-                                'Seller Rating',
-                                style: FlutterFlowTheme.of(context).bodyText1,
-                                colors: [Color(0xFFFB1E2B), Color(0xFFEA720C)],
-                                gradientDirection: GradientDirection.ltr,
-                                gradientType: GradientType.linear,
+                                  15.0, 0.0, 0.0, 0.0),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  context.pushNamed('Report');
+                                },
+                                text: 'REPORT',
+                                icon: Icon(
+                                  Icons.flag_rounded,
+                                  size: 15.0,
+                                ),
+                                options: FFButtonOptions(
+                                  width: 130.0,
+                                  height: 40.0,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FlutterFlowTheme.of(context).alternate,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .subtitle2
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        color: Colors.white,
+                                      ),
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
                               ),
-                            ),
-                            FlutterFlowIconButton(
-                              borderColor: Colors.transparent,
-                              borderRadius: 30.0,
-                              borderWidth: 1.0,
-                              buttonSize: 40.0,
-                              icon: Icon(
-                                Icons.thumb_up_rounded,
-                                color: Color(0xFF23BC2D),
-                                size: 20.0,
-                              ),
-                              onPressed: () {
-                                print('IconButton pressed ...');
-                              },
-                            ),
-                            FlutterFlowIconButton(
-                              borderColor: Colors.transparent,
-                              borderRadius: 30.0,
-                              borderWidth: 1.0,
-                              buttonSize: 40.0,
-                              icon: Icon(
-                                Icons.thumb_down_alt_rounded,
-                                color: FlutterFlowTheme.of(context).alternate,
-                                size: 20.0,
-                              ),
-                              onPressed: () {
-                                print('IconButton pressed ...');
-                              },
                             ),
                           ],
                         ),
@@ -1259,7 +1381,11 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                                       }
                                                       List<UsersRecord>
                                                           menuItemUsersRecordList =
-                                                          snapshot.data!;
+                                                          snapshot.data!
+                                                              .where((u) =>
+                                                                  u.uid !=
+                                                                  currentUserUid)
+                                                              .toList();
                                                       // Return an empty Container when the item does not exist.
                                                       if (snapshot
                                                           .data!.isEmpty) {

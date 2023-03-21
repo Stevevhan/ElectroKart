@@ -122,13 +122,13 @@ final parametersBuilderMap =
       ),
   'sellersdb': ParameterData.none(),
   'account': ParameterData.none(),
-  'new_product': ParameterData.none(),
   'edit_product': (data) async => ParameterData(
         allParams: {
           'productfid': getParameter<DocumentReference>(data, 'productfid'),
           'thumb': getParameter<String>(data, 'thumb'),
         },
       ),
+  'new_product': ParameterData.none(),
   'edit_profile': ParameterData.none(),
   'change_password': ParameterData.none(),
   'chat_page': (data) async => ParameterData(

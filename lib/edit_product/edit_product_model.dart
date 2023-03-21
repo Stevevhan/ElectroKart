@@ -33,6 +33,10 @@ class EditProductModel extends FlutterFlowModel {
   // State field(s) for inputProductCost widget.
   TextEditingController? inputProductCostController;
   String? Function(BuildContext, String?)? inputProductCostControllerValidator;
+  // State field(s) for inputProductQuantity widget.
+  TextEditingController? inputProductQuantityController;
+  String? Function(BuildContext, String?)?
+      inputProductQuantityControllerValidator;
 
   /// Initialization and disposal methods.
 
@@ -42,6 +46,7 @@ class EditProductModel extends FlutterFlowModel {
     inputProductNameController?.dispose();
     inputProductDescController?.dispose();
     inputProductCostController?.dispose();
+    inputProductQuantityController?.dispose();
   }
 
   /// Additional helper methods are added here.

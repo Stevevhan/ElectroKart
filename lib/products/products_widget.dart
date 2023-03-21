@@ -314,6 +314,8 @@ class _ProductsWidgetState extends State<ProductsWidget>
                             'Laptop',
                             'Smartwatch',
                             'Desktop PC',
+                            'Game Console',
+                            'Accessories',
                             'Other'
                           ],
                           onChanged: (val) =>
@@ -365,13 +367,19 @@ class _ProductsWidgetState extends State<ProductsWidget>
                           ),
                         ),
                         AuthUserStreamWidget(
-                          builder: (context) => Text(
-                            currentUserDisplayName,
-                            style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 16.0,
-                                    ),
+                          builder: (context) => InkWell(
+                            onTap: () async {
+                              context.pushNamed('edit_profile');
+                            },
+                            child: Text(
+                              currentUserDisplayName,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 16.0,
+                                  ),
+                            ),
                           ),
                         ),
                         Padding(
