@@ -312,6 +312,7 @@ class _SellerProductsWidgetState extends State<SellerProductsWidget> {
                                   padding: EdgeInsets.zero,
                                   primary: false,
                                   shrinkWrap: true,
+                                  reverse: false,
                                   scrollDirection: Axis.vertical,
                                   builderDelegate:
                                       PagedChildBuilderDelegate<ProductsRecord>(

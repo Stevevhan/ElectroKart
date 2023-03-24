@@ -6,7 +6,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/upload_media.dart';
+import '/flutter_flow/upload_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -150,37 +150,39 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                       child: Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
-                        child: InkWell(
-                          onTap: () async {
-                            await Navigator.push(
-                              context,
-                              PageTransition(
-                                type: PageTransitionType.fade,
-                                child: FlutterFlowExpandedImageView(
-                                  image: Image.network(
-                                    _model.uploadedFileUrl,
-                                    fit: BoxFit.contain,
+                        child: AuthUserStreamWidget(
+                          builder: (context) => InkWell(
+                            onTap: () async {
+                              await Navigator.push(
+                                context,
+                                PageTransition(
+                                  type: PageTransitionType.fade,
+                                  child: FlutterFlowExpandedImageView(
+                                    image: Image.network(
+                                      currentUserPhoto,
+                                      fit: BoxFit.contain,
+                                    ),
+                                    allowRotation: false,
+                                    tag: currentUserPhoto,
+                                    useHeroAnimation: true,
                                   ),
-                                  allowRotation: false,
-                                  tag: _model.uploadedFileUrl,
-                                  useHeroAnimation: true,
                                 ),
-                              ),
-                            );
-                          },
-                          child: Hero(
-                            tag: _model.uploadedFileUrl,
-                            transitionOnUserGestures: true,
-                            child: Container(
-                              width: 90.0,
-                              height: 90.0,
-                              clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                              ),
-                              child: Image.network(
-                                _model.uploadedFileUrl,
-                                fit: BoxFit.cover,
+                              );
+                            },
+                            child: Hero(
+                              tag: currentUserPhoto,
+                              transitionOnUserGestures: true,
+                              child: Container(
+                                width: 90.0,
+                                height: 90.0,
+                                clipBehavior: Clip.antiAlias,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Image.network(
+                                  currentUserPhoto,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ),
@@ -206,7 +208,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         if (selectedMedia != null &&
                             selectedMedia.every((m) =>
                                 validateFileFormat(m.storagePath, context))) {
-                          setState(() => _model.isMediaUploading = true);
+                          setState(() => _model.isDataUploading = true);
                           var selectedUploadedFiles = <FFUploadedFile>[];
                           var downloadUrls = <String>[];
                           try {
@@ -235,7 +237,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                 .toList();
                           } finally {
                             ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                            _model.isMediaUploading = false;
+                            _model.isDataUploading = false;
                           }
                           if (selectedUploadedFiles.length ==
                                   selectedMedia.length &&
@@ -248,8 +250,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                             showUploadMessage(context, 'Success!');
                           } else {
                             setState(() {});
-                            showUploadMessage(
-                                context, 'Failed to upload media');
+                            showUploadMessage(context, 'Failed to upload data');
                             return;
                           }
                         }
@@ -336,6 +337,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 16.0),
                 child: TextFormField(
                   controller: _model.youremailaddressController,
+                  readOnly: true,
                   obscureText: false,
                   decoration: InputDecoration(
                     labelText: 'Email',

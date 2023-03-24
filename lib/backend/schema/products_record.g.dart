@@ -101,6 +101,13 @@ class _$ProductsRecordSerializer
         ..add('Quantity')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
+    value = object.condition;
+    if (value != null) {
+      result
+        ..add('Condition')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -175,6 +182,10 @@ class _$ProductsRecordSerializer
           result.quantity = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
           break;
+        case 'Condition':
+          result.condition = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -212,6 +223,8 @@ class _$ProductsRecord extends ProductsRecord {
   @override
   final int? quantity;
   @override
+  final String? condition;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$ProductsRecord([void Function(ProductsRecordBuilder)? updates]) =>
@@ -229,6 +242,7 @@ class _$ProductsRecord extends ProductsRecord {
       this.cart,
       this.status,
       this.quantity,
+      this.condition,
       this.ffRef})
       : super._();
 
@@ -255,33 +269,28 @@ class _$ProductsRecord extends ProductsRecord {
         cart == other.cart &&
         status == other.status &&
         quantity == other.quantity &&
+        condition == other.condition &&
         ffRef == other.ffRef;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc(
-            $jc(
-                $jc(
-                    $jc(
-                        $jc(
-                            $jc(
-                                $jc(
-                                    $jc(
-                                        $jc(
-                                            $jc($jc(0, name.hashCode),
-                                                category.hashCode),
-                                            thumb.hashCode),
-                                        desc.hashCode),
-                                    cost.hashCode),
-                                sellerid.hashCode),
-                            parish.hashCode),
-                        likedBy.hashCode),
-                    cart.hashCode),
-                status.hashCode),
-            quantity.hashCode),
-        ffRef.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, name.hashCode);
+    _$hash = $jc(_$hash, category.hashCode);
+    _$hash = $jc(_$hash, thumb.hashCode);
+    _$hash = $jc(_$hash, desc.hashCode);
+    _$hash = $jc(_$hash, cost.hashCode);
+    _$hash = $jc(_$hash, sellerid.hashCode);
+    _$hash = $jc(_$hash, parish.hashCode);
+    _$hash = $jc(_$hash, likedBy.hashCode);
+    _$hash = $jc(_$hash, cart.hashCode);
+    _$hash = $jc(_$hash, status.hashCode);
+    _$hash = $jc(_$hash, quantity.hashCode);
+    _$hash = $jc(_$hash, condition.hashCode);
+    _$hash = $jc(_$hash, ffRef.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
@@ -298,6 +307,7 @@ class _$ProductsRecord extends ProductsRecord {
           ..add('cart', cart)
           ..add('status', status)
           ..add('quantity', quantity)
+          ..add('condition', condition)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -354,6 +364,10 @@ class ProductsRecordBuilder
   int? get quantity => _$this._quantity;
   set quantity(int? quantity) => _$this._quantity = quantity;
 
+  String? _condition;
+  String? get condition => _$this._condition;
+  set condition(String? condition) => _$this._condition = condition;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -376,6 +390,7 @@ class ProductsRecordBuilder
       _cart = $v.cart?.toBuilder();
       _status = $v.status;
       _quantity = $v.quantity;
+      _condition = $v.condition;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -412,6 +427,7 @@ class ProductsRecordBuilder
               cart: _cart?.build(),
               status: status,
               quantity: quantity,
+              condition: condition,
               ffRef: ffRef);
     } catch (_) {
       late String _$failedField;
@@ -431,4 +447,4 @@ class ProductsRecordBuilder
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,no_leading_underscores_for_local_identifiers,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new,unnecessary_lambdas
+// ignore_for_file: deprecated_member_use_from_same_package,type=lint

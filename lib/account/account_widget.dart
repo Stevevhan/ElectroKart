@@ -2,10 +2,12 @@ import '/auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_toggle_icon.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
@@ -375,12 +377,11 @@ class _AccountWidgetState extends State<AccountWidget> {
                                         FlutterFlowTheme.of(context).bodyText1,
                                   ),
                                 ),
-                                Switch.adaptive(
-                                  value: _model.switchValue ??= false,
-                                  onChanged: (newValue) async {
-                                    setState(
-                                        () => _model.switchValue = newValue!);
-                                    if (newValue!) {
+                                ToggleIcon(
+                                  onPressed: () async {
+                                    setState(() => FFAppState().Darkmode =
+                                        !FFAppState().Darkmode);
+                                    if (FFAppState().Darkmode) {
                                       setDarkModeSetting(
                                           context, ThemeMode.dark);
                                     } else {
@@ -388,8 +389,17 @@ class _AccountWidgetState extends State<AccountWidget> {
                                           context, ThemeMode.light);
                                     }
                                   },
-                                  activeColor:
-                                      FlutterFlowTheme.of(context).gray600,
+                                  value: FFAppState().Darkmode,
+                                  onIcon: Icon(
+                                    Icons.wb_sunny,
+                                    color: Colors.white,
+                                    size: 25.0,
+                                  ),
+                                  offIcon: FaIcon(
+                                    FontAwesomeIcons.solidMoon,
+                                    color: Colors.black,
+                                    size: 25.0,
+                                  ),
                                 ),
                               ],
                             ),

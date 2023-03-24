@@ -123,7 +123,7 @@ class _VerifyEmailWidgetState extends State<VerifyEmailWidget> {
                   color: FlutterFlowTheme.of(context).primaryColor,
                   textStyle: FlutterFlowTheme.of(context).subtitle2.override(
                         fontFamily: 'Poppins',
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        color: Color(0xFFF2F2F2),
                       ),
                   elevation: 3.0,
                   borderSide: BorderSide(

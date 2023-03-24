@@ -41,6 +41,9 @@ abstract class ProductsRecord
   @BuiltValueField(wireName: 'Quantity')
   int? get quantity;
 
+  @BuiltValueField(wireName: 'Condition')
+  String? get condition;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -55,7 +58,8 @@ abstract class ProductsRecord
     ..likedBy = ListBuilder()
     ..cart = ListBuilder()
     ..status = ''
-    ..quantity = 0;
+    ..quantity = 0
+    ..condition = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('Products');
@@ -88,6 +92,7 @@ Map<String, dynamic> createProductsRecordData({
   String? parish,
   String? status,
   int? quantity,
+  String? condition,
 }) {
   final firestoreData = serializers.toFirestore(
     ProductsRecord.serializer,
@@ -103,7 +108,8 @@ Map<String, dynamic> createProductsRecordData({
         ..likedBy = null
         ..cart = null
         ..status = status
-        ..quantity = quantity,
+        ..quantity = quantity
+        ..condition = condition,
     ),
   );
 

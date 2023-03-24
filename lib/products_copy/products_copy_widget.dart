@@ -198,6 +198,7 @@ class _ProductsCopyWidgetState extends State<ProductsCopyWidget> {
                         margin: EdgeInsetsDirectional.fromSTEB(
                             12.0, 4.0, 12.0, 4.0),
                         hidesUnderline: true,
+                        isSearchable: false,
                       ),
                       FlutterFlowDropDown<String>(
                         controller: _model.dropDownController2 ??=
@@ -230,6 +231,7 @@ class _ProductsCopyWidgetState extends State<ProductsCopyWidget> {
                         margin: EdgeInsetsDirectional.fromSTEB(
                             12.0, 4.0, 12.0, 4.0),
                         hidesUnderline: true,
+                        isSearchable: false,
                       ),
                     ],
                   ),
@@ -269,7 +271,8 @@ class _ProductsCopyWidgetState extends State<ProductsCopyWidget> {
                                         .where('parish',
                                             isEqualTo: _model.dropDownValue1)
                                         .where('Category',
-                                            isEqualTo: _model.dropDownValue2);
+                                            isEqualTo: _model.dropDownValue2)
+                                        .orderBy('Cost');
                                 if (_model.pagingController != null) {
                                   final query =
                                       queryBuilder(ProductsRecord.collection);
@@ -298,7 +301,8 @@ class _ProductsCopyWidgetState extends State<ProductsCopyWidget> {
                                                     _model.dropDownValue1)
                                             .where('Category',
                                                 isEqualTo:
-                                                    _model.dropDownValue2),
+                                                    _model.dropDownValue2)
+                                            .orderBy('Cost'),
                                     nextPageMarker: nextPageMarker,
                                     pageSize: 50,
                                     isStream: true,
@@ -339,6 +343,7 @@ class _ProductsCopyWidgetState extends State<ProductsCopyWidget> {
                               padding: EdgeInsets.zero,
                               primary: false,
                               shrinkWrap: true,
+                              reverse: false,
                               scrollDirection: Axis.vertical,
                               builderDelegate:
                                   PagedChildBuilderDelegate<ProductsRecord>(

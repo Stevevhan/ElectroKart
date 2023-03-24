@@ -304,6 +304,7 @@ class _ProductsWidgetState extends State<ProductsWidget>
                             margin: EdgeInsetsDirectional.fromSTEB(
                                 12.0, 4.0, 12.0, 4.0),
                             hidesUnderline: true,
+                            isSearchable: false,
                           ),
                         ),
                         FlutterFlowDropDown<String>(
@@ -337,6 +338,7 @@ class _ProductsWidgetState extends State<ProductsWidget>
                           margin: EdgeInsetsDirectional.fromSTEB(
                               12.0, 4.0, 12.0, 4.0),
                           hidesUnderline: true,
+                          isSearchable: false,
                         ),
                       ],
                     ),

@@ -21,6 +21,9 @@ class EditProductModel extends FlutterFlowModel {
   // State field(s) for statusDropDown widget.
   String? statusDropDownValue;
   FormFieldController<String>? statusDropDownController;
+  // State field(s) for conditionDropDown widget.
+  String? conditionDropDownValue;
+  FormFieldController<String>? conditionDropDownController;
   // State field(s) for CategoryDropDown widget.
   String? categoryDropDownValue;
   FormFieldController<String>? categoryDropDownController;

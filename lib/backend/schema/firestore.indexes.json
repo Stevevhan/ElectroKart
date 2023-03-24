@@ -15,6 +15,24 @@
       ]
     },
     {
+      "collectionGroup": "Products",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "parish",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "Category",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "Cost",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
       "collectionGroup": "chat_messages",
       "queryScope": "COLLECTION",
       "fields": [

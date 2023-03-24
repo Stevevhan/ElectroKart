@@ -310,6 +310,7 @@ class _SearchpageWidgetState extends State<SearchpageWidget> {
                                   padding: EdgeInsets.zero,
                                   primary: false,
                                   shrinkWrap: true,
+                                  reverse: false,
                                   scrollDirection: Axis.vertical,
                                   builderDelegate:
                                       PagedChildBuilderDelegate<ProductsRecord>(

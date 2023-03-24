@@ -7,7 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/flutter_flow/upload_media.dart';
+import '/flutter_flow/upload_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -146,8 +146,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                                         .bodyText1
                                         .override(
                                           fontFamily: 'Poppins',
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
+                                          color: Color(0xFFFFCA00),
                                           fontSize: 35.0,
                                         ),
                                   ),
@@ -200,7 +199,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                                           validateFileFormat(
                                               m.storagePath, context))) {
                                     setState(
-                                        () => _model.isMediaUploading = true);
+                                        () => _model.isDataUploading = true);
                                     var selectedUploadedFiles =
                                         <FFUploadedFile>[];
                                     var downloadUrls = <String>[];
@@ -233,7 +232,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                                     } finally {
                                       ScaffoldMessenger.of(context)
                                           .hideCurrentSnackBar();
-                                      _model.isMediaUploading = false;
+                                      _model.isDataUploading = false;
                                     }
                                     if (selectedUploadedFiles.length ==
                                             selectedMedia.length &&
@@ -249,7 +248,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                                     } else {
                                       setState(() {});
                                       showUploadMessage(
-                                          context, 'Failed to upload media');
+                                          context, 'Failed to upload data');
                                       return;
                                     }
                                   }
@@ -371,6 +370,42 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                             margin: EdgeInsetsDirectional.fromSTEB(
                                 12.0, 4.0, 12.0, 4.0),
                             hidesUnderline: true,
+                            isSearchable: false,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              28.0, 20.0, 0.0, 0.0),
+                          child: FlutterFlowDropDown<String>(
+                            controller: _model.conditionDropDownController ??=
+                                FormFieldController<String>(null),
+                            options: [
+                              'Used',
+                              'New',
+                              'Like New',
+                              'For Parts/Repair'
+                            ],
+                            onChanged: (val) => setState(
+                                () => _model.conditionDropDownValue = val),
+                            width: 180.0,
+                            height: 50.0,
+                            textStyle:
+                                FlutterFlowTheme.of(context).bodyText2.override(
+                                      fontFamily: 'Poppins',
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                    ),
+                            hintText: 'Product Condition',
+                            fillColor:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                            elevation: 2.0,
+                            borderColor: Color(0x004B39EF),
+                            borderWidth: 1.0,
+                            borderRadius: 5.0,
+                            margin: EdgeInsetsDirectional.fromSTEB(
+                                12.0, 4.0, 12.0, 4.0),
+                            hidesUnderline: true,
+                            isSearchable: false,
                           ),
                         ),
                         Padding(
@@ -403,6 +438,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                             margin: EdgeInsetsDirectional.fromSTEB(
                                 12.0, 4.0, 12.0, 4.0),
                             hidesUnderline: true,
+                            isSearchable: false,
                           ),
                         ),
                         Padding(
@@ -442,6 +478,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                             margin: EdgeInsetsDirectional.fromSTEB(
                                 12.0, 4.0, 12.0, 4.0),
                             hidesUnderline: true,
+                            isSearchable: false,
                           ),
                         ),
                         Padding(
@@ -686,6 +723,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                               status: _model.statusDropDownValue,
                               quantity: int.tryParse(
                                   _model.inputProductQuantityController.text),
+                              condition: _model.conditionDropDownValue,
                             );
                             var productsRecordReference =
                                 ProductsRecord.collection.doc();

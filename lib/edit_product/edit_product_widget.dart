@@ -134,8 +134,7 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                         .bodyText1
                                         .override(
                                           fontFamily: 'Poppins',
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
+                                          color: Color(0xFFFFCA00),
                                           fontSize: 35.0,
                                         ),
                                   ),
@@ -295,6 +294,77 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                   margin: EdgeInsetsDirectional.fromSTEB(
                                       12.0, 4.0, 12.0, 4.0),
                                   hidesUnderline: true,
+                                  isSearchable: false,
+                                );
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                28.0, 30.0, 0.0, 0.0),
+                            child: StreamBuilder<List<SoldRecord>>(
+                              stream: querySoldRecord(
+                                singleRecord: true,
+                              ),
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 30.0,
+                                      height: 30.0,
+                                      child: SpinKitDualRing(
+                                        color: Color(0xFFFFCA00),
+                                        size: 30.0,
+                                      ),
+                                    ),
+                                  );
+                                }
+                                List<SoldRecord>
+                                    conditionDropDownSoldRecordList =
+                                    snapshot.data!;
+                                // Return an empty Container when the item does not exist.
+                                if (snapshot.data!.isEmpty) {
+                                  return Container();
+                                }
+                                final conditionDropDownSoldRecord =
+                                    conditionDropDownSoldRecordList.isNotEmpty
+                                        ? conditionDropDownSoldRecordList.first
+                                        : null;
+                                return FlutterFlowDropDown<String>(
+                                  controller:
+                                      _model.conditionDropDownController ??=
+                                          FormFieldController<String>(
+                                    _model.conditionDropDownValue ??=
+                                        editProductProductsRecord.condition,
+                                  ),
+                                  options: [
+                                    'Used',
+                                    'New',
+                                    'Like New',
+                                    'For Parts/Repair'
+                                  ],
+                                  onChanged: (val) => setState(() =>
+                                      _model.conditionDropDownValue = val),
+                                  width: 180.0,
+                                  height: 50.0,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        color: Color(0xFF4E5153),
+                                      ),
+                                  hintText: 'Condition...',
+                                  fillColor: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  elevation: 2.0,
+                                  borderColor: Color(0x004B39EF),
+                                  borderWidth: 1.0,
+                                  borderRadius: 5.0,
+                                  margin: EdgeInsetsDirectional.fromSTEB(
+                                      12.0, 4.0, 12.0, 4.0),
+                                  hidesUnderline: true,
+                                  isSearchable: false,
                                 );
                               },
                             ),
@@ -337,6 +407,7 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                               margin: EdgeInsetsDirectional.fromSTEB(
                                   12.0, 4.0, 12.0, 4.0),
                               hidesUnderline: true,
+                              isSearchable: false,
                             ),
                           ),
                           Padding(
@@ -383,6 +454,7 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                               margin: EdgeInsetsDirectional.fromSTEB(
                                   12.0, 4.0, 12.0, 4.0),
                               hidesUnderline: true,
+                              isSearchable: false,
                             ),
                           ),
                           Padding(
@@ -706,6 +778,7 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                     status: _model.statusDropDownValue,
                                     quantity: int.tryParse(_model
                                         .inputProductQuantityController.text),
+                                    condition: _model.conditionDropDownValue,
                                   );
                                   await editProductProductsRecord.reference
                                       .update(productsUpdateData);

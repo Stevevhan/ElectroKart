@@ -1,5 +1,6 @@
 import '/auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/push_notifications/push_notifications_util.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -72,13 +73,12 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
     'buttonOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
       effects: [
-        ShakeEffect(
+        SaturateEffect(
           curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 1000.ms,
-          hz: 10,
-          offset: Offset(0.0, 0.0),
-          rotation: 0.087,
+          delay: 1000.ms,
+          duration: 600.ms,
+          begin: 0.0,
+          end: 1.0,
         ),
       ],
     ),
@@ -450,7 +450,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                         children: [
                           Container(
                             width: 340.6,
-                            height: 100.0,
+                            height: 129.4,
                             decoration: BoxDecoration(
                               color: Color(0x1E95A1AC),
                               borderRadius: BorderRadius.circular(10.0),
@@ -567,6 +567,57 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                                 textSoldRecordList.isNotEmpty
                                                     ? textSoldRecordList.first
                                                     : null;
+                                            return Text(
+                                              'Condition: ${productDetailsProductsRecord.condition}',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText2,
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      10.0, 5.0, 0.0, 0.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 4.0, 0.0, 0.0),
+                                        child: StreamBuilder<List<SoldRecord>>(
+                                          stream: querySoldRecord(
+                                            singleRecord: true,
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 30.0,
+                                                  height: 30.0,
+                                                  child: SpinKitDualRing(
+                                                    color: Color(0xFFFFCA00),
+                                                    size: 30.0,
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            List<SoldRecord>
+                                                textSoldRecordList =
+                                                snapshot.data!;
+                                            // Return an empty Container when the item does not exist.
+                                            if (snapshot.data!.isEmpty) {
+                                              return Container();
+                                            }
+                                            final textSoldRecord =
+                                                textSoldRecordList.isNotEmpty
+                                                    ? textSoldRecordList.first
+                                                    : null;
                                             return GradientText(
                                               'Status: ${productDetailsProductsRecord.status}',
                                               style:
@@ -627,7 +678,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                           children: [
                             Container(
                               width: 340.7,
-                              height: 106.2,
+                              height: 119.4,
                               decoration: BoxDecoration(
                                 color: Color(0x1E95A1AC),
                                 borderRadius: BorderRadius.circular(10.0),
@@ -688,7 +739,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        10.0, 5.0, 0.0, 0.0),
+                                        10.0, 8.0, 0.0, 0.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
@@ -706,7 +757,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        10.0, 5.0, 0.0, 0.0),
+                                        10.0, 8.0, 0.0, 0.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
@@ -757,7 +808,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        10.0, 5.0, 0.0, 0.0),
+                                        10.0, 8.0, 0.0, 0.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
@@ -1330,6 +1381,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                             padding: EdgeInsets.zero,
                                             primary: false,
                                             shrinkWrap: true,
+                                            reverse: false,
                                             scrollDirection: Axis.vertical,
                                             builderDelegate:
                                                 PagedChildBuilderDelegate<
@@ -1750,10 +1802,24 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                 ),
                               },
                             );
+
+                            triggerPushNotification(
+                              notificationTitle: currentUserDisplayName,
+                              notificationText:
+                                  'Re: ${productDetailsProductsRecord.name}',
+                              notificationImageUrl:
+                                  productDetailsProductsRecord.thumb,
+                              notificationSound: 'default',
+                              userRefs: [
+                                productDetailsProductsRecord.sellerid!
+                              ],
+                              initialPageName: 'all_chats',
+                              parameterData: {},
+                            );
                           },
-                          text: 'Inquire Now',
+                          text: 'Chat Now',
                           icon: Icon(
-                            Icons.chat_bubble_outline_rounded,
+                            Icons.chat,
                             size: 15.0,
                           ),
                           options: FFButtonOptions(
