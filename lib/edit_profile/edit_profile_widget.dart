@@ -445,7 +445,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         displayName: _model.yourNameController.text,
                         email: _model.youremailaddressController.text,
                         photoUrl: _model.uploadedFileUrl,
-                        phoneNumber: '',
+                        phoneNumber: _model.yourphoneController.text,
                       );
                       await currentUserReference!.update(usersUpdateData);
                       context.pop();
