@@ -1,20 +1,24 @@
-import '/auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'report_model.dart';
 export 'report_model.dart';
 
 class ReportWidget extends StatefulWidget {
-  const ReportWidget({Key? key}) : super(key: key);
+  const ReportWidget({
+    Key? key,
+    required this.reportid,
+  }) : super(key: key);
+
+  final DocumentReference? reportid;
 
   @override
   _ReportWidgetState createState() => _ReportWidgetState();
@@ -46,8 +50,8 @@ class _ReportWidgetState extends State<ReportWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return StreamBuilder<UsersRecord>(
-      stream: UsersRecord.getDocument(currentUserReference!),
+    return StreamBuilder<ProductsRecord>(
+      stream: ProductsRecord.getDocument(widget.reportid!),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -62,47 +66,48 @@ class _ReportWidgetState extends State<ReportWidget> {
             ),
           );
         }
-        final reportUsersRecord = snapshot.data!;
-        return Scaffold(
-          key: scaffoldKey,
-          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-          appBar: AppBar(
+        final reportProductsRecord = snapshot.data!;
+        return GestureDetector(
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+          child: Scaffold(
+            key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-            automaticallyImplyLeading: false,
-            title: GradientText(
-              'REPORT',
-              style: FlutterFlowTheme.of(context).title2,
-              colors: [
-                FlutterFlowTheme.of(context).alternate,
-                FlutterFlowTheme.of(context).tertiaryColor
-              ],
-              gradientDirection: GradientDirection.ltr,
-              gradientType: GradientType.linear,
-            ),
-            actions: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
-                child: FlutterFlowIconButton(
-                  borderColor: Colors.transparent,
-                  borderRadius: 30.0,
-                  buttonSize: 48.0,
-                  icon: Icon(
-                    Icons.close_rounded,
-                    color: FlutterFlowTheme.of(context).secondaryText,
-                    size: 30.0,
-                  ),
-                  onPressed: () async {
-                    context.pop();
-                  },
-                ),
+            appBar: AppBar(
+              backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+              automaticallyImplyLeading: false,
+              title: Text(
+                'REPORT',
+                style: FlutterFlowTheme.of(context).headlineMedium.override(
+                      fontFamily:
+                          FlutterFlowTheme.of(context).headlineMediumFamily,
+                      color: FlutterFlowTheme.of(context).primaryText,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          FlutterFlowTheme.of(context).headlineMediumFamily),
+                    ),
               ),
-            ],
-            centerTitle: false,
-            elevation: 0.0,
-          ),
-          body: SafeArea(
-            child: GestureDetector(
-              onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+              actions: [
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
+                  child: FlutterFlowIconButton(
+                    borderColor: Colors.transparent,
+                    borderRadius: 30.0,
+                    buttonSize: 48.0,
+                    icon: Icon(
+                      Icons.close_rounded,
+                      color: FlutterFlowTheme.of(context).secondaryText,
+                      size: 30.0,
+                    ),
+                    onPressed: () async {
+                      context.pop();
+                    },
+                  ),
+                ),
+              ],
+              centerTitle: false,
+              elevation: 0.0,
+            ),
+            body: SafeArea(
+              top: true,
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -119,6 +124,27 @@ class _ReportWidgetState extends State<ReportWidget> {
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Text(
+                                    reportProductsRecord.name,
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily,
+                                          fontSize: 16.0,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily),
+                                        ),
+                                  ),
+                                ],
+                              ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 12.0, 0.0, 0.0),
@@ -133,12 +159,12 @@ class _ReportWidgetState extends State<ReportWidget> {
                                           hintText: 'Describe the complaint...',
                                           hintStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText2,
+                                                  .bodySmall,
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primaryColor,
+                                                      .warning,
                                               width: 2.0,
                                             ),
                                             borderRadius:
@@ -174,7 +200,7 @@ class _ReportWidgetState extends State<ReportWidget> {
                                                   20.0, 32.0, 20.0, 12.0),
                                         ),
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyText1,
+                                            .bodyMedium,
                                         textAlign: TextAlign.start,
                                         maxLines: 4,
                                         validator: _model
@@ -200,7 +226,7 @@ class _ReportWidgetState extends State<ReportWidget> {
                             scheme: 'mailto',
                             path: 'electrokart876@gmail.com',
                             query: {
-                              'subject': reportUsersRecord.displayName!,
+                              'subject': reportProductsRecord.name,
                               'body': _model.textController.text,
                             }
                                 .entries
@@ -216,13 +242,16 @@ class _ReportWidgetState extends State<ReportWidget> {
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconPadding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primaryColor,
+                        color: FlutterFlowTheme.of(context).primary,
                         textStyle:
-                            FlutterFlowTheme.of(context).subtitle2.override(
+                            FlutterFlowTheme.of(context).titleSmall.override(
                                   fontFamily: 'Lexend Deca',
                                   color: Colors.white,
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.w500,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .titleSmallFamily),
                                 ),
                         elevation: 3.0,
                         borderSide: BorderSide(

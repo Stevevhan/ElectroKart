@@ -1,8 +1,11 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/empty_list_widget.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -46,16 +49,28 @@ class _SellersdbWidgetState extends State<SellersdbWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        floatingActionButton: FloatingActionButton(
+        floatingActionButton: FloatingActionButton.extended(
           onPressed: () async {
             context.pushNamed('new_product');
           },
           backgroundColor: Color(0xFF2500FF),
           elevation: 8.0,
-          child: Icon(
-            Icons.add,
-            color: Color(0xFFF5BC2E),
-            size: 30.0,
+          label: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Text(
+                'New Ad',
+                style: FlutterFlowTheme.of(context).bodyMedium,
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                child: Icon(
+                  Icons.add,
+                  color: Color(0xFFF5BC2E),
+                  size: 30.0,
+                ),
+              ),
+            ],
           ),
         ),
         appBar: AppBar(
@@ -63,20 +78,17 @@ class _SellersdbWidgetState extends State<SellersdbWidget> {
           automaticallyImplyLeading: false,
           title: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
-            child: GradientText(
+            child: Text(
               'My Ads',
               textAlign: TextAlign.center,
-              style: FlutterFlowTheme.of(context).title1.override(
+              style: FlutterFlowTheme.of(context).displaySmall.override(
                     fontFamily: 'Lato',
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    color: FlutterFlowTheme.of(context).primaryText,
                     fontSize: 36.0,
+                    fontWeight: FontWeight.w600,
+                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                        FlutterFlowTheme.of(context).displaySmallFamily),
                   ),
-              colors: [
-                FlutterFlowTheme.of(context).primaryColor,
-                FlutterFlowTheme.of(context).secondaryColor
-              ],
-              gradientDirection: GradientDirection.ltr,
-              gradientType: GradientType.linear,
             ),
           ),
           actions: [],
@@ -84,6 +96,7 @@ class _SellersdbWidgetState extends State<SellersdbWidget> {
           elevation: 10.0,
         ),
         body: SafeArea(
+          top: true,
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -97,17 +110,128 @@ class _SellersdbWidgetState extends State<SellersdbWidget> {
                     children: [
                       GradientText(
                         'Manage your Ads here',
-                        style: FlutterFlowTheme.of(context).bodyText2.override(
-                              fontFamily: 'Poppins',
+                        style: FlutterFlowTheme.of(context).bodySmall.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).bodySmallFamily,
                               color: Color(0xFFFFCA00),
                               fontSize: 20.0,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context).bodySmallFamily),
                             ),
                         colors: [
-                          FlutterFlowTheme.of(context).primaryColor,
-                          FlutterFlowTheme.of(context).secondaryColor
+                          FlutterFlowTheme.of(context).primary,
+                          FlutterFlowTheme.of(context).secondary
                         ],
                         gradientDirection: GradientDirection.ltr,
                         gradientType: GradientType.linear,
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(16.0, 10.0, 16.0, 0.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            0.0, 10.0, 20.0, 10.0),
+                        child: FlutterFlowDropDown<String>(
+                          controller: _model.dropDownValueController ??=
+                              FormFieldController<String>(null),
+                          options: [
+                            'Available',
+                            'Sold',
+                            'Sold Out',
+                            'Seller is away'
+                          ],
+                          onChanged: (val) =>
+                              setState(() => _model.dropDownValue = val),
+                          width: 110.0,
+                          height: 40.0,
+                          searchHintTextStyle: FlutterFlowTheme.of(context)
+                              .bodyLarge
+                              .override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .bodyLargeFamily,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .bodyLargeFamily),
+                              ),
+                          textStyle: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .bodyMediumFamily,
+                                color:
+                                    FlutterFlowTheme.of(context).primaryBtnText,
+                                fontSize: 12.0,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .bodyMediumFamily),
+                              ),
+                          hintText: 'Status',
+                          searchHintText: 'Search for an item...',
+                          fillColor:
+                              FlutterFlowTheme.of(context).primaryBackground,
+                          elevation: 2.0,
+                          borderColor: FlutterFlowTheme.of(context).warning,
+                          borderWidth: 0.0,
+                          borderRadius: 10.0,
+                          margin: EdgeInsetsDirectional.fromSTEB(
+                              12.0, 4.0, 12.0, 4.0),
+                          hidesUnderline: true,
+                          isSearchable: false,
+                        ),
+                      ),
+                      FFButtonWidget(
+                        onPressed: () async {
+                          context.pushNamed(
+                            'sellersdb',
+                            extra: <String, dynamic>{
+                              kTransitionInfoKey: TransitionInfo(
+                                hasTransition: true,
+                                transitionType: PageTransitionType.fade,
+                                duration: Duration(milliseconds: 20),
+                              ),
+                            },
+                          );
+                        },
+                        text: 'Refresh',
+                        icon: Icon(
+                          Icons.refresh,
+                          color: Color(0xFFFFCA00),
+                          size: 15.0,
+                        ),
+                        options: FFButtonOptions(
+                          width: 97.0,
+                          height: 40.0,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: FlutterFlowTheme.of(context).primary,
+                          textStyle: FlutterFlowTheme.of(context)
+                              .titleSmall
+                              .override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .titleSmallFamily,
+                                color: Colors.white,
+                                fontSize: 13.0,
+                                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                    FlutterFlowTheme.of(context)
+                                        .titleSmallFamily),
+                              ),
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
                       ),
                     ],
                   ),
@@ -122,6 +246,9 @@ class _SellersdbWidgetState extends State<SellersdbWidget> {
                         child: StreamBuilder<List<SoldRecord>>(
                           stream: querySoldRecord(
                             parent: currentUserReference,
+                            queryBuilder: (soldRecord) => soldRecord.where(
+                                'status',
+                                isEqualTo: _model.dropDownValue),
                           ),
                           builder: (context, snapshot) {
                             // Customize what your widget looks like when it's loading.
@@ -178,6 +305,10 @@ class _SellersdbWidgetState extends State<SellersdbWidget> {
                                       final menuItemProductsRecord =
                                           snapshot.data!;
                                       return InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
                                         onTap: () async {
                                           context.pushNamed(
                                             'edit_product',
@@ -261,9 +392,9 @@ class _SellersdbWidgetState extends State<SellersdbWidget> {
                                             gradient: LinearGradient(
                                               colors: [
                                                 FlutterFlowTheme.of(context)
-                                                    .primaryColor,
+                                                    .primary,
                                                 FlutterFlowTheme.of(context)
-                                                    .secondaryColor
+                                                    .secondary
                                               ],
                                               stops: [0.0, 1.0],
                                               begin: AlignmentDirectional(
@@ -290,7 +421,7 @@ class _SellersdbWidgetState extends State<SellersdbWidget> {
                                                             6.0),
                                                     child: Image.network(
                                                       menuItemProductsRecord
-                                                          .thumb!,
+                                                          .thumb,
                                                       width: 80.0,
                                                       height: 80.0,
                                                       fit: BoxFit.cover,
@@ -315,7 +446,7 @@ class _SellersdbWidgetState extends State<SellersdbWidget> {
                                                       children: [
                                                         Text(
                                                           menuItemProductsRecord
-                                                              .name!
+                                                              .name
                                                               .maybeHandleOverflow(
                                                             maxChars: 18,
                                                             replacement: '…',
@@ -323,7 +454,7 @@ class _SellersdbWidgetState extends State<SellersdbWidget> {
                                                           maxLines: 1,
                                                           style: FlutterFlowTheme
                                                                   .of(context)
-                                                              .title3,
+                                                              .headlineSmall,
                                                         ),
                                                         Padding(
                                                           padding:
@@ -335,7 +466,7 @@ class _SellersdbWidgetState extends State<SellersdbWidget> {
                                                                       0.0),
                                                           child: AutoSizeText(
                                                             menuItemProductsRecord
-                                                                .desc!
+                                                                .desc
                                                                 .maybeHandleOverflow(
                                                               maxChars: 10,
                                                               replacement: '…',
@@ -345,13 +476,19 @@ class _SellersdbWidgetState extends State<SellersdbWidget> {
                                                             maxLines: 1,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
-                                                                .bodyText2
+                                                                .bodySmall
                                                                 .override(
-                                                                  fontFamily:
-                                                                      'Poppins',
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodySmallFamily,
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondaryBackground,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .bodySmallFamily),
                                                                 ),
                                                           ),
                                                         ),
@@ -364,16 +501,21 @@ class _SellersdbWidgetState extends State<SellersdbWidget> {
                                                           children: [
                                                             Text(
                                                               menuItemProductsRecord
-                                                                  .status!,
+                                                                  .status,
                                                               style: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .bodyText1
+                                                                  .bodyMedium
                                                                   .override(
                                                                     fontFamily:
-                                                                        'Poppins',
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodyMediumFamily,
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
                                                                         .secondaryBackground,
+                                                                    useGoogleFonts: GoogleFonts
+                                                                            .asMap()
+                                                                        .containsKey(
+                                                                            FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                   ),
                                                             ),
                                                           ],
@@ -418,7 +560,7 @@ class _SellersdbWidgetState extends State<SellersdbWidget> {
                                                       child: Text(
                                                         formatNumber(
                                                           menuItemProductsRecord
-                                                              .cost!,
+                                                              .cost,
                                                           formatType:
                                                               FormatType.custom,
                                                           currency: '',
@@ -427,19 +569,27 @@ class _SellersdbWidgetState extends State<SellersdbWidget> {
                                                         ),
                                                         textAlign:
                                                             TextAlign.end,
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .bodyText1
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Poppins',
-                                                              color: Color(
-                                                                  0xFFFFCA00),
-                                                              fontSize: 16.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                            ),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily,
+                                                                  color: Color(
+                                                                      0xFFFFCA00),
+                                                                  fontSize:
+                                                                      16.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .bodyMediumFamily),
+                                                                ),
                                                       ),
                                                     ),
                                                   ],

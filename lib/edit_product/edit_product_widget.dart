@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -69,33 +69,48 @@ class _EditProductWidgetState extends State<EditProductWidget> {
           );
         }
         final editProductProductsRecord = snapshot.data!;
-        return Scaffold(
-          key: scaffoldKey,
-          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-          appBar: AppBar(
+        return GestureDetector(
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+          child: Scaffold(
+            key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-            automaticallyImplyLeading: false,
-            leading: FlutterFlowIconButton(
-              borderColor: Colors.transparent,
-              borderRadius: 30.0,
-              borderWidth: 1.0,
-              buttonSize: 60.0,
-              icon: Icon(
-                Icons.arrow_back_rounded,
-                color: FlutterFlowTheme.of(context).primaryText,
-                size: 30.0,
+            appBar: AppBar(
+              backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+              automaticallyImplyLeading: false,
+              leading: FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30.0,
+                borderWidth: 1.0,
+                buttonSize: 60.0,
+                icon: Icon(
+                  Icons.arrow_back_ios_sharp,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  size: 30.0,
+                ),
+                onPressed: () async {
+                  context.pop();
+                },
               ),
-              onPressed: () async {
-                context.pop();
-              },
+              title: Align(
+                alignment: AlignmentDirectional(-0.25, 0.0),
+                child: Text(
+                  'Edit Ad',
+                  textAlign: TextAlign.center,
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily:
+                            FlutterFlowTheme.of(context).bodyMediumFamily,
+                        fontSize: 25.0,
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            FlutterFlowTheme.of(context).bodyMediumFamily),
+                      ),
+                ),
+              ),
+              actions: [],
+              centerTitle: false,
+              elevation: 0.0,
             ),
-            actions: [],
-            centerTitle: false,
-            elevation: 0.0,
-          ),
-          body: SafeArea(
-            child: GestureDetector(
-              onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+            body: SafeArea(
+              top: true,
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -105,43 +120,6 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: 286.0,
-                                height: 51.8,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                      FlutterFlowTheme.of(context)
-                                          .secondaryColor
-                                    ],
-                                    stops: [0.0, 1.0],
-                                    begin: AlignmentDirectional(0.0, -1.0),
-                                    end: AlignmentDirectional(0, 1.0),
-                                  ),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: Align(
-                                  alignment: AlignmentDirectional(0.0, -0.05),
-                                  child: Text(
-                                    'Edit Ad',
-                                    textAlign: TextAlign.center,
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Poppins',
-                                          color: Color(0xFFFFCA00),
-                                          fontSize: 35.0,
-                                        ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 8.0, 16.0, 0.0),
@@ -158,7 +136,7 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(16.0),
                                   child: Image.network(
-                                    editProductProductsRecord.thumb!,
+                                    editProductProductsRecord.thumb,
                                     width: double.infinity,
                                     height: double.infinity,
                                     fit: BoxFit.cover,
@@ -180,17 +158,27 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                               decoration: InputDecoration(
                                 labelText: 'Product Name',
                                 labelStyle: FlutterFlowTheme.of(context)
-                                    .bodyText1
+                                    .bodyMedium
                                     .override(
-                                      fontFamily: 'Poppins',
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyMediumFamily,
                                       color: Color(0xFFFFCA00),
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily),
                                     ),
                                 hintText: 'Product name...',
                                 hintStyle: FlutterFlowTheme.of(context)
-                                    .bodyText2
+                                    .bodySmall
                                     .override(
-                                      fontFamily: 'Poppins',
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodySmallFamily,
                                       fontSize: 14.0,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodySmallFamily),
                                     ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -224,7 +212,7 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                 fillColor: FlutterFlowTheme.of(context)
                                     .primaryBackground,
                               ),
-                              style: FlutterFlowTheme.of(context).bodyText1,
+                              style: FlutterFlowTheme.of(context).bodyMedium,
                               validator: _model
                                   .inputProductNameControllerValidator
                                   .asValidator(context),
@@ -263,7 +251,7 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                         : null;
                                 return FlutterFlowDropDown<String>(
                                   controller:
-                                      _model.statusDropDownController ??=
+                                      _model.statusDropDownValueController ??=
                                           FormFieldController<String>(
                                     _model.statusDropDownValue ??=
                                         editProductProductsRecord.status,
@@ -279,10 +267,15 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                   width: 180.0,
                                   height: 50.0,
                                   textStyle: FlutterFlowTheme.of(context)
-                                      .bodyText1
+                                      .bodyMedium
                                       .override(
-                                        fontFamily: 'Poppins',
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .bodyMediumFamily,
                                         color: Color(0xFF4E5153),
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily),
                                       ),
                                   hintText: 'Product category..',
                                   fillColor: FlutterFlowTheme.of(context)
@@ -332,9 +325,9 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                         ? conditionDropDownSoldRecordList.first
                                         : null;
                                 return FlutterFlowDropDown<String>(
-                                  controller:
-                                      _model.conditionDropDownController ??=
-                                          FormFieldController<String>(
+                                  controller: _model
+                                          .conditionDropDownValueController ??=
+                                      FormFieldController<String>(
                                     _model.conditionDropDownValue ??=
                                         editProductProductsRecord.condition,
                                   ),
@@ -349,10 +342,15 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                   width: 180.0,
                                   height: 50.0,
                                   textStyle: FlutterFlowTheme.of(context)
-                                      .bodyText1
+                                      .bodyMedium
                                       .override(
-                                        fontFamily: 'Poppins',
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .bodyMediumFamily,
                                         color: Color(0xFF4E5153),
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily),
                                       ),
                                   hintText: 'Condition...',
                                   fillColor: FlutterFlowTheme.of(context)
@@ -373,8 +371,9 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 28.0, 30.0, 0.0, 0.0),
                             child: FlutterFlowDropDown<String>(
-                              controller: _model.categoryDropDownController ??=
-                                  FormFieldController<String>(
+                              controller:
+                                  _model.categoryDropDownValueController ??=
+                                      FormFieldController<String>(
                                 _model.categoryDropDownValue ??=
                                     editProductProductsRecord.category,
                               ),
@@ -392,10 +391,15 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                               width: 180.0,
                               height: 50.0,
                               textStyle: FlutterFlowTheme.of(context)
-                                  .bodyText1
+                                  .bodyMedium
                                   .override(
-                                    fontFamily: 'Poppins',
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .bodyMediumFamily,
                                     color: Color(0xFF4E5153),
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .bodyMediumFamily),
                                   ),
                               hintText: 'Product category..',
                               fillColor: FlutterFlowTheme.of(context)
@@ -414,8 +418,9 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 28.0, 30.0, 0.0, 0.0),
                             child: FlutterFlowDropDown<String>(
-                              controller: _model.parishDropDownController ??=
-                                  FormFieldController<String>(
+                              controller:
+                                  _model.parishDropDownValueController ??=
+                                      FormFieldController<String>(
                                 _model.parishDropDownValue ??=
                                     editProductProductsRecord.parish,
                               ),
@@ -439,10 +444,15 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                               width: 180.0,
                               height: 50.0,
                               textStyle: FlutterFlowTheme.of(context)
-                                  .bodyText1
+                                  .bodyMedium
                                   .override(
-                                    fontFamily: 'Poppins',
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .bodyMediumFamily,
                                     color: Color(0xFF4E5153),
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .bodyMediumFamily),
                                   ),
                               hintText: 'Product parish..',
                               fillColor: FlutterFlowTheme.of(context)
@@ -470,14 +480,19 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                               decoration: InputDecoration(
                                 labelText: 'Description',
                                 labelStyle: FlutterFlowTheme.of(context)
-                                    .bodyText1
+                                    .bodyMedium
                                     .override(
-                                      fontFamily: 'Poppins',
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyMediumFamily,
                                       color: Color(0xFFFFCA00),
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily),
                                     ),
                                 hintText: 'Product description.....',
                                 hintStyle:
-                                    FlutterFlowTheme.of(context).bodyText2,
+                                    FlutterFlowTheme.of(context).bodySmall,
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0x004B39EF),
@@ -510,7 +525,7 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                 fillColor: FlutterFlowTheme.of(context)
                                     .primaryBackground,
                               ),
-                              style: FlutterFlowTheme.of(context).bodyText1,
+                              style: FlutterFlowTheme.of(context).bodyMedium,
                               maxLines: 3,
                               validator: _model
                                   .inputProductDescControllerValidator
@@ -526,22 +541,27 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                 controller:
                                     _model.inputProductCostController ??=
                                         TextEditingController(
-                                  text: editProductProductsRecord.cost
-                                      ?.toString(),
+                                  text:
+                                      editProductProductsRecord.cost.toString(),
                                 ),
                                 autofocus: true,
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelText: 'Price',
                                   labelStyle: FlutterFlowTheme.of(context)
-                                      .bodyText1
+                                      .bodyMedium
                                       .override(
-                                        fontFamily: 'Poppins',
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .bodyMediumFamily,
                                         color: Color(0xFFAB9B00),
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily),
                                       ),
                                   hintText: 'Edit price....',
                                   hintStyle:
-                                      FlutterFlowTheme.of(context).bodyText2,
+                                      FlutterFlowTheme.of(context).bodySmall,
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0x00FFCA00),
@@ -578,7 +598,7 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                     color: Color(0xFFAB9B00),
                                   ),
                                 ),
-                                style: FlutterFlowTheme.of(context).bodyText1,
+                                style: FlutterFlowTheme.of(context).bodyMedium,
                                 keyboardType: TextInputType.number,
                                 validator: _model
                                     .inputProductCostControllerValidator
@@ -596,21 +616,26 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                     _model.inputProductQuantityController ??=
                                         TextEditingController(
                                   text: editProductProductsRecord.quantity
-                                      ?.toString(),
+                                      .toString(),
                                 ),
                                 autofocus: true,
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelText: 'Quantity',
                                   labelStyle: FlutterFlowTheme.of(context)
-                                      .bodyText1
+                                      .bodyMedium
                                       .override(
-                                        fontFamily: 'Poppins',
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .bodyMediumFamily,
                                         color: Color(0xFFAB9B00),
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily),
                                       ),
                                   hintText: 'Quantity....',
                                   hintStyle:
-                                      FlutterFlowTheme.of(context).bodyText2,
+                                      FlutterFlowTheme.of(context).bodySmall,
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0x00FFCA00),
@@ -643,7 +668,7 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                   fillColor: FlutterFlowTheme.of(context)
                                       .primaryBackground,
                                 ),
-                                style: FlutterFlowTheme.of(context).bodyText1,
+                                style: FlutterFlowTheme.of(context).bodyMedium,
                                 keyboardType: TextInputType.number,
                                 validator: _model
                                     .inputProductQuantityControllerValidator
@@ -683,7 +708,7 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                       return Text(
                                         'Seller: ${textUsersRecord.displayName}',
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyText1,
+                                            .bodyMedium,
                                       );
                                     },
                                   ),
@@ -713,8 +738,8 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                       ],
                       gradient: LinearGradient(
                         colors: [
-                          FlutterFlowTheme.of(context).primaryColor,
-                          FlutterFlowTheme.of(context).secondaryColor
+                          FlutterFlowTheme.of(context).primary,
+                          FlutterFlowTheme.of(context).secondary
                         ],
                         stops: [0.0, 1.0],
                         begin: AlignmentDirectional(0.0, -1.0),
@@ -800,12 +825,16 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                       0.0, 0.0, 0.0, 0.0),
                                   color: Color(0xFFFFCA00),
                                   textStyle: FlutterFlowTheme.of(context)
-                                      .subtitle2
+                                      .titleSmall
                                       .override(
                                         fontFamily: 'Outfit',
                                         color: Colors.white,
                                         fontSize: 20.0,
                                         fontWeight: FontWeight.w500,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmallFamily),
                                       ),
                                   elevation: 3.0,
                                   borderSide: BorderSide(

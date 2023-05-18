@@ -1,17 +1,17 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_toggle_icon.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'account_model.dart';
 export 'account_model.dart';
 
@@ -54,18 +54,15 @@ class _AccountWidgetState extends State<AccountWidget> {
           automaticallyImplyLeading: false,
           title: Padding(
             padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
-            child: GradientText(
+            child: Text(
               'My Profile',
-              style: FlutterFlowTheme.of(context).title2.override(
-                    fontFamily: 'Poppins',
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
+              style: FlutterFlowTheme.of(context).headlineMedium.override(
+                    fontFamily:
+                        FlutterFlowTheme.of(context).headlineMediumFamily,
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                        FlutterFlowTheme.of(context).headlineMediumFamily),
                   ),
-              colors: [
-                FlutterFlowTheme.of(context).primaryColor,
-                FlutterFlowTheme.of(context).secondaryColor
-              ],
-              gradientDirection: GradientDirection.ltr,
-              gradientType: GradientType.linear,
             ),
           ),
           actions: [],
@@ -73,6 +70,7 @@ class _AccountWidgetState extends State<AccountWidget> {
           elevation: 0.0,
         ),
         body: SafeArea(
+          top: true,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -85,8 +83,8 @@ class _AccountWidgetState extends State<AccountWidget> {
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          FlutterFlowTheme.of(context).primaryColor,
-                          FlutterFlowTheme.of(context).secondaryColor
+                          FlutterFlowTheme.of(context).primary,
+                          FlutterFlowTheme.of(context).secondary
                         ],
                         stops: [0.0, 1.0],
                         begin: AlignmentDirectional(0.0, -1.0),
@@ -107,14 +105,18 @@ class _AccountWidgetState extends State<AccountWidget> {
                                     0.0, 10.0, 0.0, 0.0),
                                 child: AuthUserStreamWidget(
                                   builder: (context) => InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
                                     onTap: () async {
                                       await Navigator.push(
                                         context,
                                         PageTransition(
                                           type: PageTransitionType.fade,
                                           child: FlutterFlowExpandedImageView(
-                                            image: Image.network(
-                                              currentUserPhoto,
+                                            image: CachedNetworkImage(
+                                              imageUrl: currentUserPhoto,
                                               fit: BoxFit.contain,
                                             ),
                                             allowRotation: false,
@@ -134,8 +136,8 @@ class _AccountWidgetState extends State<AccountWidget> {
                                         decoration: BoxDecoration(
                                           shape: BoxShape.circle,
                                         ),
-                                        child: Image.network(
-                                          currentUserPhoto,
+                                        child: CachedNetworkImage(
+                                          imageUrl: currentUserPhoto,
                                           fit: BoxFit.cover,
                                         ),
                                       ),
@@ -155,11 +157,17 @@ class _AccountWidgetState extends State<AccountWidget> {
                                   builder: (context) => Text(
                                     currentUserDisplayName,
                                     style: FlutterFlowTheme.of(context)
-                                        .title1
+                                        .displaySmall
                                         .override(
-                                          fontFamily: 'Poppins',
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .displaySmallFamily,
                                           color: FlutterFlowTheme.of(context)
                                               .secondaryBackground,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .displaySmallFamily),
                                         ),
                                   ),
                                 ),
@@ -178,13 +186,17 @@ class _AccountWidgetState extends State<AccountWidget> {
                                   child: Text(
                                     currentUserEmail,
                                     style: FlutterFlowTheme.of(context)
-                                        .bodyText1
+                                        .bodyMedium
                                         .override(
                                           fontFamily: 'Lexend Deca',
                                           color: FlutterFlowTheme.of(context)
                                               .primaryText,
                                           fontSize: 14.0,
                                           fontWeight: FontWeight.normal,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily),
                                         ),
                                   ),
                                 ),
@@ -220,12 +232,17 @@ class _AccountWidgetState extends State<AccountWidget> {
                               'Account Settings',
                               textAlign: TextAlign.center,
                               style: FlutterFlowTheme.of(context)
-                                  .bodyText1
+                                  .bodyMedium
                                   .override(
-                                    fontFamily: 'Poppins',
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .bodyMediumFamily,
                                     color: FlutterFlowTheme.of(context)
                                         .primaryText,
                                     fontSize: 17.0,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .bodyMediumFamily),
                                   ),
                             ),
                           ),
@@ -255,6 +272,10 @@ class _AccountWidgetState extends State<AccountWidget> {
                               shape: BoxShape.rectangle,
                             ),
                             child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
                               onTap: () async {
                                 context.pushNamed(
                                   'edit_profile',
@@ -275,7 +296,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                                     child: Text(
                                       'Edit Profile',
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                          .bodyMedium,
                                     ),
                                   ),
                                   Expanded(
@@ -310,6 +331,10 @@ class _AccountWidgetState extends State<AccountWidget> {
                               shape: BoxShape.rectangle,
                             ),
                             child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
                               onTap: () async {
                                 context.pushNamed(
                                   'change_password',
@@ -330,7 +355,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                                     child: Text(
                                       'Change Password',
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                          .bodyMedium,
                                     ),
                                   ),
                                   Expanded(
@@ -374,7 +399,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                                   child: Text(
                                     'Dark Mode',
                                     style:
-                                        FlutterFlowTheme.of(context).bodyText1,
+                                        FlutterFlowTheme.of(context).bodyMedium,
                                   ),
                                 ),
                                 ToggleIcon(
@@ -419,6 +444,10 @@ class _AccountWidgetState extends State<AccountWidget> {
                             shape: BoxShape.rectangle,
                           ),
                           child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
                             onTap: () async {
                               context.pushNamed(
                                 'termsOfservice',
@@ -439,7 +468,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                                   child: Text(
                                     'Terms of Service',
                                     style:
-                                        FlutterFlowTheme.of(context).bodyText1,
+                                        FlutterFlowTheme.of(context).bodyMedium,
                                   ),
                                 ),
                                 Expanded(
@@ -503,6 +532,10 @@ class _AccountWidgetState extends State<AccountWidget> {
                                           ? rowProductsRecordList.first
                                           : null;
                                   return InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
                                     onTap: () async {
                                       var confirmDialogResponse =
                                           await showDialog<bool>(
@@ -534,7 +567,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                                               ) ??
                                               false;
                                       if (confirmDialogResponse) {
-                                        await deleteUser(context);
+                                        await authManager.deleteUser(context);
 
                                         context.pushNamed('Login');
                                       } else {
@@ -562,10 +595,19 @@ class _AccountWidgetState extends State<AccountWidget> {
                                           child: Text(
                                             'Delete Account',
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyText1
+                                                .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Poppins',
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily,
                                                   color: Colors.white,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMediumFamily),
                                                 ),
                                           ),
                                         ),
@@ -605,10 +647,10 @@ class _AccountWidgetState extends State<AccountWidget> {
                           FFButtonWidget(
                             onPressed: () async {
                               GoRouter.of(context).prepareAuthEvent();
-                              await signOut();
+                              await authManager.signOut();
                               GoRouter.of(context).clearRedirectLocation();
 
-                              context.goNamedAuth('Login', mounted);
+                              context.goNamedAuth('TestLogin', context.mounted);
                             },
                             text: 'Log Out',
                             options: FFButtonOptions(
@@ -621,13 +663,16 @@ class _AccountWidgetState extends State<AccountWidget> {
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
                               textStyle: FlutterFlowTheme.of(context)
-                                  .bodyText2
+                                  .bodySmall
                                   .override(
                                     fontFamily: 'Lexend Deca',
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
+                                    color: FlutterFlowTheme.of(context).primary,
                                     fontSize: 14.0,
                                     fontWeight: FontWeight.normal,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .bodySmallFamily),
                                   ),
                               elevation: 3.0,
                               borderSide: BorderSide(

@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
@@ -12,6 +12,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 
 class NewProductModel extends FlutterFlowModel {
@@ -27,16 +28,16 @@ class NewProductModel extends FlutterFlowModel {
   String? Function(BuildContext, String?)? inputProductNameControllerValidator;
   // State field(s) for statusDropDown widget.
   String? statusDropDownValue;
-  FormFieldController<String>? statusDropDownController;
+  FormFieldController<String>? statusDropDownValueController;
   // State field(s) for conditionDropDown widget.
   String? conditionDropDownValue;
-  FormFieldController<String>? conditionDropDownController;
+  FormFieldController<String>? conditionDropDownValueController;
   // State field(s) for CategoryDropDown widget.
   String? categoryDropDownValue;
-  FormFieldController<String>? categoryDropDownController;
+  FormFieldController<String>? categoryDropDownValueController;
   // State field(s) for ParishDropDown widget.
   String? parishDropDownValue;
-  FormFieldController<String>? parishDropDownController;
+  FormFieldController<String>? parishDropDownValueController;
   // State field(s) for inputProductDesc widget.
   TextEditingController? inputProductDescController;
   String? Function(BuildContext, String?)? inputProductDescControllerValidator;

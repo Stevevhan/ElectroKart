@@ -1,85 +1,118 @@
 import 'dart:async';
 
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+
 import 'index.dart';
-import 'serializers.dart';
-import 'package:built_value/built_value.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
-part 'products_record.g.dart';
+class ProductsRecord extends FirestoreRecord {
+  ProductsRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
+    _initializeFields();
+  }
 
-abstract class ProductsRecord
-    implements Built<ProductsRecord, ProductsRecordBuilder> {
-  static Serializer<ProductsRecord> get serializer =>
-      _$productsRecordSerializer;
+  // "Name" field.
+  String? _name;
+  String get name => _name ?? '';
+  bool hasName() => _name != null;
 
-  @BuiltValueField(wireName: 'Name')
-  String? get name;
+  // "Category" field.
+  String? _category;
+  String get category => _category ?? '';
+  bool hasCategory() => _category != null;
 
-  @BuiltValueField(wireName: 'Category')
-  String? get category;
+  // "Thumb" field.
+  String? _thumb;
+  String get thumb => _thumb ?? '';
+  bool hasThumb() => _thumb != null;
 
-  @BuiltValueField(wireName: 'Thumb')
-  String? get thumb;
+  // "Desc" field.
+  String? _desc;
+  String get desc => _desc ?? '';
+  bool hasDesc() => _desc != null;
 
-  @BuiltValueField(wireName: 'Desc')
-  String? get desc;
+  // "Cost" field.
+  int? _cost;
+  int get cost => _cost ?? 0;
+  bool hasCost() => _cost != null;
 
-  @BuiltValueField(wireName: 'Cost')
-  int? get cost;
+  // "sellerid" field.
+  DocumentReference? _sellerid;
+  DocumentReference? get sellerid => _sellerid;
+  bool hasSellerid() => _sellerid != null;
 
-  DocumentReference? get sellerid;
+  // "parish" field.
+  String? _parish;
+  String get parish => _parish ?? '';
+  bool hasParish() => _parish != null;
 
-  String? get parish;
+  // "liked_by" field.
+  List<DocumentReference>? _likedBy;
+  List<DocumentReference> get likedBy => _likedBy ?? const [];
+  bool hasLikedBy() => _likedBy != null;
 
-  @BuiltValueField(wireName: 'liked_by')
-  BuiltList<DocumentReference>? get likedBy;
+  // "cart" field.
+  List<bool>? _cart;
+  List<bool> get cart => _cart ?? const [];
+  bool hasCart() => _cart != null;
 
-  BuiltList<bool>? get cart;
+  // "Status" field.
+  String? _status;
+  String get status => _status ?? '';
+  bool hasStatus() => _status != null;
 
-  @BuiltValueField(wireName: 'Status')
-  String? get status;
+  // "Quantity" field.
+  int? _quantity;
+  int get quantity => _quantity ?? 0;
+  bool hasQuantity() => _quantity != null;
 
-  @BuiltValueField(wireName: 'Quantity')
-  int? get quantity;
+  // "Condition" field.
+  String? _condition;
+  String get condition => _condition ?? '';
+  bool hasCondition() => _condition != null;
 
-  @BuiltValueField(wireName: 'Condition')
-  String? get condition;
-
-  @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ffRef;
-  DocumentReference get reference => ffRef!;
-
-  static void _initializeBuilder(ProductsRecordBuilder builder) => builder
-    ..name = ''
-    ..category = ''
-    ..thumb = ''
-    ..desc = ''
-    ..cost = 0
-    ..parish = ''
-    ..likedBy = ListBuilder()
-    ..cart = ListBuilder()
-    ..status = ''
-    ..quantity = 0
-    ..condition = '';
+  void _initializeFields() {
+    _name = snapshotData['Name'] as String?;
+    _category = snapshotData['Category'] as String?;
+    _thumb = snapshotData['Thumb'] as String?;
+    _desc = snapshotData['Desc'] as String?;
+    _cost = snapshotData['Cost'] as int?;
+    _sellerid = snapshotData['sellerid'] as DocumentReference?;
+    _parish = snapshotData['parish'] as String?;
+    _likedBy = getDataList(snapshotData['liked_by']);
+    _cart = getDataList(snapshotData['cart']);
+    _status = snapshotData['Status'] as String?;
+    _quantity = snapshotData['Quantity'] as int?;
+    _condition = snapshotData['Condition'] as String?;
+  }
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('Products');
 
-  static Stream<ProductsRecord> getDocument(DocumentReference ref) => ref
-      .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Stream<ProductsRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => ProductsRecord.fromSnapshot(s));
 
-  static Future<ProductsRecord> getDocumentOnce(DocumentReference ref) => ref
-      .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Future<ProductsRecord> getDocumentOnce(DocumentReference ref) =>
+      ref.get().then((s) => ProductsRecord.fromSnapshot(s));
 
-  ProductsRecord._();
-  factory ProductsRecord([void Function(ProductsRecordBuilder) updates]) =
-      _$ProductsRecord;
+  static ProductsRecord fromSnapshot(DocumentSnapshot snapshot) =>
+      ProductsRecord._(
+        snapshot.reference,
+        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+      );
 
   static ProductsRecord getDocumentFromData(
-          Map<String, dynamic> data, DocumentReference reference) =>
-      serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
+    Map<String, dynamic> data,
+    DocumentReference reference,
+  ) =>
+      ProductsRecord._(reference, mapFromFirestore(data));
+
+  @override
+  String toString() =>
+      'ProductsRecord(reference: ${reference.path}, data: $snapshotData)';
 }
 
 Map<String, dynamic> createProductsRecordData({
@@ -94,23 +127,19 @@ Map<String, dynamic> createProductsRecordData({
   int? quantity,
   String? condition,
 }) {
-  final firestoreData = serializers.toFirestore(
-    ProductsRecord.serializer,
-    ProductsRecord(
-      (p) => p
-        ..name = name
-        ..category = category
-        ..thumb = thumb
-        ..desc = desc
-        ..cost = cost
-        ..sellerid = sellerid
-        ..parish = parish
-        ..likedBy = null
-        ..cart = null
-        ..status = status
-        ..quantity = quantity
-        ..condition = condition,
-    ),
+  final firestoreData = mapToFirestore(
+    <String, dynamic>{
+      'Name': name,
+      'Category': category,
+      'Thumb': thumb,
+      'Desc': desc,
+      'Cost': cost,
+      'sellerid': sellerid,
+      'parish': parish,
+      'Status': status,
+      'Quantity': quantity,
+      'Condition': condition,
+    }.withoutNulls,
   );
 
   return firestoreData;

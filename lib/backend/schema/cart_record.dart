@@ -1,56 +1,68 @@
 import 'dart:async';
 
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+
 import 'index.dart';
-import 'serializers.dart';
-import 'package:built_value/built_value.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
-part 'cart_record.g.dart';
+class CartRecord extends FirestoreRecord {
+  CartRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
+    _initializeFields();
+  }
 
-abstract class CartRecord implements Built<CartRecord, CartRecordBuilder> {
-  static Serializer<CartRecord> get serializer => _$cartRecordSerializer;
+  // "created_by" field.
+  DocumentReference? _createdBy;
+  DocumentReference? get createdBy => _createdBy;
+  bool hasCreatedBy() => _createdBy != null;
 
-  @BuiltValueField(wireName: 'created_by')
-  DocumentReference? get createdBy;
+  // "product" field.
+  DocumentReference? _product;
+  DocumentReference? get product => _product;
+  bool hasProduct() => _product != null;
 
-  DocumentReference? get product;
-
-  @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ffRef;
-  DocumentReference get reference => ffRef!;
-
-  static void _initializeBuilder(CartRecordBuilder builder) => builder;
+  void _initializeFields() {
+    _createdBy = snapshotData['created_by'] as DocumentReference?;
+    _product = snapshotData['product'] as DocumentReference?;
+  }
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('cart');
 
-  static Stream<CartRecord> getDocument(DocumentReference ref) => ref
-      .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Stream<CartRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => CartRecord.fromSnapshot(s));
 
-  static Future<CartRecord> getDocumentOnce(DocumentReference ref) => ref
-      .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Future<CartRecord> getDocumentOnce(DocumentReference ref) =>
+      ref.get().then((s) => CartRecord.fromSnapshot(s));
 
-  CartRecord._();
-  factory CartRecord([void Function(CartRecordBuilder) updates]) = _$CartRecord;
+  static CartRecord fromSnapshot(DocumentSnapshot snapshot) => CartRecord._(
+        snapshot.reference,
+        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+      );
 
   static CartRecord getDocumentFromData(
-          Map<String, dynamic> data, DocumentReference reference) =>
-      serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
+    Map<String, dynamic> data,
+    DocumentReference reference,
+  ) =>
+      CartRecord._(reference, mapFromFirestore(data));
+
+  @override
+  String toString() =>
+      'CartRecord(reference: ${reference.path}, data: $snapshotData)';
 }
 
 Map<String, dynamic> createCartRecordData({
   DocumentReference? createdBy,
   DocumentReference? product,
 }) {
-  final firestoreData = serializers.toFirestore(
-    CartRecord.serializer,
-    CartRecord(
-      (c) => c
-        ..createdBy = createdBy
-        ..product = product,
-    ),
+  final firestoreData = mapToFirestore(
+    <String, dynamic>{
+      'created_by': createdBy,
+      'product': product,
+    }.withoutNulls,
   );
 
   return firestoreData;

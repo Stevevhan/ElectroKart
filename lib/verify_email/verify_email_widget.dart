@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -61,10 +61,12 @@ class _VerifyEmailWidgetState extends State<VerifyEmailWidget> {
         ),
         title: Text(
           'Email Verification',
-          style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Poppins',
+          style: FlutterFlowTheme.of(context).headlineMedium.override(
+                fontFamily: FlutterFlowTheme.of(context).headlineMediumFamily,
                 color: FlutterFlowTheme.of(context).primaryText,
                 fontSize: 22.0,
+                useGoogleFonts: GoogleFonts.asMap().containsKey(
+                    FlutterFlowTheme.of(context).headlineMediumFamily),
               ),
         ),
         actions: [],
@@ -72,6 +74,7 @@ class _VerifyEmailWidgetState extends State<VerifyEmailWidget> {
         elevation: 2.0,
       ),
       body: SafeArea(
+        top: true,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -86,7 +89,7 @@ class _VerifyEmailWidgetState extends State<VerifyEmailWidget> {
                         EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                     child: Text(
                       'A link will be sent to your Email.\nSelect it to verify your email address',
-                      style: FlutterFlowTheme.of(context).bodyText1,
+                      style: FlutterFlowTheme.of(context).bodyMedium,
                     ),
                   ),
                 ],
@@ -96,7 +99,7 @@ class _VerifyEmailWidgetState extends State<VerifyEmailWidget> {
               padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
               child: FFButtonWidget(
                 onPressed: () async {
-                  await sendEmailVerification();
+                  await authManager.sendEmailVerification();
                   await Future.delayed(const Duration(milliseconds: 1000));
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
@@ -120,10 +123,13 @@ class _VerifyEmailWidgetState extends State<VerifyEmailWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   iconPadding:
                       EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                  color: FlutterFlowTheme.of(context).primaryColor,
-                  textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                        fontFamily: 'Poppins',
+                  color: FlutterFlowTheme.of(context).primary,
+                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                        fontFamily:
+                            FlutterFlowTheme.of(context).titleSmallFamily,
                         color: Color(0xFFF2F2F2),
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            FlutterFlowTheme.of(context).titleSmallFamily),
                       ),
                   elevation: 3.0,
                   borderSide: BorderSide(

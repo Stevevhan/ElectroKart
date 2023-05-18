@@ -80,12 +80,9 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
   Widget build(BuildContext context) => _loading
       ? Container(
           color: FlutterFlowTheme.of(context).primaryBackground,
-          child: Center(
-            child: Image.asset(
-              'assets/images/LogoMakr-8J2EEZ.png',
-              width: MediaQuery.of(context).size.width * 0.7,
-              fit: BoxFit.fitWidth,
-            ),
+          child: Image.asset(
+            'assets/images/LogoMakr-35xiGH-300dpi.png',
+            fit: BoxFit.scaleDown,
           ),
         )
       : widget.child;
@@ -134,7 +131,7 @@ final parametersBuilderMap =
   'chat_page': (data) async => ParameterData(
         allParams: {
           'chatUser': await getDocumentParameter<UsersRecord>(
-              data, 'chatUser', UsersRecord.serializer),
+              data, 'chatUser', UsersRecord.fromSnapshot),
           'chatRef': getParameter<DocumentReference>(data, 'chatRef'),
         },
       ),
@@ -145,9 +142,15 @@ final parametersBuilderMap =
   'termsOfservice': ParameterData.none(),
   'Verify_Email': ParameterData.none(),
   'Onboarding': ParameterData.none(),
-  'Report': ParameterData.none(),
+  'Report': (data) async => ParameterData(
+        allParams: {
+          'reportid': getParameter<DocumentReference>(data, 'reportid'),
+        },
+      ),
   'SellerProducts': ParameterData.none(),
   'ProductsCopy': ParameterData.none(),
+  'TestLogin': ParameterData.none(),
+  'TestSignUp': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

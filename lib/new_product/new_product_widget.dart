@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
@@ -12,6 +12,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'new_product_model.dart';
 export 'new_product_model.dart';
@@ -69,33 +70,46 @@ class _NewProductWidgetState extends State<NewProductWidget> {
           );
         }
         final newProductUsersRecord = snapshot.data!;
-        return Scaffold(
-          key: scaffoldKey,
-          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-          appBar: AppBar(
+        return GestureDetector(
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+          child: Scaffold(
+            key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-            automaticallyImplyLeading: false,
-            leading: FlutterFlowIconButton(
-              borderColor: Colors.transparent,
-              borderRadius: 30.0,
-              borderWidth: 1.0,
-              buttonSize: 60.0,
-              icon: Icon(
-                Icons.arrow_back_rounded,
-                color: FlutterFlowTheme.of(context).primaryText,
-                size: 30.0,
+            appBar: AppBar(
+              backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+              automaticallyImplyLeading: false,
+              leading: FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30.0,
+                borderWidth: 1.0,
+                buttonSize: 60.0,
+                icon: Icon(
+                  Icons.arrow_back_ios_sharp,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  size: 30.0,
+                ),
+                onPressed: () async {
+                  context.pop();
+                },
               ),
-              onPressed: () async {
-                context.pop();
-              },
+              title: Align(
+                alignment: AlignmentDirectional(-0.4, 0.0),
+                child: Text(
+                  'Create Ad',
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily:
+                            FlutterFlowTheme.of(context).bodyMediumFamily,
+                        fontSize: 25.0,
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            FlutterFlowTheme.of(context).bodyMediumFamily),
+                      ),
+                ),
+              ),
+              actions: [],
+              centerTitle: false,
+              elevation: 0.0,
             ),
-            actions: [],
-            centerTitle: false,
-            elevation: 0.0,
-          ),
-          body: GestureDetector(
-            onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-            child: Column(
+            body: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 Expanded(
@@ -104,57 +118,6 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Material(
-                              color: Colors.transparent,
-                              elevation: 5.0,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              child: Container(
-                                width: 286.0,
-                                height: 51.8,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 4.0,
-                                      color: Color(0x33000000),
-                                      offset: Offset(0.0, 2.0),
-                                    )
-                                  ],
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                      FlutterFlowTheme.of(context)
-                                          .secondaryColor
-                                    ],
-                                    stops: [0.0, 1.0],
-                                    begin: AlignmentDirectional(0.0, -1.0),
-                                    end: AlignmentDirectional(0, 1.0),
-                                  ),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: Align(
-                                  alignment: AlignmentDirectional(0.0, -0.55),
-                                  child: Text(
-                                    'New Ad',
-                                    textAlign: TextAlign.center,
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Poppins',
-                                          color: Color(0xFFFFCA00),
-                                          fontSize: 35.0,
-                                        ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 8.0, 16.0, 0.0),
@@ -170,8 +133,13 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                               alignment: AlignmentDirectional(0.0, 0.0),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(16.0),
-                                child: Image.network(
-                                  _model.uploadedFileUrl,
+                                child: OctoImage(
+                                  placeholderBuilder: OctoPlaceholder.blurHash(
+                                    _model.uploadedLocalFile.blurHash,
+                                  ),
+                                  image: NetworkImage(
+                                    _model.uploadedFileUrl,
+                                  ),
                                   width: double.infinity,
                                   height: double.infinity,
                                   fit: BoxFit.cover,
@@ -193,6 +161,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                                       await selectMediaWithSourceBottomSheet(
                                     context: context,
                                     allowPhoto: true,
+                                    includeBlurHash: true,
                                   );
                                   if (selectedMedia != null &&
                                       selectedMedia.every((m) =>
@@ -217,6 +186,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                                                 bytes: m.bytes,
                                                 height: m.dimensions?.height,
                                                 width: m.dimensions?.width,
+                                                blurHash: m.blurHash,
                                               ))
                                           .toList();
 
@@ -267,12 +237,18 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                                       0.0, 0.0, 0.0, 0.0),
                                   color: Color(0xFF417DE2),
                                   textStyle: FlutterFlowTheme.of(context)
-                                      .subtitle2
+                                      .titleSmall
                                       .override(
-                                        fontFamily: 'Poppins',
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .titleSmallFamily,
                                         color: FlutterFlowTheme.of(context)
                                             .primaryBtnText,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmallFamily),
                                       ),
+                                  elevation: 2.0,
                                   borderSide: BorderSide(
                                     color: Color(0x00FFCA00),
                                     width: 2.0,
@@ -292,13 +268,18 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                             obscureText: false,
                             decoration: InputDecoration(
                               labelStyle:
-                                  FlutterFlowTheme.of(context).bodyText1,
+                                  FlutterFlowTheme.of(context).bodyMedium,
                               hintText: 'Product Name',
                               hintStyle: FlutterFlowTheme.of(context)
-                                  .bodyText2
+                                  .bodySmall
                                   .override(
-                                    fontFamily: 'Poppins',
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .bodySmallFamily,
                                     color: Color(0xFFFFCA00),
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .bodySmallFamily),
                                   ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
@@ -332,7 +313,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                               fillColor: FlutterFlowTheme.of(context)
                                   .primaryBackground,
                             ),
-                            style: FlutterFlowTheme.of(context).bodyText1,
+                            style: FlutterFlowTheme.of(context).bodyMedium,
                             validator: _model
                                 .inputProductNameControllerValidator
                                 .asValidator(context),
@@ -342,7 +323,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(
                               28.0, 20.0, 0.0, 0.0),
                           child: FlutterFlowDropDown<String>(
-                            controller: _model.statusDropDownController ??=
+                            controller: _model.statusDropDownValueController ??=
                                 FormFieldController<String>(null),
                             options: [
                               'Available',
@@ -354,12 +335,17 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                                 () => _model.statusDropDownValue = val),
                             width: 180.0,
                             height: 50.0,
-                            textStyle:
-                                FlutterFlowTheme.of(context).bodyText2.override(
-                                      fontFamily: 'Poppins',
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                    ),
+                            textStyle: FlutterFlowTheme.of(context)
+                                .bodySmall
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .bodySmallFamily,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .bodySmallFamily),
+                                ),
                             hintText: 'Product status',
                             fillColor:
                                 FlutterFlowTheme.of(context).primaryBackground,
@@ -377,8 +363,9 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(
                               28.0, 20.0, 0.0, 0.0),
                           child: FlutterFlowDropDown<String>(
-                            controller: _model.conditionDropDownController ??=
-                                FormFieldController<String>(null),
+                            controller:
+                                _model.conditionDropDownValueController ??=
+                                    FormFieldController<String>(null),
                             options: [
                               'Used',
                               'New',
@@ -389,12 +376,17 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                                 () => _model.conditionDropDownValue = val),
                             width: 180.0,
                             height: 50.0,
-                            textStyle:
-                                FlutterFlowTheme.of(context).bodyText2.override(
-                                      fontFamily: 'Poppins',
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                    ),
+                            textStyle: FlutterFlowTheme.of(context)
+                                .bodySmall
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .bodySmallFamily,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .bodySmallFamily),
+                                ),
                             hintText: 'Product Condition',
                             fillColor:
                                 FlutterFlowTheme.of(context).primaryBackground,
@@ -412,8 +404,9 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(
                               28.0, 20.0, 0.0, 0.0),
                           child: FlutterFlowDropDown<String>(
-                            controller: _model.categoryDropDownController ??=
-                                FormFieldController<String>(null),
+                            controller:
+                                _model.categoryDropDownValueController ??=
+                                    FormFieldController<String>(null),
                             options: [
                               'Smartphone',
                               'Laptop',
@@ -427,7 +420,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                                 () => _model.categoryDropDownValue = val),
                             width: 180.0,
                             height: 50.0,
-                            textStyle: FlutterFlowTheme.of(context).bodyText2,
+                            textStyle: FlutterFlowTheme.of(context).bodySmall,
                             hintText: 'Product category',
                             fillColor:
                                 FlutterFlowTheme.of(context).primaryBackground,
@@ -445,7 +438,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(
                               28.0, 20.0, 0.0, 0.0),
                           child: FlutterFlowDropDown<String>(
-                            controller: _model.parishDropDownController ??=
+                            controller: _model.parishDropDownValueController ??=
                                 FormFieldController<String>(null),
                             options: [
                               'Kingston',
@@ -467,7 +460,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                                 () => _model.parishDropDownValue = val),
                             width: 180.0,
                             height: 50.0,
-                            textStyle: FlutterFlowTheme.of(context).bodyText2,
+                            textStyle: FlutterFlowTheme.of(context).bodySmall,
                             hintText: 'Parish',
                             fillColor:
                                 FlutterFlowTheme.of(context).primaryBackground,
@@ -490,13 +483,18 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                             obscureText: false,
                             decoration: InputDecoration(
                               labelStyle:
-                                  FlutterFlowTheme.of(context).bodyText1,
+                                  FlutterFlowTheme.of(context).bodyMedium,
                               hintText: 'Product Description....',
                               hintStyle: FlutterFlowTheme.of(context)
-                                  .bodyText2
+                                  .bodySmall
                                   .override(
-                                    fontFamily: 'Poppins',
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .bodySmallFamily,
                                     color: Color(0xFFFFCA00),
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .bodySmallFamily),
                                   ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
@@ -530,7 +528,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                               fillColor: FlutterFlowTheme.of(context)
                                   .primaryBackground,
                             ),
-                            style: FlutterFlowTheme.of(context).bodyText1,
+                            style: FlutterFlowTheme.of(context).bodyMedium,
                             maxLines: 3,
                             validator: _model
                                 .inputProductDescControllerValidator
@@ -549,7 +547,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                               decoration: InputDecoration(
                                 hintText: 'Enter price...',
                                 hintStyle:
-                                    FlutterFlowTheme.of(context).bodyText2,
+                                    FlutterFlowTheme.of(context).bodySmall,
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0x004B39EF),
@@ -586,7 +584,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                                   color: Color(0xFFFFCA00),
                                 ),
                               ),
-                              style: FlutterFlowTheme.of(context).bodyText1,
+                              style: FlutterFlowTheme.of(context).bodyMedium,
                               keyboardType: TextInputType.number,
                               validator: _model
                                   .inputProductCostControllerValidator
@@ -606,7 +604,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                               decoration: InputDecoration(
                                 hintText: 'Quantity...',
                                 hintStyle:
-                                    FlutterFlowTheme.of(context).bodyText2,
+                                    FlutterFlowTheme.of(context).bodySmall,
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0x004B39EF),
@@ -639,7 +637,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                                 fillColor: FlutterFlowTheme.of(context)
                                     .primaryBackground,
                               ),
-                              style: FlutterFlowTheme.of(context).bodyText1,
+                              style: FlutterFlowTheme.of(context).bodyMedium,
                               keyboardType: TextInputType.number,
                               validator: _model
                                   .inputProductQuantityControllerValidator
@@ -660,7 +658,8 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                                     16.0, 20.0, 30.0, 12.0),
                                 child: Text(
                                   'Seller: ${newProductUsersRecord.displayName}',
-                                  style: FlutterFlowTheme.of(context).bodyText1,
+                                  style:
+                                      FlutterFlowTheme.of(context).bodyMedium,
                                 ),
                               ),
                             ],
@@ -688,8 +687,8 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                     ],
                     gradient: LinearGradient(
                       colors: [
-                        FlutterFlowTheme.of(context).primaryColor,
-                        FlutterFlowTheme.of(context).secondaryColor
+                        FlutterFlowTheme.of(context).primary,
+                        FlutterFlowTheme.of(context).secondary
                       ],
                       stops: [0.0, 1.0],
                       begin: AlignmentDirectional(0.0, -1.0),
@@ -759,13 +758,17 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                             iconPadding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
                             color: Color(0xFFFFCA00),
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Outfit',
-                                      color: Colors.white,
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Outfit',
+                                  color: Colors.white,
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.w500,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .titleSmallFamily),
+                                ),
                             elevation: 3.0,
                             borderSide: BorderSide(
                               color: Colors.transparent,

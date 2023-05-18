@@ -67,11 +67,13 @@ class _EmptyChatWidgetState extends State<EmptyChatWidget> {
               Text(
                 widget.message1!,
                 textAlign: TextAlign.center,
-                style: FlutterFlowTheme.of(context).title3.override(
+                style: FlutterFlowTheme.of(context).headlineSmall.override(
                       fontFamily: 'Outfit',
                       color: FlutterFlowTheme.of(context).primaryText,
                       fontSize: 20.0,
                       fontWeight: FontWeight.w500,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          FlutterFlowTheme.of(context).headlineSmallFamily),
                     ),
               ),
             ],
@@ -87,11 +89,13 @@ class _EmptyChatWidgetState extends State<EmptyChatWidget> {
                 child: Text(
                   widget.message2!,
                   textAlign: TextAlign.center,
-                  style: FlutterFlowTheme.of(context).bodyText2.override(
+                  style: FlutterFlowTheme.of(context).bodySmall.override(
                         fontFamily: 'Outfit',
                         color: Color(0xFF7C8791),
                         fontSize: 14.0,
                         fontWeight: FontWeight.normal,
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            FlutterFlowTheme.of(context).bodySmallFamily),
                       ),
                 ),
               ),

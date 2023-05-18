@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'chat_page_model.dart';
 export 'chat_page_model.dart';
 
@@ -93,100 +92,109 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
         final chatPageChatsRecord = chatPageChatsRecordList.isNotEmpty
             ? chatPageChatsRecordList.first
             : null;
-        return Scaffold(
-          key: scaffoldKey,
-          appBar: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            automaticallyImplyLeading: false,
-            leading: FlutterFlowIconButton(
-              borderColor: Colors.transparent,
-              borderRadius: 30.0,
-              borderWidth: 1.0,
-              buttonSize: 60.0,
-              icon: Icon(
-                Icons.arrow_back_rounded,
-                color: FlutterFlowTheme.of(context).primaryText,
-                size: 24.0,
-              ),
-              onPressed: () async {
-                context.pop();
-              },
-            ),
-            title: Stack(
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        GradientText(
-                          widget.chatUser!.displayName!,
-                          style: FlutterFlowTheme.of(context)
-                              .bodyText1
-                              .override(
-                                fontFamily: 'Lato',
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                fontSize: 16.0,
-                              ),
-                          colors: [
-                            FlutterFlowTheme.of(context).primaryColor,
-                            FlutterFlowTheme.of(context).secondaryColor
-                          ],
-                          gradientDirection: GradientDirection.ltr,
-                          gradientType: GradientType.linear,
-                        ),
-                      ],
-                    ),
-                    InkWell(
-                      onTap: () async {
-                        var confirmDialogResponse = await showDialog<bool>(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title: Text('Delete Chat'),
-                                  content: Text(
-                                      'Are you sure you want to delete this chat? Chat will also be deleted for recipient.'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(
-                                          alertDialogContext, false),
-                                      child: Text('Cancel'),
-                                    ),
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(
-                                          alertDialogContext, true),
-                                      child: Text('Confirm'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            ) ??
-                            false;
-                        if (confirmDialogResponse) {
-                          await widget.chatRef!.delete();
-
-                          context.pushNamed('all_chats');
-                        }
-                      },
-                      child: Icon(
-                        Icons.delete,
-                        color: FlutterFlowTheme.of(context).primaryText,
-                        size: 24.0,
-                      ),
-                    ),
-                  ],
+        return GestureDetector(
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+          child: Scaffold(
+            key: scaffoldKey,
+            appBar: AppBar(
+              backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+              automaticallyImplyLeading: false,
+              leading: FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30.0,
+                borderWidth: 1.0,
+                buttonSize: 60.0,
+                icon: Icon(
+                  Icons.arrow_back_ios_sharp,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  size: 24.0,
                 ),
-              ],
+                onPressed: () async {
+                  context.pop();
+                },
+              ),
+              title: Stack(
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Text(
+                                widget.chatUser!.displayName,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Lato',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      fontSize: 20.0,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily),
+                                    ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          var confirmDialogResponse = await showDialog<bool>(
+                                context: context,
+                                builder: (alertDialogContext) {
+                                  return AlertDialog(
+                                    title: Text('Delete Chat'),
+                                    content: Text(
+                                        'Are you sure you want to delete this chat? Chat will also be deleted for recipient.'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(
+                                            alertDialogContext, false),
+                                        child: Text('Cancel'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(
+                                            alertDialogContext, true),
+                                        child: Text('Confirm'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ) ??
+                              false;
+                          if (confirmDialogResponse) {
+                            await widget.chatRef!.delete();
+
+                            context.pushNamed('all_chats');
+                          }
+                        },
+                        child: Icon(
+                          Icons.delete,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          size: 24.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              actions: [],
+              centerTitle: false,
+              elevation: 2.0,
             ),
-            actions: [],
-            centerTitle: false,
-            elevation: 2.0,
-          ),
-          body: SafeArea(
-            child: GestureDetector(
-              onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+            body: SafeArea(
+              top: true,
               child: StreamBuilder<FFChatInfo>(
                 stream: FFChatManager.instance.getChatInfo(
                   otherUserRecord: widget.chatUser,

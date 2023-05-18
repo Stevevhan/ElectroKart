@@ -46,12 +46,13 @@ class _SellerProductsWidgetState extends State<SellerProductsWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        body: SafeArea(
+          top: true,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -62,6 +63,10 @@ class _SellerProductsWidgetState extends State<SellerProductsWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
                       onTap: () async {
                         context.pop();
                       },
@@ -115,11 +120,10 @@ class _SellerProductsWidgetState extends State<SellerProductsWidget> {
                               decoration: InputDecoration(
                                 hintText: 'Search...',
                                 hintStyle:
-                                    FlutterFlowTheme.of(context).bodyText2,
+                                    FlutterFlowTheme.of(context).bodySmall,
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
+                                    color: FlutterFlowTheme.of(context).primary,
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(30.0),
@@ -160,7 +164,7 @@ class _SellerProductsWidgetState extends State<SellerProductsWidget> {
                                           )
                                         : null,
                               ),
-                              style: FlutterFlowTheme.of(context).bodyText1,
+                              style: FlutterFlowTheme.of(context).bodyMedium,
                               validator: _model.textControllerValidator
                                   .asValidator(context),
                             );
@@ -368,6 +372,11 @@ class _SellerProductsWidgetState extends State<SellerProductsWidget> {
                                                         .first
                                                     : null;
                                             return InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
                                               onTap: () async {
                                                 context.pushNamed(
                                                   'product_details',
@@ -396,10 +405,10 @@ class _SellerProductsWidgetState extends State<SellerProductsWidget> {
                                                     colors: [
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .primaryColor,
+                                                          .primary,
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .secondaryColor
+                                                          .secondary
                                                     ],
                                                     stops: [0.0, 1.0],
                                                     begin: AlignmentDirectional(
@@ -434,7 +443,7 @@ class _SellerProductsWidgetState extends State<SellerProductsWidget> {
                                                                       6.0),
                                                           child: Image.network(
                                                             listViewProductsRecord
-                                                                .thumb!,
+                                                                .thumb,
                                                             width: 80.0,
                                                             height: 80.0,
                                                             fit: BoxFit.cover,
@@ -463,7 +472,7 @@ class _SellerProductsWidgetState extends State<SellerProductsWidget> {
                                                             children: [
                                                               Text(
                                                                 listViewProductsRecord
-                                                                    .name!
+                                                                    .name
                                                                     .maybeHandleOverflow(
                                                                   maxChars: 18,
                                                                   replacement:
@@ -472,12 +481,17 @@ class _SellerProductsWidgetState extends State<SellerProductsWidget> {
                                                                 maxLines: 1,
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .title3
+                                                                    .headlineSmall
                                                                     .override(
                                                                       fontFamily:
-                                                                          'Poppins',
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .headlineSmallFamily,
                                                                       fontSize:
                                                                           16.0,
+                                                                      useGoogleFonts: GoogleFonts
+                                                                              .asMap()
+                                                                          .containsKey(
+                                                                              FlutterFlowTheme.of(context).headlineSmallFamily),
                                                                     ),
                                                               ),
                                                               Padding(
@@ -491,7 +505,7 @@ class _SellerProductsWidgetState extends State<SellerProductsWidget> {
                                                                 child:
                                                                     AutoSizeText(
                                                                   listViewProductsRecord
-                                                                      .category!
+                                                                      .category
                                                                       .maybeHandleOverflow(
                                                                           maxChars:
                                                                               10),
@@ -500,12 +514,14 @@ class _SellerProductsWidgetState extends State<SellerProductsWidget> {
                                                                           .start,
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .bodyText2
+                                                                      .bodySmall
                                                                       .override(
                                                                         fontFamily:
-                                                                            'Poppins',
+                                                                            FlutterFlowTheme.of(context).bodySmallFamily,
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .secondaryBackground,
+                                                                        useGoogleFonts:
+                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
                                                                       ),
                                                                 ),
                                                               ),
@@ -520,18 +536,20 @@ class _SellerProductsWidgetState extends State<SellerProductsWidget> {
                                                                 child:
                                                                     AutoSizeText(
                                                                   listViewProductsRecord
-                                                                      .parish!,
+                                                                      .parish,
                                                                   textAlign:
                                                                       TextAlign
                                                                           .start,
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .bodyText2
+                                                                      .bodySmall
                                                                       .override(
                                                                         fontFamily:
-                                                                            'Poppins',
+                                                                            FlutterFlowTheme.of(context).bodySmallFamily,
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .secondaryBackground,
+                                                                        useGoogleFonts:
+                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
                                                                       ),
                                                                 ),
                                                               ),
@@ -577,7 +595,7 @@ class _SellerProductsWidgetState extends State<SellerProductsWidget> {
                                                             child: Text(
                                                               formatNumber(
                                                                 listViewProductsRecord
-                                                                    .cost!,
+                                                                    .cost,
                                                                 formatType:
                                                                     FormatType
                                                                         .custom,
@@ -589,10 +607,11 @@ class _SellerProductsWidgetState extends State<SellerProductsWidget> {
                                                                   TextAlign.end,
                                                               style: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .bodyText1
+                                                                  .bodyMedium
                                                                   .override(
                                                                     fontFamily:
-                                                                        'Poppins',
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodyMediumFamily,
                                                                     color: Color(
                                                                         0xFFFFCA00),
                                                                     fontSize:
@@ -600,6 +619,10 @@ class _SellerProductsWidgetState extends State<SellerProductsWidget> {
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold,
+                                                                    useGoogleFonts: GoogleFonts
+                                                                            .asMap()
+                                                                        .containsKey(
+                                                                            FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                   ),
                                                             ),
                                                           ),

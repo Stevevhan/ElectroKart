@@ -1,6 +1,7 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_ad_banner.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
@@ -48,33 +49,74 @@ class _ProductsCopyWidgetState extends State<ProductsCopyWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          context.pushNamed(
-            'ProductsCopy',
-            extra: <String, dynamic>{
-              kTransitionInfoKey: TransitionInfo(
-                hasTransition: true,
-                transitionType: PageTransitionType.fade,
-                duration: Duration(milliseconds: 10),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () async {
+            context.pushNamed(
+              'ProductsCopy',
+              extra: <String, dynamic>{
+                kTransitionInfoKey: TransitionInfo(
+                  hasTransition: true,
+                  transitionType: PageTransitionType.fade,
+                  duration: Duration(milliseconds: 10),
+                ),
+              },
+            );
+          },
+          backgroundColor: Color(0xFF2500FF),
+          elevation: 8.0,
+          label: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Text(
+                'Refresh',
+                style: FlutterFlowTheme.of(context).bodyMedium,
               ),
-            },
-          );
-        },
-        backgroundColor: Color(0xFF2500FF),
-        elevation: 8.0,
-        child: Icon(
-          Icons.refresh,
-          color: Color(0xFFF5BC2E),
-          size: 30.0,
+              Icon(
+                Icons.refresh,
+                color: Color(0xFFF5BC2E),
+                size: 25.0,
+              ),
+            ],
+          ),
         ),
-      ),
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          automaticallyImplyLeading: false,
+          leading: FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30.0,
+            borderWidth: 1.0,
+            buttonSize: 60.0,
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: FlutterFlowTheme.of(context).primaryText,
+              size: 30.0,
+            ),
+            onPressed: () async {
+              context.pop();
+            },
+          ),
+          title: Text(
+            'All Products',
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: FlutterFlowTheme.of(context).headlineMediumFamily,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  fontSize: 22.0,
+                  useGoogleFonts: GoogleFonts.asMap().containsKey(
+                      FlutterFlowTheme.of(context).headlineMediumFamily),
+                ),
+          ),
+          actions: [],
+          centerTitle: true,
+          elevation: 2.0,
+        ),
+        body: SafeArea(
+          top: true,
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -95,7 +137,7 @@ class _ProductsCopyWidgetState extends State<ProductsCopyWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         hintText: 'Search here...',
-                        hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                        hintStyle: FlutterFlowTheme.of(context).bodySmall,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Color(0xFF2500FF),
@@ -129,7 +171,7 @@ class _ProductsCopyWidgetState extends State<ProductsCopyWidget> {
                             FlutterFlowTheme.of(context).primaryBackground,
                         prefixIcon: Icon(
                           Icons.search,
-                          color: FlutterFlowTheme.of(context).primaryColor,
+                          color: FlutterFlowTheme.of(context).primary,
                         ),
                         suffixIcon:
                             _model.searchFieldController!.text.isNotEmpty
@@ -146,7 +188,7 @@ class _ProductsCopyWidgetState extends State<ProductsCopyWidget> {
                                   )
                                 : null,
                       ),
-                      style: FlutterFlowTheme.of(context).bodyText1,
+                      style: FlutterFlowTheme.of(context).bodyMedium,
                       validator: _model.searchFieldControllerValidator
                           .asValidator(context),
                     ),
@@ -159,7 +201,7 @@ class _ProductsCopyWidgetState extends State<ProductsCopyWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       FlutterFlowDropDown<String>(
-                        controller: _model.dropDownController1 ??=
+                        controller: _model.dropDownValueController1 ??=
                             FormFieldController<String>(null),
                         options: [
                           'St. Elizabeth',
@@ -182,11 +224,15 @@ class _ProductsCopyWidgetState extends State<ProductsCopyWidget> {
                         width: 140.0,
                         height: 50.0,
                         textStyle: FlutterFlowTheme.of(context)
-                            .bodyText1
+                            .bodyMedium
                             .override(
-                              fontFamily: 'Poppins',
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).bodyMediumFamily,
                               color: FlutterFlowTheme.of(context).primaryText,
                               fontSize: 12.0,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context)
+                                      .bodyMediumFamily),
                             ),
                         hintText: 'Parish...',
                         fillColor:
@@ -201,7 +247,7 @@ class _ProductsCopyWidgetState extends State<ProductsCopyWidget> {
                         isSearchable: false,
                       ),
                       FlutterFlowDropDown<String>(
-                        controller: _model.dropDownController2 ??=
+                        controller: _model.dropDownValueController2 ??=
                             FormFieldController<String>(null),
                         options: [
                           'Smartphone',
@@ -216,11 +262,16 @@ class _ProductsCopyWidgetState extends State<ProductsCopyWidget> {
                             setState(() => _model.dropDownValue2 = val),
                         width: 140.0,
                         height: 50.0,
-                        textStyle:
-                            FlutterFlowTheme.of(context).bodyText1.override(
-                                  fontFamily: 'Poppins',
-                                  fontSize: 12.0,
-                                ),
+                        textStyle: FlutterFlowTheme.of(context)
+                            .bodyMedium
+                            .override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).bodyMediumFamily,
+                              fontSize: 12.0,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context)
+                                      .bodyMediumFamily),
+                            ),
                         hintText: 'Category...',
                         fillColor:
                             FlutterFlowTheme.of(context).primaryBackground,
@@ -242,423 +293,451 @@ class _ProductsCopyWidgetState extends State<ProductsCopyWidget> {
                     width: MediaQuery.of(context).size.width * 1.0,
                     height: 50.0,
                     showsTestAd: true,
-                    androidAdUnitID: 'ca-app-pub-4840032926949336/8829177242',
+                    androidAdUnitID: 'ca-app-pub-4840032926949336/2436788931',
                   ),
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width * 1.0,
-                        height: MediaQuery.of(context).size.height * 0.7,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                        ),
-                        child: Visibility(
-                          visible: FFAppState().showFullList,
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 12.0, 0.0, 0.0),
-                            child: PagedListView<DocumentSnapshot<Object?>?,
-                                ProductsRecord>(
-                              pagingController: () {
-                                final Query<Object?> Function(Query<Object?>)
-                                    queryBuilder =
-                                    (productsRecord) => productsRecord
-                                        .where('parish',
-                                            isEqualTo: _model.dropDownValue1)
-                                        .where('Category',
-                                            isEqualTo: _model.dropDownValue2)
-                                        .orderBy('Cost');
-                                if (_model.pagingController != null) {
-                                  final query =
-                                      queryBuilder(ProductsRecord.collection);
-                                  if (query != _model.pagingQuery) {
-                                    // The query has changed
-                                    _model.pagingQuery = query;
-                                    _model.streamSubscriptions
-                                        .forEach((s) => s?.cancel());
-                                    _model.streamSubscriptions.clear();
-                                    _model.pagingController!.refresh();
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width * 1.0,
+                          height: MediaQuery.of(context).size.height * 0.5,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                          ),
+                          child: Visibility(
+                            visible: FFAppState().showFullList,
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 12.0, 0.0, 0.0),
+                              child: PagedListView<DocumentSnapshot<Object?>?,
+                                  ProductsRecord>(
+                                pagingController: () {
+                                  final Query<Object?> Function(Query<Object?>)
+                                      queryBuilder =
+                                      (productsRecord) => productsRecord
+                                          .where('parish',
+                                              isEqualTo: _model.dropDownValue1)
+                                          .where('Category',
+                                              isEqualTo: _model.dropDownValue2)
+                                          .orderBy('Cost');
+                                  if (_model.pagingController != null) {
+                                    final query =
+                                        queryBuilder(ProductsRecord.collection);
+                                    if (query != _model.pagingQuery) {
+                                      // The query has changed
+                                      _model.pagingQuery = query;
+                                      _model.streamSubscriptions
+                                          .forEach((s) => s?.cancel());
+                                      _model.streamSubscriptions.clear();
+                                      _model.pagingController!.refresh();
+                                    }
+                                    return _model.pagingController!;
                                   }
-                                  return _model.pagingController!;
-                                }
 
-                                _model.pagingController =
-                                    PagingController(firstPageKey: null);
-                                _model.pagingQuery =
-                                    queryBuilder(ProductsRecord.collection);
-                                _model.pagingController!
-                                    .addPageRequestListener((nextPageMarker) {
-                                  queryProductsRecordPage(
-                                    queryBuilder: (productsRecord) =>
-                                        productsRecord
-                                            .where('parish',
-                                                isEqualTo:
-                                                    _model.dropDownValue1)
-                                            .where('Category',
-                                                isEqualTo:
-                                                    _model.dropDownValue2)
-                                            .orderBy('Cost'),
-                                    nextPageMarker: nextPageMarker,
-                                    pageSize: 50,
-                                    isStream: true,
-                                  ).then((page) {
-                                    _model.pagingController!.appendPage(
-                                      page.data,
-                                      page.nextPageMarker,
-                                    );
-                                    final streamSubscription =
-                                        page.dataStream?.listen((data) {
-                                      data.forEach((item) {
-                                        final itemIndexes = _model
-                                            .pagingController!.itemList!
-                                            .asMap()
-                                            .map((k, v) =>
-                                                MapEntry(v.reference.id, k));
-                                        final index =
-                                            itemIndexes[item.reference.id];
-                                        final items =
-                                            _model.pagingController!.itemList!;
-                                        if (index != null) {
-                                          items.replaceRange(
-                                              index, index + 1, [item]);
-                                          _model.pagingController!.itemList = {
-                                            for (var item in items)
-                                              item.reference: item
-                                          }.values.toList();
-                                        }
+                                  _model.pagingController =
+                                      PagingController(firstPageKey: null);
+                                  _model.pagingQuery =
+                                      queryBuilder(ProductsRecord.collection);
+                                  _model.pagingController!
+                                      .addPageRequestListener((nextPageMarker) {
+                                    queryProductsRecordPage(
+                                      queryBuilder: (productsRecord) =>
+                                          productsRecord
+                                              .where('parish',
+                                                  isEqualTo:
+                                                      _model.dropDownValue1)
+                                              .where('Category',
+                                                  isEqualTo:
+                                                      _model.dropDownValue2)
+                                              .orderBy('Cost'),
+                                      nextPageMarker: nextPageMarker,
+                                      pageSize: 50,
+                                      isStream: true,
+                                    ).then((page) {
+                                      _model.pagingController!.appendPage(
+                                        page.data,
+                                        page.nextPageMarker,
+                                      );
+                                      final streamSubscription =
+                                          page.dataStream?.listen((data) {
+                                        data.forEach((item) {
+                                          final itemIndexes = _model
+                                              .pagingController!.itemList!
+                                              .asMap()
+                                              .map((k, v) =>
+                                                  MapEntry(v.reference.id, k));
+                                          final index =
+                                              itemIndexes[item.reference.id];
+                                          final items = _model
+                                              .pagingController!.itemList!;
+                                          if (index != null) {
+                                            items.replaceRange(
+                                                index, index + 1, [item]);
+                                            _model.pagingController!.itemList =
+                                                {
+                                              for (var item in items)
+                                                item.reference: item
+                                            }.values.toList();
+                                          }
+                                        });
+                                        setState(() {});
                                       });
-                                      setState(() {});
+                                      _model.streamSubscriptions
+                                          .add(streamSubscription);
                                     });
-                                    _model.streamSubscriptions
-                                        .add(streamSubscription);
                                   });
-                                });
-                                return _model.pagingController!;
-                              }(),
-                              padding: EdgeInsets.zero,
-                              primary: false,
-                              shrinkWrap: true,
-                              reverse: false,
-                              scrollDirection: Axis.vertical,
-                              builderDelegate:
-                                  PagedChildBuilderDelegate<ProductsRecord>(
-                                // Customize what your widget looks like when it's loading the first page.
-                                firstPageProgressIndicatorBuilder: (_) =>
-                                    Center(
-                                  child: SizedBox(
-                                    width: 30.0,
-                                    height: 30.0,
-                                    child: SpinKitDualRing(
-                                      color: Color(0xFFFFCA00),
-                                      size: 30.0,
+                                  return _model.pagingController!;
+                                }(),
+                                padding: EdgeInsets.zero,
+                                primary: false,
+                                shrinkWrap: true,
+                                reverse: false,
+                                scrollDirection: Axis.vertical,
+                                builderDelegate:
+                                    PagedChildBuilderDelegate<ProductsRecord>(
+                                  // Customize what your widget looks like when it's loading the first page.
+                                  firstPageProgressIndicatorBuilder: (_) =>
+                                      Center(
+                                    child: SizedBox(
+                                      width: 30.0,
+                                      height: 30.0,
+                                      child: SpinKitDualRing(
+                                        color: Color(0xFFFFCA00),
+                                        size: 30.0,
+                                      ),
                                     ),
                                   ),
-                                ),
 
-                                itemBuilder: (context, _, listViewIndex) {
-                                  final listViewProductsRecord = _model
-                                      .pagingController!
-                                      .itemList![listViewIndex];
-                                  return Visibility(
-                                    visible: functions.showSearchResult(
-                                            _model.searchFieldController.text,
-                                            listViewProductsRecord.name!) ??
-                                        true,
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16.0, 0.0, 16.0, 8.0),
-                                      child: StreamBuilder<List<UsersRecord>>(
-                                        stream: queryUsersRecord(
-                                          singleRecord: true,
-                                        ),
-                                        builder: (context, snapshot) {
-                                          // Customize what your widget looks like when it's loading.
-                                          if (!snapshot.hasData) {
-                                            return Center(
-                                              child: SizedBox(
-                                                width: 30.0,
-                                                height: 30.0,
-                                                child: SpinKitDualRing(
-                                                  color: Color(0xFFFFCA00),
-                                                  size: 30.0,
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                          List<UsersRecord>
-                                              menuItemUsersRecordList =
-                                              snapshot.data!;
-                                          // Return an empty Container when the item does not exist.
-                                          if (snapshot.data!.isEmpty) {
-                                            return Container();
-                                          }
-                                          final menuItemUsersRecord =
-                                              menuItemUsersRecordList.isNotEmpty
-                                                  ? menuItemUsersRecordList
-                                                      .first
-                                                  : null;
-                                          return InkWell(
-                                            onTap: () async {
-                                              context.pushNamed(
-                                                'product_details',
-                                                queryParams: {
-                                                  'productfid': serializeParam(
-                                                    listViewProductsRecord
-                                                        .reference,
-                                                    ParamType.DocumentReference,
+                                  itemBuilder: (context, _, listViewIndex) {
+                                    final listViewProductsRecord = _model
+                                        .pagingController!
+                                        .itemList![listViewIndex];
+                                    return Visibility(
+                                      visible: functions.showSearchResult(
+                                              _model.searchFieldController.text,
+                                              listViewProductsRecord.name) ??
+                                          true,
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            16.0, 0.0, 16.0, 10.0),
+                                        child: StreamBuilder<List<UsersRecord>>(
+                                          stream: queryUsersRecord(
+                                            singleRecord: true,
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 30.0,
+                                                  height: 30.0,
+                                                  child: SpinKitDualRing(
+                                                    color: Color(0xFFFFCA00),
+                                                    size: 30.0,
                                                   ),
-                                                }.withoutNulls,
-                                              );
-                                            },
-                                            child: Container(
-                                              width: double.infinity,
-                                              decoration: BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    blurRadius: 3.0,
-                                                    color: Color(0x411D2429),
-                                                    offset: Offset(0.0, 1.0),
-                                                  )
-                                                ],
-                                                gradient: LinearGradient(
-                                                  colors: [
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryColor,
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryColor
-                                                  ],
-                                                  stops: [0.0, 1.0],
-                                                  begin: AlignmentDirectional(
-                                                      0.0, -1.0),
-                                                  end: AlignmentDirectional(
-                                                      0, 1.0),
                                                 ),
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                              ),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        8.0, 8.0, 8.0, 8.0),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  1.0,
-                                                                  1.0,
-                                                                  1.0),
-                                                      child: Hero(
-                                                        tag:
-                                                            listViewProductsRecord
-                                                                .thumb!,
-                                                        transitionOnUserGestures:
-                                                            true,
-                                                        child: ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      6.0),
-                                                          child: Image.network(
-                                                            listViewProductsRecord
-                                                                .thumb!,
-                                                            width: 80.0,
-                                                            height: 80.0,
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        ),
-                                                      ),
+                                              );
+                                            }
+                                            List<UsersRecord>
+                                                menuItemUsersRecordList =
+                                                snapshot.data!;
+                                            // Return an empty Container when the item does not exist.
+                                            if (snapshot.data!.isEmpty) {
+                                              return Container();
+                                            }
+                                            final menuItemUsersRecord =
+                                                menuItemUsersRecordList
+                                                        .isNotEmpty
+                                                    ? menuItemUsersRecordList
+                                                        .first
+                                                    : null;
+                                            return InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                  'product_details',
+                                                  queryParams: {
+                                                    'productfid':
+                                                        serializeParam(
+                                                      listViewProductsRecord
+                                                          .reference,
+                                                      ParamType
+                                                          .DocumentReference,
                                                     ),
-                                                    Expanded(
-                                                      child: Padding(
+                                                  }.withoutNulls,
+                                                );
+                                              },
+                                              child: Container(
+                                                width: double.infinity,
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      blurRadius: 3.0,
+                                                      color: Color(0x411D2429),
+                                                      offset: Offset(0.0, 1.0),
+                                                    )
+                                                  ],
+                                                  gradient: LinearGradient(
+                                                    colors: [
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primary,
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .secondary
+                                                    ],
+                                                    stops: [0.0, 1.0],
+                                                    begin: AlignmentDirectional(
+                                                        0.0, -1.0),
+                                                    end: AlignmentDirectional(
+                                                        0, 1.0),
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                ),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          8.0, 8.0, 8.0, 8.0),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Padding(
                                                         padding:
                                                             EdgeInsetsDirectional
                                                                 .fromSTEB(
-                                                                    8.0,
-                                                                    8.0,
-                                                                    4.0,
-                                                                    0.0),
-                                                        child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
+                                                                    0.0,
+                                                                    1.0,
+                                                                    1.0,
+                                                                    1.0),
+                                                        child: Hero(
+                                                          tag:
                                                               listViewProductsRecord
-                                                                  .name!
-                                                                  .maybeHandleOverflow(
-                                                                maxChars: 18,
-                                                                replacement:
-                                                                    '…',
-                                                              ),
-                                                              maxLines: 1,
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .title3
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Poppins',
-                                                                    fontSize:
-                                                                        16.0,
-                                                                  ),
+                                                                  .thumb,
+                                                          transitionOnUserGestures:
+                                                              true,
+                                                          child: ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        6.0),
+                                                            child:
+                                                                Image.network(
+                                                              listViewProductsRecord
+                                                                  .thumb,
+                                                              width: 80.0,
+                                                              height: 80.0,
+                                                              fit: BoxFit.cover,
                                                             ),
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          4.0,
-                                                                          8.0,
-                                                                          0.0),
-                                                              child:
-                                                                  AutoSizeText(
-                                                                listViewProductsRecord
-                                                                    .category!
-                                                                    .maybeHandleOverflow(
-                                                                        maxChars:
-                                                                            10),
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .start,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText2
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Poppins',
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .secondaryBackground,
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          4.0,
-                                                                          8.0,
-                                                                          0.0),
-                                                              child:
-                                                                  AutoSizeText(
-                                                                listViewProductsRecord
-                                                                    .parish!,
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .start,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText2
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Poppins',
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .secondaryBackground,
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                          ],
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                    Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .end,
-                                                      children: [
-                                                        Padding(
+                                                      Expanded(
+                                                        child: Padding(
                                                           padding:
                                                               EdgeInsetsDirectional
                                                                   .fromSTEB(
-                                                                      0.0,
+                                                                      8.0,
+                                                                      8.0,
                                                                       4.0,
-                                                                      0.0,
                                                                       0.0),
-                                                          child: Icon(
-                                                            Icons
-                                                                .chevron_right_rounded,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primaryBackground,
-                                                            size: 24.0,
-                                                          ),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      12.0,
-                                                                      4.0,
-                                                                      8.0),
-                                                          child: Text(
-                                                            formatNumber(
-                                                              listViewProductsRecord
-                                                                  .cost!,
-                                                              formatType:
-                                                                  FormatType
-                                                                      .custom,
-                                                              currency: '',
-                                                              format: '',
-                                                              locale: '',
-                                                            ),
-                                                            textAlign:
-                                                                TextAlign.end,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyText1
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Poppins',
-                                                                  color: Color(
-                                                                      0xFFFFCA00),
-                                                                  fontSize:
-                                                                      16.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
+                                                          child: Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                listViewProductsRecord
+                                                                    .name
+                                                                    .maybeHandleOverflow(
+                                                                  maxChars: 18,
+                                                                  replacement:
+                                                                      '…',
                                                                 ),
+                                                                maxLines: 1,
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .headlineSmall
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .headlineSmallFamily,
+                                                                      fontSize:
+                                                                          16.0,
+                                                                      useGoogleFonts: GoogleFonts
+                                                                              .asMap()
+                                                                          .containsKey(
+                                                                              FlutterFlowTheme.of(context).headlineSmallFamily),
+                                                                    ),
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            4.0,
+                                                                            8.0,
+                                                                            0.0),
+                                                                child:
+                                                                    AutoSizeText(
+                                                                  listViewProductsRecord
+                                                                      .category
+                                                                      .maybeHandleOverflow(
+                                                                          maxChars:
+                                                                              10),
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .start,
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodySmall
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            FlutterFlowTheme.of(context).bodySmallFamily,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryBackground,
+                                                                        useGoogleFonts:
+                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
+                                                                      ),
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            4.0,
+                                                                            8.0,
+                                                                            0.0),
+                                                                child:
+                                                                    AutoSizeText(
+                                                                  listViewProductsRecord
+                                                                      .parish,
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .start,
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodySmall
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            FlutterFlowTheme.of(context).bodySmallFamily,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryBackground,
+                                                                        useGoogleFonts:
+                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
+                                                                      ),
+                                                                ),
+                                                              ),
+                                                            ],
                                                           ),
                                                         ),
-                                                      ],
-                                                    ),
-                                                  ],
+                                                      ),
+                                                      Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        4.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                            child: Icon(
+                                                              Icons
+                                                                  .chevron_right_rounded,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primaryBackground,
+                                                              size: 24.0,
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        12.0,
+                                                                        4.0,
+                                                                        8.0),
+                                                            child: Text(
+                                                              formatNumber(
+                                                                listViewProductsRecord
+                                                                    .cost,
+                                                                formatType:
+                                                                    FormatType
+                                                                        .custom,
+                                                                currency: '',
+                                                                format: '',
+                                                                locale: '',
+                                                              ),
+                                                              textAlign:
+                                                                  TextAlign.end,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodyMediumFamily,
+                                                                    color: Color(
+                                                                        0xFFFFCA00),
+                                                                    fontSize:
+                                                                        16.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    useGoogleFonts: GoogleFonts
+                                                                            .asMap()
+                                                                        .containsKey(
+                                                                            FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                  ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          );
-                                        },
+                                            );
+                                          },
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                },
+                                    );
+                                  },
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 Row(

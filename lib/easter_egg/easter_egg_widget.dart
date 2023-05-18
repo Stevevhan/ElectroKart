@@ -83,6 +83,7 @@ class _EasterEggWidgetState extends State<EasterEggWidget>
         elevation: 0.0,
       ),
       body: SafeArea(
+        top: true,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -111,13 +112,16 @@ class _EasterEggWidgetState extends State<EasterEggWidget>
                   GradientText(
                     'ElectroKart Developed By \nStevevhan Myers',
                     textAlign: TextAlign.center,
-                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Poppins',
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).bodyMediumFamily,
                           fontSize: 16.0,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).bodyMediumFamily),
                         ),
                     colors: [
-                      FlutterFlowTheme.of(context).primaryColor,
-                      FlutterFlowTheme.of(context).secondaryColor
+                      FlutterFlowTheme.of(context).primary,
+                      FlutterFlowTheme.of(context).secondary
                     ],
                     gradientDirection: GradientDirection.ltr,
                     gradientType: GradientType.linear,
@@ -137,7 +141,7 @@ class _EasterEggWidgetState extends State<EasterEggWidget>
                     child: Text(
                       'ElectroKart is a personal marketplace \ndesigned  to facilitate the resale of new \nand used tech and foster communication \nbetween buyers an sellers.',
                       maxLines: 5,
-                      style: FlutterFlowTheme.of(context).bodyText1,
+                      style: FlutterFlowTheme.of(context).bodyMedium,
                     ),
                   ),
                 ],
@@ -152,9 +156,12 @@ class _EasterEggWidgetState extends State<EasterEggWidget>
                   Text(
                     'AND MAYBE ALSO HELP TO REDUCE\n OUR CARBON FOOT PRINT : )',
                     maxLines: 4,
-                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Poppins',
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).bodyMediumFamily,
                           color: Color(0xFF3FAE06),
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).bodyMediumFamily),
                         ),
                   ),
                 ],

@@ -1,13 +1,14 @@
 import '/backend/backend.dart';
 import '/components/empty_cart_widget.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'cart_page_model.dart';
 export 'cart_page_model.dart';
 
@@ -48,29 +49,59 @@ class _CartPageWidgetState extends State<CartPageWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
-          title: Align(
-            alignment: AlignmentDirectional(0.0, 0.0),
-            child: GradientText(
-              'Favorites',
-              textAlign: TextAlign.center,
-              style: FlutterFlowTheme.of(context).title1.override(
-                    fontFamily: 'Lato',
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                    fontSize: 36.0,
+          title: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Align(
+                alignment: AlignmentDirectional(0.0, 0.0),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                  child: Text(
+                    'Favorites',
+                    textAlign: TextAlign.center,
+                    style: FlutterFlowTheme.of(context).displaySmall.override(
+                          fontFamily: 'Lato',
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          fontSize: 36.0,
+                          fontWeight: FontWeight.w600,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).displaySmallFamily),
+                        ),
                   ),
-              colors: [
-                FlutterFlowTheme.of(context).primaryColor,
-                FlutterFlowTheme.of(context).secondaryColor
-              ],
-              gradientDirection: GradientDirection.ltr,
-              gradientType: GradientType.linear,
-            ),
+                ),
+              ),
+              FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30.0,
+                borderWidth: 1.0,
+                buttonSize: 60.0,
+                fillColor: Color(0x00E0E3E7),
+                icon: Icon(
+                  Icons.search,
+                  color: Color(0xFFF5BC2E),
+                  size: 24.0,
+                ),
+                onPressed: () async {
+                  context.pushNamed(
+                    'searchpage',
+                    extra: <String, dynamic>{
+                      kTransitionInfoKey: TransitionInfo(
+                        hasTransition: true,
+                        transitionType: PageTransitionType.fade,
+                      ),
+                    },
+                  );
+                },
+              ),
+            ],
           ),
           actions: [],
           centerTitle: true,
           elevation: 10.0,
         ),
         body: SafeArea(
+          top: true,
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -129,6 +160,10 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                                     final menuItemProductsRecord =
                                         snapshot.data!;
                                     return InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
                                       onTap: () async {
                                         context.pushNamed(
                                           'product_details',
@@ -153,9 +188,9 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                                           gradient: LinearGradient(
                                             colors: [
                                               FlutterFlowTheme.of(context)
-                                                  .primaryColor,
+                                                  .primary,
                                               FlutterFlowTheme.of(context)
-                                                  .secondaryColor
+                                                  .secondary
                                             ],
                                             stops: [0.0, 1.0],
                                             begin:
@@ -172,22 +207,141 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 1.0, 1.0, 1.0),
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          6.0),
-                                                  child: Image.network(
-                                                    menuItemProductsRecord
-                                                        .thumb!,
-                                                    width: 80.0,
-                                                    height: 80.0,
-                                                    fit: BoxFit.cover,
+                                              Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 1.0,
+                                                                1.0, 1.0),
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6.0),
+                                                      child: Image.network(
+                                                        menuItemProductsRecord
+                                                            .thumb,
+                                                        width: 80.0,
+                                                        height: 80.0,
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
                                                   ),
-                                                ),
+                                                  if (menuItemProductsRecord
+                                                          .status ==
+                                                      'Sold')
+                                                    FFButtonWidget(
+                                                      onPressed: () {
+                                                        print(
+                                                            'Button pressed ...');
+                                                      },
+                                                      text: 'SOLD',
+                                                      options: FFButtonOptions(
+                                                        width: 79.0,
+                                                        height: 40.0,
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        iconPadding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .error,
+                                                        textStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmall
+                                                                .override(
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmallFamily,
+                                                                  color: Colors
+                                                                      .white,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .titleSmallFamily),
+                                                                ),
+                                                        borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width: 1.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.0),
+                                                      ),
+                                                    ),
+                                                  if (menuItemProductsRecord
+                                                          .status ==
+                                                      'Seller is away')
+                                                    FFButtonWidget(
+                                                      onPressed: () {
+                                                        print(
+                                                            'Button pressed ...');
+                                                      },
+                                                      text: 'Seller is N/A',
+                                                      options: FFButtonOptions(
+                                                        width: 79.0,
+                                                        height: 40.0,
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        iconPadding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .warning,
+                                                        textStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmall
+                                                                .override(
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmallFamily,
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize: 3.0,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .titleSmallFamily),
+                                                                ),
+                                                        borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width: 1.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.0),
+                                                      ),
+                                                    ),
+                                                ],
                                               ),
                                               Expanded(
                                                 child: Padding(
@@ -206,14 +360,14 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                                                     children: [
                                                       AutoSizeText(
                                                         menuItemProductsRecord
-                                                            .name!
+                                                            .name
                                                             .maybeHandleOverflow(
                                                                 maxChars: 18),
                                                         maxLines: 1,
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .title3,
+                                                                .headlineSmall,
                                                       ),
                                                       Padding(
                                                         padding:
@@ -225,20 +379,26 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                                                                     0.0),
                                                         child: AutoSizeText(
                                                           menuItemProductsRecord
-                                                              .category!
+                                                              .category
                                                               .maybeHandleOverflow(
                                                                   maxChars: 20),
                                                           textAlign:
                                                               TextAlign.start,
                                                           style: FlutterFlowTheme
                                                                   .of(context)
-                                                              .bodyText2
+                                                              .bodySmall
                                                               .override(
-                                                                fontFamily:
-                                                                    'Poppins',
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodySmallFamily,
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .secondaryBackground,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodySmallFamily),
                                                               ),
                                                         ),
                                                       ),
@@ -252,20 +412,26 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                                                                     0.0),
                                                         child: AutoSizeText(
                                                           menuItemProductsRecord
-                                                              .status!
+                                                              .status
                                                               .maybeHandleOverflow(
                                                                   maxChars: 20),
                                                           textAlign:
                                                               TextAlign.start,
                                                           style: FlutterFlowTheme
                                                                   .of(context)
-                                                              .bodyText2
+                                                              .bodySmall
                                                               .override(
-                                                                fontFamily:
-                                                                    'Poppins',
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodySmallFamily,
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .secondaryBackground,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodySmallFamily),
                                                               ),
                                                         ),
                                                       ),
@@ -279,7 +445,7 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                                                           Text(
                                                             formatNumber(
                                                               menuItemProductsRecord
-                                                                  .cost!,
+                                                                  .cost,
                                                               formatType:
                                                                   FormatType
                                                                       .custom,
@@ -289,15 +455,30 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                                                             ),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
-                                                                .bodyText1
+                                                                .bodyMedium
                                                                 .override(
-                                                                  fontFamily:
-                                                                      'Poppins',
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily,
                                                                   color: Color(
                                                                       0xFFF5BC2E),
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .bodyMediumFamily),
                                                                 ),
                                                           ),
                                                           InkWell(
+                                                            splashColor: Colors
+                                                                .transparent,
+                                                            focusColor: Colors
+                                                                .transparent,
+                                                            hoverColor: Colors
+                                                                .transparent,
+                                                            highlightColor:
+                                                                Colors
+                                                                    .transparent,
                                                             onTap: () async {
                                                               FFAppState()
                                                                   .update(() {

@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -20,16 +20,16 @@ class EditProductModel extends FlutterFlowModel {
   String? Function(BuildContext, String?)? inputProductNameControllerValidator;
   // State field(s) for statusDropDown widget.
   String? statusDropDownValue;
-  FormFieldController<String>? statusDropDownController;
+  FormFieldController<String>? statusDropDownValueController;
   // State field(s) for conditionDropDown widget.
   String? conditionDropDownValue;
-  FormFieldController<String>? conditionDropDownController;
+  FormFieldController<String>? conditionDropDownValueController;
   // State field(s) for CategoryDropDown widget.
   String? categoryDropDownValue;
-  FormFieldController<String>? categoryDropDownController;
+  FormFieldController<String>? categoryDropDownValueController;
   // State field(s) for ParishDropDown widget.
   String? parishDropDownValue;
-  FormFieldController<String>? parishDropDownController;
+  FormFieldController<String>? parishDropDownValueController;
   // State field(s) for inputProductDesc widget.
   TextEditingController? inputProductDescController;
   String? Function(BuildContext, String?)? inputProductDescControllerValidator;

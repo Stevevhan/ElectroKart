@@ -21,6 +21,11 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
   late OnboardingModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  int get pageViewCurrentIndex => _model.pageViewController != null &&
+          _model.pageViewController!.hasClients &&
+          _model.pageViewController!.page != null
+      ? _model.pageViewController!.page!.round()
+      : 0;
 
   @override
   void initState() {
@@ -105,7 +110,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                             'Search for Books',
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
-                                                .title1,
+                                                .displaySmall,
                                           ),
                                         ),
                                       ],
@@ -122,7 +127,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                             'Find amazing classic books in our library.',
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
-                                                .subtitle2,
+                                                .titleSmall,
                                           ),
                                         ),
                                       ],
@@ -166,7 +171,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                             'Purchase Books',
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
-                                                .title1,
+                                                .displaySmall,
                                           ),
                                         ),
                                       ],
@@ -183,7 +188,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                             'Buy and view all your favorite books you find in this library.',
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
-                                                .subtitle2,
+                                                .titleSmall,
                                           ),
                                         ),
                                       ],
@@ -227,7 +232,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                             'Review Purchases',
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
-                                                .title1,
+                                                .displaySmall,
                                           ),
                                         ),
                                       ],
@@ -244,7 +249,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                             'Keep track of all your purchases that you have made, want to trade books in? Go ahead and list them for exchange.',
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
-                                                .subtitle2,
+                                                .titleSmall,
                                           ),
                                         ),
                                       ],
@@ -266,8 +271,8 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                 PageController(initialPage: 0),
                             count: 3,
                             axisDirection: Axis.horizontal,
-                            onDotClicked: (i) {
-                              _model.pageViewController!.animateToPage(
+                            onDotClicked: (i) async {
+                              await _model.pageViewController!.animateToPage(
                                 i,
                                 duration: Duration(milliseconds: 500),
                                 curve: Curves.ease,
@@ -315,13 +320,16 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                       iconPadding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primaryBackground,
-                      textStyle:
-                          FlutterFlowTheme.of(context).subtitle1.override(
-                                fontFamily: 'Lexend Deca',
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.w500,
-                              ),
+                      textStyle: FlutterFlowTheme.of(context)
+                          .titleMedium
+                          .override(
+                            fontFamily: 'Lexend Deca',
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.w500,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                FlutterFlowTheme.of(context).titleMediumFamily),
+                          ),
                       elevation: 2.0,
                       borderSide: BorderSide(
                         color: Colors.transparent,

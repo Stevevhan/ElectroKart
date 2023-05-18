@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'backend/backend.dart';
+import '/backend/backend.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 
@@ -10,9 +10,7 @@ class FFAppState extends ChangeNotifier {
     return _instance;
   }
 
-  FFAppState._internal() {
-    initializePersistedState();
-  }
+  FFAppState._internal();
 
   Future initializePersistedState() async {
     prefs = await SharedPreferences.getInstance();
@@ -43,6 +41,13 @@ class FFAppState extends ChangeNotifier {
 
   void removeAtIndexFromCart(int _index) {
     _cart.removeAt(_index);
+  }
+
+  void updateCartAtIndex(
+    int _index,
+    Function(DocumentReference) updateFn,
+  ) {
+    updateFn(_cart[_index]);
   }
 
   bool _showFullList = true;

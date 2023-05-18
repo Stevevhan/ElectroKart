@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/empty_chat_widget.dart';
 import '/flutter_flow/chat/index.dart';
@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'all_chats_model.dart';
 export 'all_chats_model.dart';
 
@@ -48,26 +47,23 @@ class _AllChatsWidgetState extends State<AllChatsWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
-          title: GradientText(
+          title: Text(
             'All Chats',
-            style: FlutterFlowTheme.of(context).bodyText1.override(
+            style: FlutterFlowTheme.of(context).bodyMedium.override(
                   fontFamily: 'Lato',
                   color: FlutterFlowTheme.of(context).primaryText,
                   fontSize: 36.0,
                   fontWeight: FontWeight.w600,
+                  useGoogleFonts: GoogleFonts.asMap().containsKey(
+                      FlutterFlowTheme.of(context).bodyMediumFamily),
                 ),
-            colors: [
-              FlutterFlowTheme.of(context).primaryColor,
-              FlutterFlowTheme.of(context).secondaryColor
-            ],
-            gradientDirection: GradientDirection.ltr,
-            gradientType: GradientType.linear,
           ),
           actions: [],
           centerTitle: true,
           elevation: 4.0,
         ),
         body: SafeArea(
+          top: true,
           child: Padding(
             padding: EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
             child: StreamBuilder<List<ChatsRecord>>(

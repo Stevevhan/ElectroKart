@@ -19,3 +19,5 @@ export '/onboarding/onboarding_widget.dart' show OnboardingWidget;
 export '/report/report_widget.dart' show ReportWidget;
 export '/seller_products/seller_products_widget.dart' show SellerProductsWidget;
 export '/products_copy/products_copy_widget.dart' show ProductsCopyWidget;
+export '/test_login/test_login_widget.dart' show TestLoginWidget;
+export '/test_sign_up/test_sign_up_widget.dart' show TestSignUpWidget;

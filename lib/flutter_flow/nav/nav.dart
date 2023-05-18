@@ -5,9 +5,9 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
 import '../flutter_flow_theme.dart';
-import '../../backend/backend.dart';
+import '/backend/backend.dart';
 
-import '../../auth/firebase_user_provider.dart';
+import '../../auth/base_auth_user_provider.dart';
 import '../../backend/push_notifications/push_notifications_handler.dart'
     show PushNotificationsHandler;
 
@@ -23,8 +23,8 @@ export 'serialization_util.dart';
 const kTransitionInfoKey = '__transition_info__';
 
 class AppStateNotifier extends ChangeNotifier {
-  ElectroKartFirebaseUser? initialUser;
-  ElectroKartFirebaseUser? user;
+  BaseAuthUser? initialUser;
+  BaseAuthUser? user;
   bool showSplashImage = true;
   String? _redirectLocation;
 
@@ -49,7 +49,7 @@ class AppStateNotifier extends ChangeNotifier {
   /// to perform subsequent actions (such as navigation) afterwards.
   void updateNotifyOnAuthChange(bool notify) => notifyOnAuthChange = notify;
 
-  void update(ElectroKartFirebaseUser newUser) {
+  void update(BaseAuthUser newUser) {
     initialUser ??= newUser;
     user = newUser;
     // Refresh the app on auth change unless explicitly marked otherwise.
@@ -72,13 +72,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, _) =>
-          appStateNotifier.loggedIn ? NavBarPage() : LoginWidget(),
+          appStateNotifier.loggedIn ? NavBarPage() : TestLoginWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? NavBarPage() : LoginWidget(),
+              appStateNotifier.loggedIn ? NavBarPage() : TestLoginWidget(),
           routes: [
             FFRoute(
               name: 'Login',
@@ -145,7 +145,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'chat_page',
               path: 'chatPage',
               asyncParams: {
-                'chatUser': getDoc(['users'], UsersRecord.serializer),
+                'chatUser': getDoc(['users'], UsersRecord.fromSnapshot),
               },
               builder: (context, params) => ChatPageWidget(
                 chatUser: params.getParam('chatUser', ParamType.Document),
@@ -195,7 +195,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'Report',
               path: 'report',
-              builder: (context, params) => ReportWidget(),
+              builder: (context, params) => ReportWidget(
+                reportid: params.getParam('reportid',
+                    ParamType.DocumentReference, false, ['Products']),
+              ),
             ),
             FFRoute(
               name: 'SellerProducts',
@@ -206,6 +209,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'ProductsCopy',
               path: 'productsCopy',
               builder: (context, params) => ProductsCopyWidget(),
+            ),
+            FFRoute(
+              name: 'TestLogin',
+              path: 'testLogin',
+              builder: (context, params) => TestLoginWidget(),
+            ),
+            FFRoute(
+              name: 'TestSignUp',
+              path: 'testSignUp',
+              builder: (context, params) => TestSignUpWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
@@ -343,7 +356,8 @@ class FFParameters {
       return param;
     }
     // Return serialized value.
-    return deserializeParam<T>(param, type, isList, collectionNamePath);
+    return deserializeParam<T>(param, type, isList,
+        collectionNamePath: collectionNamePath);
   }
 }
 
@@ -376,7 +390,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/login';
+            return '/testLogin';
           }
           return null;
         },
@@ -391,12 +405,9 @@ class FFRoute {
           final child = appStateNotifier.loading
               ? Container(
                   color: FlutterFlowTheme.of(context).primaryBackground,
-                  child: Center(
-                    child: Image.asset(
-                      'assets/images/LogoMakr-8J2EEZ.png',
-                      width: MediaQuery.of(context).size.width * 0.7,
-                      fit: BoxFit.fitWidth,
-                    ),
+                  child: Image.asset(
+                    'assets/images/LogoMakr-35xiGH-300dpi.png',
+                    fit: BoxFit.scaleDown,
                   ),
                 )
               : PushNotificationsHandler(child: page);

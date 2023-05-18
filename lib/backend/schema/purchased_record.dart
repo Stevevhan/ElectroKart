@@ -1,30 +1,41 @@
 import 'dart:async';
 
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+
 import 'index.dart';
-import 'serializers.dart';
-import 'package:built_value/built_value.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
-part 'purchased_record.g.dart';
+class PurchasedRecord extends FirestoreRecord {
+  PurchasedRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
+    _initializeFields();
+  }
 
-abstract class PurchasedRecord
-    implements Built<PurchasedRecord, PurchasedRecordBuilder> {
-  static Serializer<PurchasedRecord> get serializer =>
-      _$purchasedRecordSerializer;
+  // "productid" field.
+  DocumentReference? _productid;
+  DocumentReference? get productid => _productid;
+  bool hasProductid() => _productid != null;
 
-  DocumentReference? get productid;
+  // "price" field.
+  double? _price;
+  double get price => _price ?? 0.0;
+  bool hasPrice() => _price != null;
 
-  double? get price;
-
-  DateTime? get ts;
-
-  @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ffRef;
-  DocumentReference get reference => ffRef!;
+  // "ts" field.
+  DateTime? _ts;
+  DateTime? get ts => _ts;
+  bool hasTs() => _ts != null;
 
   DocumentReference get parentReference => reference.parent.parent!;
 
-  static void _initializeBuilder(PurchasedRecordBuilder builder) =>
-      builder..price = 0.0;
+  void _initializeFields() {
+    _productid = snapshotData['productid'] as DocumentReference?;
+    _price = castToType<double>(snapshotData['price']);
+    _ts = snapshotData['ts'] as DateTime?;
+  }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
       parent != null
@@ -34,22 +45,27 @@ abstract class PurchasedRecord
   static DocumentReference createDoc(DocumentReference parent) =>
       parent.collection('purchased').doc();
 
-  static Stream<PurchasedRecord> getDocument(DocumentReference ref) => ref
-      .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Stream<PurchasedRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => PurchasedRecord.fromSnapshot(s));
 
-  static Future<PurchasedRecord> getDocumentOnce(DocumentReference ref) => ref
-      .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Future<PurchasedRecord> getDocumentOnce(DocumentReference ref) =>
+      ref.get().then((s) => PurchasedRecord.fromSnapshot(s));
 
-  PurchasedRecord._();
-  factory PurchasedRecord([void Function(PurchasedRecordBuilder) updates]) =
-      _$PurchasedRecord;
+  static PurchasedRecord fromSnapshot(DocumentSnapshot snapshot) =>
+      PurchasedRecord._(
+        snapshot.reference,
+        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+      );
 
   static PurchasedRecord getDocumentFromData(
-          Map<String, dynamic> data, DocumentReference reference) =>
-      serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
+    Map<String, dynamic> data,
+    DocumentReference reference,
+  ) =>
+      PurchasedRecord._(reference, mapFromFirestore(data));
+
+  @override
+  String toString() =>
+      'PurchasedRecord(reference: ${reference.path}, data: $snapshotData)';
 }
 
 Map<String, dynamic> createPurchasedRecordData({
@@ -57,14 +73,12 @@ Map<String, dynamic> createPurchasedRecordData({
   double? price,
   DateTime? ts,
 }) {
-  final firestoreData = serializers.toFirestore(
-    PurchasedRecord.serializer,
-    PurchasedRecord(
-      (p) => p
-        ..productid = productid
-        ..price = price
-        ..ts = ts,
-    ),
+  final firestoreData = mapToFirestore(
+    <String, dynamic>{
+      'productid': productid,
+      'price': price,
+      'ts': ts,
+    }.withoutNulls,
   );
 
   return firestoreData;
