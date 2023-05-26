@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -163,8 +164,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                 PageTransition(
                                   type: PageTransitionType.fade,
                                   child: FlutterFlowExpandedImageView(
-                                    image: Image.network(
-                                      currentUserPhoto,
+                                    image: CachedNetworkImage(
+                                      imageUrl: currentUserPhoto,
                                       fit: BoxFit.contain,
                                     ),
                                     allowRotation: false,
@@ -184,8 +185,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                 ),
-                                child: Image.network(
-                                  currentUserPhoto,
+                                child: CachedNetworkImage(
+                                  imageUrl: currentUserPhoto,
                                   fit: BoxFit.cover,
                                 ),
                               ),

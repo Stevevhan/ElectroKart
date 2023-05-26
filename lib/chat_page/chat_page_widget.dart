@@ -1,10 +1,13 @@
 import '/backend/backend.dart';
 import '/flutter_flow/chat/index.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +28,8 @@ class ChatPageWidget extends StatefulWidget {
   _ChatPageWidgetState createState() => _ChatPageWidgetState();
 }
 
-class _ChatPageWidgetState extends State<ChatPageWidget> {
+class _ChatPageWidgetState extends State<ChatPageWidget>
+    with TickerProviderStateMixin {
   late ChatPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -41,10 +45,41 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
     return _chatInfo?.isGroupChat ?? false;
   }
 
+  final animationsMap = {
+    'iconOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        RotateEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+      ],
+    ),
+  };
+
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => ChatPageModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Note, chats will disappear after 30 days',
+            style: TextStyle(
+              color: FlutterFlowTheme.of(context).primaryText,
+            ),
+          ),
+          duration: Duration(milliseconds: 2500),
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        ),
+      );
+    });
 
     FFChatManager.instance
         .getChatInfo(
@@ -144,46 +179,24 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                           ),
                         ],
                       ),
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          var confirmDialogResponse = await showDialog<bool>(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    title: Text('Delete Chat'),
-                                    content: Text(
-                                        'Are you sure you want to delete this chat? Chat will also be deleted for recipient.'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () => Navigator.pop(
-                                            alertDialogContext, false),
-                                        child: Text('Cancel'),
-                                      ),
-                                      TextButton(
-                                        onPressed: () => Navigator.pop(
-                                            alertDialogContext, true),
-                                        child: Text('Confirm'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              ) ??
-                              false;
-                          if (confirmDialogResponse) {
-                            await widget.chatRef!.delete();
-
-                            context.pushNamed('all_chats');
-                          }
-                        },
-                        child: Icon(
-                          Icons.delete,
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          size: 24.0,
-                        ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            130.0, 0.0, 0.0, 0.0),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            context.pushNamed('Chatnotice');
+                          },
+                          child: Icon(
+                            Icons.announcement_sharp,
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            size: 24.0,
+                          ),
+                        ).animateOnPageLoad(
+                            animationsMap['iconOnPageLoadAnimation']!),
                       ),
                     ],
                   ),

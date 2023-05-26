@@ -12,12 +12,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 
 class NewProductModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  final formKey2 = GlobalKey<FormState>();
+  final formKey5 = GlobalKey<FormState>();
+  final formKey3 = GlobalKey<FormState>();
+  final formKey1 = GlobalKey<FormState>();
+  final formKey4 = GlobalKey<FormState>();
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -26,6 +30,15 @@ class NewProductModel extends FlutterFlowModel {
   // State field(s) for inputProductName widget.
   TextEditingController? inputProductNameController;
   String? Function(BuildContext, String?)? inputProductNameControllerValidator;
+  String? _inputProductNameControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   // State field(s) for statusDropDown widget.
   String? statusDropDownValue;
   FormFieldController<String>? statusDropDownValueController;
@@ -41,9 +54,27 @@ class NewProductModel extends FlutterFlowModel {
   // State field(s) for inputProductDesc widget.
   TextEditingController? inputProductDescController;
   String? Function(BuildContext, String?)? inputProductDescControllerValidator;
+  String? _inputProductDescControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   // State field(s) for inputProductCost widget.
   TextEditingController? inputProductCostController;
   String? Function(BuildContext, String?)? inputProductCostControllerValidator;
+  String? _inputProductCostControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   // State field(s) for inputProductQuantity widget.
   TextEditingController? inputProductQuantityController;
   String? Function(BuildContext, String?)?
@@ -53,7 +84,11 @@ class NewProductModel extends FlutterFlowModel {
 
   /// Initialization and disposal methods.
 
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    inputProductNameControllerValidator = _inputProductNameControllerValidator;
+    inputProductDescControllerValidator = _inputProductDescControllerValidator;
+    inputProductCostControllerValidator = _inputProductCostControllerValidator;
+  }
 
   void dispose() {
     inputProductNameController?.dispose();

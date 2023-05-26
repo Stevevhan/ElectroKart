@@ -45,3 +45,53 @@ List<DocumentReference> createChatUserList(
 ) {
   return [userRef1, userRef2];
 }
+
+bool? showmultipleSearchResult(
+  String textSearchfor,
+  String textSearchln,
+  String? textSearchln2,
+) {
+  return textSearchln.toLowerCase().contains(textSearchfor.toLowerCase()) ||
+      (textSearchln2 != null &&
+          textSearchln2.toLowerCase().contains(textSearchfor.toLowerCase()));
+}
+
+bool? combinedSearchResult(
+  String textSearchfor,
+  String textSearchln,
+  String? textSearchln2,
+  String? textSearchln3,
+  String? textSearchln4,
+) {
+  String sanitizedSearchText = textSearchfor.toLowerCase().replaceAll(' ', '');
+  String sanitizedTextSearchln = textSearchln.toLowerCase().replaceAll(' ', '');
+  List<String> sortedSearchFor = sanitizedSearchText.split('')..sort();
+  List<String> sortedTextSearchln = sanitizedTextSearchln.split('')..sort();
+  bool containsText = sortedSearchFor.every(sortedTextSearchln.contains);
+
+  if (textSearchln2 != null) {
+    String sanitizedTextSearchln2 =
+        textSearchln2.toLowerCase().replaceAll(' ', '');
+    List<String> sortedTextSearchln2 = sanitizedTextSearchln2.split('')..sort();
+    containsText =
+        containsText || sortedSearchFor.every(sortedTextSearchln2.contains);
+  }
+
+  if (textSearchln3 != null) {
+    String sanitizedTextSearchln3 =
+        textSearchln3.toLowerCase().replaceAll(' ', '');
+    List<String> sortedTextSearchln3 = sanitizedTextSearchln3.split('')..sort();
+    containsText =
+        containsText || sortedSearchFor.every(sortedTextSearchln3.contains);
+  }
+
+  if (containsText) {
+    String combinedResult = textSearchln +
+        (textSearchln2 != null ? ' ' + textSearchln2 : '') +
+        (textSearchln3 != null ? ' ' + textSearchln3 : '');
+    print(combinedResult);
+    return true;
+  }
+
+  return false;
+}

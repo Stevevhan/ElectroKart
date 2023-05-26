@@ -50,6 +50,11 @@ class ChatsRecord extends FirestoreRecord {
       _lastMessageSeenBy ?? const [];
   bool hasLastMessageSeenBy() => _lastMessageSeenBy != null;
 
+  // "createdAt" field.
+  DateTime? _createdAt;
+  DateTime? get createdAt => _createdAt;
+  bool hasCreatedAt() => _createdAt != null;
+
   void _initializeFields() {
     _users = getDataList(snapshotData['users']);
     _userA = snapshotData['user_a'] as DocumentReference?;
@@ -59,6 +64,7 @@ class ChatsRecord extends FirestoreRecord {
     _lastMessageSentBy =
         snapshotData['last_message_sent_by'] as DocumentReference?;
     _lastMessageSeenBy = getDataList(snapshotData['last_message_seen_by']);
+    _createdAt = snapshotData['createdAt'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -92,6 +98,7 @@ Map<String, dynamic> createChatsRecordData({
   String? lastMessage,
   DateTime? lastMessageTime,
   DocumentReference? lastMessageSentBy,
+  DateTime? createdAt,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -100,6 +107,7 @@ Map<String, dynamic> createChatsRecordData({
       'last_message': lastMessage,
       'last_message_time': lastMessageTime,
       'last_message_sent_by': lastMessageSentBy,
+      'createdAt': createdAt,
     }.withoutNulls,
   );
 

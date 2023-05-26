@@ -1,12 +1,10 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/empty_list_widget.dart';
-import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/form_field_controller.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -134,106 +132,7 @@ class _SellersdbWidgetState extends State<SellersdbWidget> {
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            0.0, 10.0, 20.0, 10.0),
-                        child: FlutterFlowDropDown<String>(
-                          controller: _model.dropDownValueController ??=
-                              FormFieldController<String>(null),
-                          options: [
-                            'Available',
-                            'Sold',
-                            'Sold Out',
-                            'Seller is away'
-                          ],
-                          onChanged: (val) =>
-                              setState(() => _model.dropDownValue = val),
-                          width: 110.0,
-                          height: 40.0,
-                          searchHintTextStyle: FlutterFlowTheme.of(context)
-                              .bodyLarge
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyLargeFamily,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .bodyLargeFamily),
-                              ),
-                          textStyle: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyMediumFamily,
-                                color:
-                                    FlutterFlowTheme.of(context).primaryBtnText,
-                                fontSize: 12.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily),
-                              ),
-                          hintText: 'Status',
-                          searchHintText: 'Search for an item...',
-                          fillColor:
-                              FlutterFlowTheme.of(context).primaryBackground,
-                          elevation: 2.0,
-                          borderColor: FlutterFlowTheme.of(context).warning,
-                          borderWidth: 0.0,
-                          borderRadius: 10.0,
-                          margin: EdgeInsetsDirectional.fromSTEB(
-                              12.0, 4.0, 12.0, 4.0),
-                          hidesUnderline: true,
-                          isSearchable: false,
-                        ),
-                      ),
-                      FFButtonWidget(
-                        onPressed: () async {
-                          context.pushNamed(
-                            'sellersdb',
-                            extra: <String, dynamic>{
-                              kTransitionInfoKey: TransitionInfo(
-                                hasTransition: true,
-                                transitionType: PageTransitionType.fade,
-                                duration: Duration(milliseconds: 20),
-                              ),
-                            },
-                          );
-                        },
-                        text: 'Refresh',
-                        icon: Icon(
-                          Icons.refresh,
-                          color: Color(0xFFFFCA00),
-                          size: 15.0,
-                        ),
-                        options: FFButtonOptions(
-                          width: 97.0,
-                          height: 40.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primary,
-                          textStyle: FlutterFlowTheme.of(context)
-                              .titleSmall
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .titleSmallFamily,
-                                color: Colors.white,
-                                fontSize: 13.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .titleSmallFamily),
-                              ),
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                      ),
-                    ],
+                    children: [],
                   ),
                 ),
                 SingleChildScrollView(
@@ -246,9 +145,6 @@ class _SellersdbWidgetState extends State<SellersdbWidget> {
                         child: StreamBuilder<List<SoldRecord>>(
                           stream: querySoldRecord(
                             parent: currentUserReference,
-                            queryBuilder: (soldRecord) => soldRecord.where(
-                                'status',
-                                isEqualTo: _model.dropDownValue),
                           ),
                           builder: (context, snapshot) {
                             // Customize what your widget looks like when it's loading.
@@ -419,9 +315,10 @@ class _SellersdbWidgetState extends State<SellersdbWidget> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             6.0),
-                                                    child: Image.network(
-                                                      menuItemProductsRecord
-                                                          .thumb,
+                                                    child: CachedNetworkImage(
+                                                      imageUrl:
+                                                          menuItemProductsRecord
+                                                              .thumb,
                                                       width: 80.0,
                                                       height: 80.0,
                                                       fit: BoxFit.cover,

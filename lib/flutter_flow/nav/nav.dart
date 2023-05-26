@@ -206,9 +206,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => SellerProductsWidget(),
             ),
             FFRoute(
-              name: 'ProductsCopy',
-              path: 'productsCopy',
-              builder: (context, params) => ProductsCopyWidget(),
+              name: 'AllProducts',
+              path: 'allProducts',
+              builder: (context, params) => AllProductsWidget(),
             ),
             FFRoute(
               name: 'TestLogin',
@@ -219,6 +219,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'TestSignUp',
               path: 'testSignUp',
               builder: (context, params) => TestSignUpWidget(),
+            ),
+            FFRoute(
+              name: 'Chatnotice',
+              path: 'chatnotice',
+              builder: (context, params) => ChatnoticeWidget(),
+            ),
+            FFRoute(
+              name: 'SellerStore',
+              path: 'sellerStore',
+              builder: (context, params) => SellerStoreWidget(
+                sellerstoreid: params.getParam('sellerstoreid',
+                    ParamType.DocumentReference, false, ['Products']),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

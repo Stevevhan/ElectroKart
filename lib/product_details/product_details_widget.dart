@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_toggle_icon.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
@@ -56,6 +57,19 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
           duration: 600.ms,
           begin: 0.0,
           end: 1.0,
+        ),
+      ],
+    ),
+    'toggleIconOnPageLoadAnimation': AnimationInfo(
+      reverse: true,
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: Offset(1.0, 1.0),
+          end: Offset(2.0, 2.0),
         ),
       ],
     ),
@@ -172,7 +186,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                 size: 30.0,
               ),
               onPressed: () async {
-                context.pop();
+                context.pushNamed('Products');
               },
             ),
             actions: [
@@ -235,7 +249,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                           borderWidth: 1.0,
                           buttonSize: 60.0,
                           icon: Icon(
-                            Icons.share_rounded,
+                            Icons.ios_share,
                             color: FlutterFlowTheme.of(context).primaryText,
                             size: 25.0,
                           ),
@@ -381,8 +395,177 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                 ),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
+                                    Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Stack(
+                                              children: [
+                                                Align(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          0.08, 0.0),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(9.0, 5.0,
+                                                                0.0, 0.0),
+                                                    child: FFButtonWidget(
+                                                      onPressed: () {
+                                                        print(
+                                                            'Button pressed ...');
+                                                      },
+                                                      text: '',
+                                                      options: FFButtonOptions(
+                                                        width: 80.0,
+                                                        height: 40.0,
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    24.0,
+                                                                    0.0,
+                                                                    24.0,
+                                                                    0.0),
+                                                        iconPadding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        color:
+                                                            Color(0x7B000000),
+                                                        textStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmall
+                                                                .override(
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmallFamily,
+                                                                  color: Colors
+                                                                      .white,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .titleSmallFamily),
+                                                                ),
+                                                        elevation: 3.0,
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .warning,
+                                                          width: 1.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(50.0),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          9.0, 0.0, 0.0, 0.0),
+                                                  child: ToggleIcon(
+                                                    onPressed: () async {
+                                                      final postLikesByElement =
+                                                          currentUserReference;
+                                                      final postLikesByUpdate =
+                                                          productDetailsProductsRecord
+                                                                  .postLikesBy
+                                                                  .contains(
+                                                                      postLikesByElement)
+                                                              ? FieldValue
+                                                                  .arrayRemove([
+                                                                  postLikesByElement
+                                                                ])
+                                                              : FieldValue
+                                                                  .arrayUnion([
+                                                                  postLikesByElement
+                                                                ]);
+                                                      final productsUpdateData =
+                                                          {
+                                                        'Post_likes_by':
+                                                            postLikesByUpdate,
+                                                      };
+                                                      await productDetailsProductsRecord
+                                                          .reference
+                                                          .update(
+                                                              productsUpdateData);
+                                                    },
+                                                    value: productDetailsProductsRecord
+                                                        .postLikesBy
+                                                        .contains(
+                                                            currentUserReference),
+                                                    onIcon: Icon(
+                                                      Icons.thumb_up,
+                                                      color: Color(0xFF11CD01),
+                                                      size: 25.0,
+                                                    ),
+                                                    offIcon: Icon(
+                                                      Icons.thumb_up_outlined,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .warning,
+                                                      size: 20.0,
+                                                    ),
+                                                  ).animateOnPageLoad(animationsMap[
+                                                      'toggleIconOnPageLoadAnimation']!),
+                                                ),
+                                                Align(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          0.0, -0.22),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(50.0,
+                                                                15.0, 0.0, 0.0),
+                                                    child: Text(
+                                                      productDetailsProductsRecord
+                                                          .postLikesBy.length
+                                                          .toString(),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMediumFamily,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .warning,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodyMediumFamily),
+                                                              ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                     Column(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment: MainAxisAlignment.end,
@@ -415,9 +598,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                                     EdgeInsetsDirectional
                                                         .fromSTEB(
                                                             0.0, 0.0, 0.0, 0.0),
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .error,
+                                                color: Color(0xFFE21C3D),
                                                 textStyle:
                                                     FlutterFlowTheme.of(context)
                                                         .titleSmall
@@ -629,7 +810,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                           children: [
                             Container(
                               width: 340.6,
-                              height: 129.4,
+                              height: 143.0,
                               decoration: BoxDecoration(
                                 color: Color(0x1E95A1AC),
                                 borderRadius: BorderRadius.circular(10.0),
@@ -874,7 +1055,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                             children: [
                               Container(
                                 width: 340.7,
-                                height: 119.4,
+                                height: 160.0,
                                 decoration: BoxDecoration(
                                   color: Color(0x1E95A1AC),
                                   borderRadius: BorderRadius.circular(10.0),
@@ -885,9 +1066,11 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                   children: [
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          10.0, 8.0, 0.0, 0.0),
+                                          10.0, 10.0, 0.0, 0.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           StreamBuilder<UsersRecord>(
                                             stream: UsersRecord.getDocument(
@@ -911,6 +1094,125 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                                   snapshot.data!;
                                               return GradientText(
                                                 'Seller: ${textUsersRecord.displayName}',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Montserrat',
+                                                          fontSize: 16.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
+                                                        ),
+                                                colors: [
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondary
+                                                ],
+                                                gradientDirection:
+                                                    GradientDirection.ltr,
+                                                gradientType:
+                                                    GradientType.linear,
+                                              );
+                                            },
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 10.0, 0.0),
+                                            child: FFButtonWidget(
+                                              onPressed: () async {
+                                                context.pushNamed(
+                                                  'SellerStore',
+                                                  queryParams: {
+                                                    'sellerstoreid':
+                                                        serializeParam(
+                                                      productDetailsProductsRecord
+                                                          .reference,
+                                                      ParamType
+                                                          .DocumentReference,
+                                                    ),
+                                                  }.withoutNulls,
+                                                );
+                                              },
+                                              text: 'Visit Store',
+                                              options: FFButtonOptions(
+                                                width: 115.0,
+                                                height: 21.0,
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        24.0, 0.0, 24.0, 0.0),
+                                                iconPadding:
+                                                    EdgeInsetsDirectional
+                                                        .fromSTEB(
+                                                            0.0, 0.0, 0.0, 0.0),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                textStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmall
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmallFamily,
+                                                          color: Colors.white,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmallFamily),
+                                                        ),
+                                                elevation: 3.0,
+                                                borderSide: BorderSide(
+                                                  color: Colors.transparent,
+                                                  width: 1.0,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          10.0, 8.0, 0.0, 0.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          StreamBuilder<UsersRecord>(
+                                            stream: UsersRecord.getDocument(
+                                                productDetailsProductsRecord
+                                                    .sellerid!),
+                                            builder: (context, snapshot) {
+                                              // Customize what your widget looks like when it's loading.
+                                              if (!snapshot.hasData) {
+                                                return Center(
+                                                  child: SizedBox(
+                                                    width: 30.0,
+                                                    height: 30.0,
+                                                    child: SpinKitDualRing(
+                                                      color: Color(0xFFFFCA00),
+                                                      size: 30.0,
+                                                    ),
+                                                  ),
+                                                );
+                                              }
+                                              final textUsersRecord =
+                                                  snapshot.data!;
+                                              return GradientText(
+                                                '${textUsersRecord.likedBy.length.toString()} Positive feedback',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium
@@ -1103,7 +1405,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 15.0, 0.0, 30.0),
+                              20.0, 15.0, 20.0, 30.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -2069,6 +2371,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                         lastMessage:
                                             'Re: ${productDetailsProductsRecord.name}',
                                         lastMessageTime: getCurrentTimestamp,
+                                        createdAt: getCurrentTimestamp,
                                       ),
                                       'users': functions.createChatUserList(
                                           productDetailsProductsRecord

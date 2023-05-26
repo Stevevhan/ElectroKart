@@ -44,6 +44,16 @@ class UsersRecord extends FirestoreRecord {
   String get phoneNumber => _phoneNumber ?? '';
   bool hasPhoneNumber() => _phoneNumber != null;
 
+  // "Liked_by" field.
+  List<DocumentReference>? _likedBy;
+  List<DocumentReference> get likedBy => _likedBy ?? const [];
+  bool hasLikedBy() => _likedBy != null;
+
+  // "Disliked_by" field.
+  List<DocumentReference>? _dislikedBy;
+  List<DocumentReference> get dislikedBy => _dislikedBy ?? const [];
+  bool hasDislikedBy() => _dislikedBy != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -51,6 +61,8 @@ class UsersRecord extends FirestoreRecord {
     _uid = snapshotData['uid'] as String?;
     _createdTime = snapshotData['created_time'] as DateTime?;
     _phoneNumber = snapshotData['phone_number'] as String?;
+    _likedBy = getDataList(snapshotData['Liked_by']);
+    _dislikedBy = getDataList(snapshotData['Disliked_by']);
   }
 
   static CollectionReference get collection =>

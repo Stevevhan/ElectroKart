@@ -148,9 +148,16 @@ final parametersBuilderMap =
         },
       ),
   'SellerProducts': ParameterData.none(),
-  'ProductsCopy': ParameterData.none(),
+  'AllProducts': ParameterData.none(),
   'TestLogin': ParameterData.none(),
   'TestSignUp': ParameterData.none(),
+  'Chatnotice': ParameterData.none(),
+  'SellerStore': (data) async => ParameterData(
+        allParams: {
+          'sellerstoreid':
+              getParameter<DocumentReference>(data, 'sellerstoreid'),
+        },
+      ),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

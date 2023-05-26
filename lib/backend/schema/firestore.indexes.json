@@ -33,6 +33,24 @@
       ]
     },
     {
+      "collectionGroup": "Products",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "Category",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "sellerid",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "Cost",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
       "collectionGroup": "chat_messages",
       "queryScope": "COLLECTION",
       "fields": [

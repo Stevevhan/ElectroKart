@@ -151,28 +151,60 @@ class _ProductsWidgetState extends State<ProductsWidget>
               ),
             ),
             actions: [
-              FlutterFlowIconButton(
-                borderColor: Colors.transparent,
-                borderRadius: 30.0,
-                borderWidth: 1.0,
-                buttonSize: 60.0,
-                fillColor: Color(0x00E0E3E7),
-                icon: Icon(
-                  Icons.search,
-                  color: Color(0xFFF5BC2E),
-                  size: 24.0,
-                ),
-                onPressed: () async {
-                  context.pushNamed(
-                    'searchpage',
-                    extra: <String, dynamic>{
-                      kTransitionInfoKey: TransitionInfo(
-                        hasTransition: true,
-                        transitionType: PageTransitionType.fade,
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  AuthUserStreamWidget(
+                    builder: (context) => InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.pushNamed('edit_profile');
+                      },
+                      child: Hero(
+                        tag: currentUserPhoto,
+                        transitionOnUserGestures: true,
+                        child: Container(
+                          width: 40.0,
+                          height: 40.0,
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: CachedNetworkImage(
+                            imageUrl: currentUserPhoto,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
+                    ),
+                  ),
+                  FlutterFlowIconButton(
+                    borderColor: Colors.transparent,
+                    borderRadius: 30.0,
+                    borderWidth: 1.0,
+                    buttonSize: 60.0,
+                    fillColor: Color(0x00E0E3E7),
+                    icon: Icon(
+                      Icons.search,
+                      color: Color(0xFFF5BC2E),
+                      size: 24.0,
+                    ),
+                    onPressed: () async {
+                      context.pushNamed(
+                        'searchpage',
+                        extra: <String, dynamic>{
+                          kTransitionInfoKey: TransitionInfo(
+                            hasTransition: true,
+                            transitionType: PageTransitionType.fade,
+                          ),
+                        },
+                      );
                     },
-                  );
-                },
+                  ),
+                ],
               ),
             ],
             centerTitle: false,
@@ -416,7 +448,7 @@ class _ProductsWidgetState extends State<ProductsWidget>
                               15.0, 0.0, 0.0, 0.0),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              context.pushNamed('ProductsCopy');
+                              context.pushNamed('AllProducts');
                             },
                             text: 'All Products',
                             options: FFButtonOptions(
@@ -468,7 +500,7 @@ class _ProductsWidgetState extends State<ProductsWidget>
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 10.0, 10.0, 10.0, 10.0),
                             child: FlutterFlowAdBanner(
-                              showsTestAd: true,
+                              showsTestAd: false,
                               androidAdUnitID:
                                   'ca-app-pub-4840032926949336/8829177242',
                             ).animateOnPageLoad(
@@ -524,9 +556,12 @@ class _ProductsWidgetState extends State<ProductsWidget>
                               final wrapProductsRecord =
                                   wrapProductsRecordList[wrapIndex];
                               return Visibility(
-                                visible: functions.showSearchResult(
+                                visible: functions.combinedSearchResult(
                                         _model.searchFieldController.text,
-                                        wrapProductsRecord.name) ??
+                                        wrapProductsRecord.name,
+                                        wrapProductsRecord.category,
+                                        wrapProductsRecord.parish,
+                                        wrapProductsRecord.condition) ??
                                     true,
                                 child: InkWell(
                                   splashColor: Colors.transparent,
@@ -577,31 +612,207 @@ class _ProductsWidgetState extends State<ProductsWidget>
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               Expanded(
-                                                child: Hero(
-                                                  tag: wrapProductsRecord.thumb,
-                                                  transitionOnUserGestures:
-                                                      true,
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      bottomLeft:
-                                                          Radius.circular(0.0),
-                                                      bottomRight:
-                                                          Radius.circular(0.0),
-                                                      topLeft:
-                                                          Radius.circular(8.0),
-                                                      topRight:
-                                                          Radius.circular(8.0),
+                                                child: Stack(
+                                                  children: [
+                                                    Hero(
+                                                      tag: wrapProductsRecord
+                                                          .thumb,
+                                                      transitionOnUserGestures:
+                                                          true,
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  0.0),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  0.0),
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  8.0),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  8.0),
+                                                        ),
+                                                        child:
+                                                            CachedNetworkImage(
+                                                          imageUrl:
+                                                              wrapProductsRecord
+                                                                  .thumb,
+                                                          width: 175.0,
+                                                          height: 110.0,
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
                                                     ),
-                                                    child: CachedNetworkImage(
-                                                      imageUrl:
-                                                          wrapProductsRecord
-                                                              .thumb,
-                                                      width: 100.0,
-                                                      height: 110.0,
-                                                      fit: BoxFit.cover,
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  75.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          if (wrapProductsRecord
+                                                                  .status ==
+                                                              'Sold')
+                                                            Align(
+                                                              alignment:
+                                                                  AlignmentDirectional(
+                                                                      0.0, 0.0),
+                                                              child: Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            5.0,
+                                                                            0.0),
+                                                                child:
+                                                                    FFButtonWidget(
+                                                                  onPressed:
+                                                                      () {
+                                                                    print(
+                                                                        'Button pressed ...');
+                                                                  },
+                                                                  text: 'SOLD',
+                                                                  options:
+                                                                      FFButtonOptions(
+                                                                    width: 80.0,
+                                                                    height:
+                                                                        30.0,
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            24.0,
+                                                                            0.0,
+                                                                            24.0,
+                                                                            0.0),
+                                                                    iconPadding:
+                                                                        EdgeInsetsDirectional.fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .error,
+                                                                    textStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .titleSmall
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              FlutterFlowTheme.of(context).titleSmallFamily,
+                                                                          color:
+                                                                              Colors.white,
+                                                                          fontSize:
+                                                                              2.0,
+                                                                          fontWeight:
+                                                                              FontWeight.w500,
+                                                                          useGoogleFonts:
+                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
+                                                                        ),
+                                                                    elevation:
+                                                                        3.0,
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                      color: Colors
+                                                                          .transparent,
+                                                                      width:
+                                                                          1.0,
+                                                                    ),
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            8.0),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          if (wrapProductsRecord
+                                                                  .status ==
+                                                              'Seller is away')
+                                                            Align(
+                                                              alignment:
+                                                                  AlignmentDirectional(
+                                                                      0.0, 0.0),
+                                                              child: Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            5.0,
+                                                                            0.0),
+                                                                child:
+                                                                    FFButtonWidget(
+                                                                  onPressed:
+                                                                      () {
+                                                                    print(
+                                                                        'Button pressed ...');
+                                                                  },
+                                                                  text: 'N/A',
+                                                                  options:
+                                                                      FFButtonOptions(
+                                                                    width: 80.0,
+                                                                    height:
+                                                                        30.0,
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            24.0,
+                                                                            0.0,
+                                                                            24.0,
+                                                                            0.0),
+                                                                    iconPadding:
+                                                                        EdgeInsetsDirectional.fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .warning,
+                                                                    textStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .titleSmall
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              FlutterFlowTheme.of(context).titleSmallFamily,
+                                                                          color:
+                                                                              Colors.white,
+                                                                          fontSize:
+                                                                              2.0,
+                                                                          fontWeight:
+                                                                              FontWeight.w500,
+                                                                          useGoogleFonts:
+                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
+                                                                        ),
+                                                                    elevation:
+                                                                        3.0,
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                      color: Colors
+                                                                          .transparent,
+                                                                      width:
+                                                                          1.0,
+                                                                    ),
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            8.0),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                        ],
+                                                      ),
                                                     ),
-                                                  ),
+                                                  ],
                                                 ),
                                               ),
                                             ],

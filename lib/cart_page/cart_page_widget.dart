@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -219,9 +220,10 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               6.0),
-                                                      child: Image.network(
-                                                        menuItemProductsRecord
-                                                            .thumb,
+                                                      child: CachedNetworkImage(
+                                                        imageUrl:
+                                                            menuItemProductsRecord
+                                                                .thumb,
                                                         width: 80.0,
                                                         height: 80.0,
                                                         fit: BoxFit.cover,
