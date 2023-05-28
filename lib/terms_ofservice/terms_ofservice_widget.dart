@@ -90,7 +90,7 @@ class _TermsOfserviceWidgetState extends State<TermsOfserviceWidget> {
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily:
                                 FlutterFlowTheme.of(context).bodyMediumFamily,
-                            fontSize: 13.0,
+                            fontSize: 16.0,
                             useGoogleFonts: GoogleFonts.asMap().containsKey(
                                 FlutterFlowTheme.of(context).bodyMediumFamily),
                           ),

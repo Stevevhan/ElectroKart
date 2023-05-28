@@ -393,28 +393,7 @@ class _SearchpageWidgetState extends State<SearchpageWidget> {
                                               child: Container(
                                                 width: double.infinity,
                                                 decoration: BoxDecoration(
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      blurRadius: 3.0,
-                                                      color: Color(0x411D2429),
-                                                      offset: Offset(0.0, 1.0),
-                                                    )
-                                                  ],
-                                                  gradient: LinearGradient(
-                                                    colors: [
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primary,
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .secondary
-                                                    ],
-                                                    stops: [0.0, 1.0],
-                                                    begin: AlignmentDirectional(
-                                                        0.0, -1.0),
-                                                    end: AlignmentDirectional(
-                                                        0, 1.0),
-                                                  ),
+                                                  color: Color(0x1E95A1AC),
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           8.0),
@@ -439,7 +418,7 @@ class _SearchpageWidgetState extends State<SearchpageWidget> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(
-                                                                      6.0),
+                                                                      10.0),
                                                           child: Image.network(
                                                             listViewProductsRecord
                                                                 .thumb,
@@ -518,7 +497,7 @@ class _SearchpageWidgetState extends State<SearchpageWidget> {
                                                                         fontFamily:
                                                                             FlutterFlowTheme.of(context).bodySmallFamily,
                                                                         color: FlutterFlowTheme.of(context)
-                                                                            .secondaryBackground,
+                                                                            .primaryText,
                                                                         useGoogleFonts:
                                                                             GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
                                                                       ),
@@ -546,7 +525,7 @@ class _SearchpageWidgetState extends State<SearchpageWidget> {
                                                                         fontFamily:
                                                                             FlutterFlowTheme.of(context).bodySmallFamily,
                                                                         color: FlutterFlowTheme.of(context)
-                                                                            .secondaryBackground,
+                                                                            .primaryText,
                                                                         useGoogleFonts:
                                                                             GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
                                                                       ),
@@ -697,26 +676,7 @@ class _SearchpageWidgetState extends State<SearchpageWidget> {
                                           child: Container(
                                             width: double.infinity,
                                             decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  blurRadius: 3.0,
-                                                  color: Color(0x411D2429),
-                                                  offset: Offset(0.0, 1.0),
-                                                )
-                                              ],
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondary
-                                                ],
-                                                stops: [0.0, 1.0],
-                                                begin: AlignmentDirectional(
-                                                    0.0, -1.0),
-                                                end: AlignmentDirectional(
-                                                    0, 1.0),
-                                              ),
+                                              color: Color(0x1E95A1AC),
                                               borderRadius:
                                                   BorderRadius.circular(8.0),
                                             ),
@@ -811,7 +771,7 @@ class _SearchpageWidgetState extends State<SearchpageWidget> {
                                                                             .bodySmallFamily,
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .secondaryBackground,
+                                                                        .primaryText,
                                                                     useGoogleFonts: GoogleFonts
                                                                             .asMap()
                                                                         .containsKey(
@@ -845,7 +805,7 @@ class _SearchpageWidgetState extends State<SearchpageWidget> {
                                                                             .bodySmallFamily,
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .secondaryBackground,
+                                                                        .primaryText,
                                                                     useGoogleFonts: GoogleFonts
                                                                             .asMap()
                                                                         .containsKey(

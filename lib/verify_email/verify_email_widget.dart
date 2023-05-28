@@ -86,10 +86,22 @@ class _VerifyEmailWidgetState extends State<VerifyEmailWidget> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                    child: Text(
-                      'A link will be sent to your Email.\nSelect it to verify your email address',
-                      style: FlutterFlowTheme.of(context).bodyMedium,
+                        EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                    child: Container(
+                      width: 289.0,
+                      height: 100.0,
+                      decoration: BoxDecoration(
+                        color: Color(0x1E95A1AC),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            10.0, 20.0, 0.0, 0.0),
+                        child: Text(
+                          'A link will be sent to your Email.\nSelect it to verify your email address',
+                          style: FlutterFlowTheme.of(context).bodyMedium,
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -136,6 +148,7 @@ class _VerifyEmailWidgetState extends State<VerifyEmailWidget> {
                     color: Colors.transparent,
                     width: 1.0,
                   ),
+                  borderRadius: BorderRadius.circular(20.0),
                 ),
               ),
             ),

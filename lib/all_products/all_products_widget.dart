@@ -63,7 +63,7 @@ class _AllProductsWidgetState extends State<AllProductsWidget> {
                 kTransitionInfoKey: TransitionInfo(
                   hasTransition: true,
                   transitionType: PageTransitionType.fade,
-                  duration: Duration(milliseconds: 10),
+                  duration: Duration(milliseconds: 40),
                 ),
               },
             );
@@ -75,7 +75,12 @@ class _AllProductsWidgetState extends State<AllProductsWidget> {
             children: [
               Text(
                 'Refresh',
-                style: FlutterFlowTheme.of(context).bodyMedium,
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                      color: Colors.white,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          FlutterFlowTheme.of(context).bodyMediumFamily),
+                    ),
               ),
               Icon(
                 Icons.refresh,
@@ -223,7 +228,7 @@ class _AllProductsWidgetState extends State<AllProductsWidget> {
                         onChanged: (val) =>
                             setState(() => _model.dropDownValue1 = val),
                         width: 140.0,
-                        height: 50.0,
+                        height: 39.0,
                         textStyle: FlutterFlowTheme.of(context)
                             .bodyMedium
                             .override(
@@ -262,7 +267,7 @@ class _AllProductsWidgetState extends State<AllProductsWidget> {
                         onChanged: (val) =>
                             setState(() => _model.dropDownValue2 = val),
                         width: 140.0,
-                        height: 50.0,
+                        height: 39.0,
                         textStyle: FlutterFlowTheme.of(context)
                             .bodyMedium
                             .override(
@@ -293,7 +298,7 @@ class _AllProductsWidgetState extends State<AllProductsWidget> {
                       EdgeInsetsDirectional.fromSTEB(16.0, 15.0, 16.0, 0.0),
                   child: FlutterFlowAdBanner(
                     width: MediaQuery.of(context).size.width * 1.0,
-                    height: 50.0,
+                    height: 46.0,
                     showsTestAd: false,
                     androidAdUnitID: 'ca-app-pub-4840032926949336/2436788931',
                   ),
@@ -306,7 +311,7 @@ class _AllProductsWidgetState extends State<AllProductsWidget> {
                       children: [
                         Container(
                           width: MediaQuery.of(context).size.width * 1.0,
-                          height: MediaQuery.of(context).size.height * 0.7,
+                          height: MediaQuery.of(context).size.height * 0.65,
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
@@ -491,28 +496,9 @@ class _AllProductsWidgetState extends State<AllProductsWidget> {
                                             child: Container(
                                               width: double.infinity,
                                               decoration: BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    blurRadius: 3.0,
-                                                    color: Color(0x411D2429),
-                                                    offset: Offset(0.0, 1.0),
-                                                  )
-                                                ],
-                                                gradient: LinearGradient(
-                                                  colors: [
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondary
-                                                  ],
-                                                  stops: [0.0, 1.0],
-                                                  begin: AlignmentDirectional(
-                                                      0.0, -1.0),
-                                                  end: AlignmentDirectional(
-                                                      0, 1.0),
-                                                ),
+                                                color: Color(0x1E95A1AC),
                                                 borderRadius:
-                                                    BorderRadius.circular(8.0),
+                                                    BorderRadius.circular(20.0),
                                               ),
                                               child: Padding(
                                                 padding: EdgeInsetsDirectional
@@ -540,7 +526,7 @@ class _AllProductsWidgetState extends State<AllProductsWidget> {
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(
-                                                                      6.0),
+                                                                      10.0),
                                                           child: Image.network(
                                                             listViewProductsRecord
                                                                 .thumb,
@@ -621,7 +607,7 @@ class _AllProductsWidgetState extends State<AllProductsWidget> {
                                                                               .bodySmallFamily,
                                                                       color: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .secondaryBackground,
+                                                                          .primaryText,
                                                                       useGoogleFonts: GoogleFonts
                                                                               .asMap()
                                                                           .containsKey(
@@ -653,7 +639,7 @@ class _AllProductsWidgetState extends State<AllProductsWidget> {
                                                                               .bodySmallFamily,
                                                                       color: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .secondaryBackground,
+                                                                          .primaryText,
                                                                       useGoogleFonts: GoogleFonts
                                                                               .asMap()
                                                                           .containsKey(

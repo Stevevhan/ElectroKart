@@ -179,27 +179,9 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                                       child: Container(
                                         width: double.infinity,
                                         decoration: BoxDecoration(
-                                          boxShadow: [
-                                            BoxShadow(
-                                              blurRadius: 3.0,
-                                              color: Color(0x411D2429),
-                                              offset: Offset(0.0, 1.0),
-                                            )
-                                          ],
-                                          gradient: LinearGradient(
-                                            colors: [
-                                              FlutterFlowTheme.of(context)
-                                                  .primary,
-                                              FlutterFlowTheme.of(context)
-                                                  .secondary
-                                            ],
-                                            stops: [0.0, 1.0],
-                                            begin:
-                                                AlignmentDirectional(0.0, -1.0),
-                                            end: AlignmentDirectional(0, 1.0),
-                                          ),
+                                          color: Color(0x1E95A1AC),
                                           borderRadius:
-                                              BorderRadius.circular(8.0),
+                                              BorderRadius.circular(20.0),
                                         ),
                                         child: Padding(
                                           padding:
@@ -219,7 +201,7 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                                                     child: ClipRRect(
                                                       borderRadius:
                                                           BorderRadius.circular(
-                                                              6.0),
+                                                              20.0),
                                                       child: CachedNetworkImage(
                                                         imageUrl:
                                                             menuItemProductsRecord
@@ -283,7 +265,7 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                                                         ),
                                                         borderRadius:
                                                             BorderRadius
-                                                                .circular(8.0),
+                                                                .circular(20.0),
                                                       ),
                                                     ),
                                                   if (menuItemProductsRecord
@@ -340,7 +322,7 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                                                         ),
                                                         borderRadius:
                                                             BorderRadius
-                                                                .circular(8.0),
+                                                                .circular(20.0),
                                                       ),
                                                     ),
                                                 ],
@@ -395,7 +377,7 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                                                                     .bodySmallFamily,
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .secondaryBackground,
+                                                                    .primaryText,
                                                                 useGoogleFonts: GoogleFonts
                                                                         .asMap()
                                                                     .containsKey(
@@ -428,7 +410,7 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                                                                     .bodySmallFamily,
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .secondaryBackground,
+                                                                    .primaryText,
                                                                 useGoogleFonts: GoogleFonts
                                                                         .asMap()
                                                                     .containsKey(

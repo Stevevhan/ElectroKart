@@ -661,6 +661,7 @@ class _TestSignUpWidgetState extends State<TestSignUpWidget> {
                             color: Colors.transparent,
                             width: 1.0,
                           ),
+                          borderRadius: BorderRadius.circular(20.0),
                           disabledColor: FlutterFlowTheme.of(context).gray600,
                         ),
                       ),

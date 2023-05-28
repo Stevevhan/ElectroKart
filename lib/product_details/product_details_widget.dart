@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_toggle_icon.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -100,36 +101,36 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
     'iconButtonOnPageLoadAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
       effects: [
-        FadeEffect(
+        ScaleEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
+          begin: Offset(1.0, 1.0),
+          end: Offset(1.0, 1.0),
         ),
       ],
     ),
     'iconButtonOnPageLoadAnimation2': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
       effects: [
-        FadeEffect(
+        ScaleEffect(
           curve: Curves.easeInOut,
-          delay: 0.ms,
+          delay: 10.ms,
           duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
+          begin: Offset(1.0, 1.0),
+          end: Offset(1.0, 1.0),
         ),
       ],
     ),
     'iconButtonOnPageLoadAnimation3': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
       effects: [
-        FadeEffect(
+        ScaleEffect(
           curve: Curves.easeInOut,
-          delay: 0.ms,
+          delay: 20.ms,
           duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
+          begin: Offset(1.0, 1.0),
+          end: Offset(1.0, 1.0),
         ),
       ],
     ),
@@ -203,8 +204,8 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 40.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            0.0, 0.0, 120.0, 0.0),
                         child: Text(
                           'Item',
                           style: FlutterFlowTheme.of(context)
@@ -219,103 +220,138 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                               ),
                         ),
                       ),
-                      FlutterFlowIconButton(
-                        borderColor: Colors.transparent,
-                        borderRadius: 30.0,
-                        borderWidth: 1.0,
-                        buttonSize: 60.0,
-                        icon: Icon(
-                          Icons.search,
-                          color: Color(0xFFF5BC2E),
-                          size: 25.0,
-                        ),
-                        onPressed: () async {
-                          context.pushNamed(
-                            'searchpage',
-                            extra: <String, dynamic>{
-                              kTransitionInfoKey: TransitionInfo(
-                                hasTransition: true,
-                                transitionType: PageTransitionType.fade,
-                              ),
-                            },
-                          );
-                        },
-                      ).animateOnPageLoad(
-                          animationsMap['iconButtonOnPageLoadAnimation1']!),
-                      Builder(
-                        builder: (context) => FlutterFlowIconButton(
-                          borderColor: Colors.transparent,
-                          borderRadius: 30.0,
-                          borderWidth: 1.0,
-                          buttonSize: 60.0,
-                          icon: Icon(
-                            Icons.ios_share,
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            size: 25.0,
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                        child: Container(
+                          width: 43.0,
+                          height: 100.0,
+                          decoration: BoxDecoration(
+                            color: Color(0x1E95A1AC),
+                            borderRadius: BorderRadius.circular(150.0),
                           ),
-                          onPressed: () async {
-                            await Share.share(
-                              'electrokart://electrokart.com${GoRouter.of(context).location}',
-                              sharePositionOrigin:
-                                  getWidgetBoundingBox(context),
-                            );
-                          },
-                        ).animateOnPageLoad(
-                            animationsMap['iconButtonOnPageLoadAnimation2']!),
-                      ),
-                      if (productDetailsProductsRecord.sellerid !=
-                          currentUserReference)
-                        InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onLongPress: () async {
-                            context.pushNamed(
-                              'cart_page',
-                              extra: <String, dynamic>{
-                                kTransitionInfoKey: TransitionInfo(
-                                  hasTransition: true,
-                                  transitionType: PageTransitionType.fade,
-                                  duration: Duration(milliseconds: 0),
-                                ),
-                              },
-                            );
-                          },
                           child: FlutterFlowIconButton(
                             borderColor: Colors.transparent,
                             borderRadius: 30.0,
                             borderWidth: 1.0,
                             buttonSize: 60.0,
                             icon: Icon(
-                              Icons.offline_bolt_outlined,
-                              color: FlutterFlowTheme.of(context).primaryText,
+                              Icons.search,
+                              color: Color(0xFFF5BC2E),
                               size: 25.0,
                             ),
                             onPressed: () async {
-                              FFAppState().update(() {
-                                FFAppState().addToCart(widget.productfid!);
-                              });
-                              await Future.delayed(
-                                  const Duration(milliseconds: 1000));
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    'Added to Favorites',
-                                    style: TextStyle(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                    ),
+                              context.pushNamed(
+                                'searchpage',
+                                extra: <String, dynamic>{
+                                  kTransitionInfoKey: TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
                                   ),
-                                  duration: Duration(milliseconds: 3000),
-                                  backgroundColor: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                ),
+                                },
                               );
                             },
+                          ).animateOnPageLoad(
+                              animationsMap['iconButtonOnPageLoadAnimation1']!),
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                        child: Container(
+                          width: 43.0,
+                          height: 100.0,
+                          decoration: BoxDecoration(
+                            color: Color(0x1E95A1AC),
+                            borderRadius: BorderRadius.circular(150.0),
                           ),
-                        ).animateOnPageLoad(
-                            animationsMap['iconButtonOnPageLoadAnimation3']!),
+                          child: Builder(
+                            builder: (context) => FlutterFlowIconButton(
+                              borderColor: Colors.transparent,
+                              borderRadius: 30.0,
+                              borderWidth: 1.0,
+                              buttonSize: 60.0,
+                              icon: Icon(
+                                Icons.share_rounded,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                size: 25.0,
+                              ),
+                              onPressed: () async {
+                                await Share.share(
+                                  'electrokart://electrokart.com${GoRouter.of(context).location}',
+                                  sharePositionOrigin:
+                                      getWidgetBoundingBox(context),
+                                );
+                              },
+                            ).animateOnPageLoad(animationsMap[
+                                'iconButtonOnPageLoadAnimation2']!),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: 43.0,
+                        height: 100.0,
+                        decoration: BoxDecoration(
+                          color: Color(0x1E95A1AC),
+                          borderRadius: BorderRadius.circular(150.0),
+                        ),
+                        child: Visibility(
+                          visible: productDetailsProductsRecord.sellerid !=
+                              currentUserReference,
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onLongPress: () async {
+                              context.pushNamed(
+                                'cart_page',
+                                extra: <String, dynamic>{
+                                  kTransitionInfoKey: TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                    duration: Duration(milliseconds: 0),
+                                  ),
+                                },
+                              );
+                            },
+                            child: FlutterFlowIconButton(
+                              borderColor: Colors.transparent,
+                              borderRadius: 30.0,
+                              borderWidth: 1.0,
+                              buttonSize: 60.0,
+                              icon: Icon(
+                                Icons.offline_bolt_outlined,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                size: 25.0,
+                              ),
+                              onPressed: () async {
+                                FFAppState().update(() {
+                                  FFAppState().addToCart(widget.productfid!);
+                                });
+                                await Future.delayed(
+                                    const Duration(milliseconds: 1000));
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Added to Favorites',
+                                      style: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                      ),
+                                    ),
+                                    duration: Duration(milliseconds: 3000),
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context)
+                                            .primaryBackground,
+                                  ),
+                                );
+                              },
+                            ),
+                          ).animateOnPageLoad(
+                              animationsMap['iconButtonOnPageLoadAnimation3']!),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -380,7 +416,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                       transitionOnUserGestures: true,
                                       child: ClipRRect(
                                         borderRadius:
-                                            BorderRadius.circular(16.0),
+                                            BorderRadius.circular(20.0),
                                         child: CachedNetworkImage(
                                           imageUrl: productDetailsProductsRecord
                                               .thumb,
@@ -509,16 +545,16 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                                         .contains(
                                                             currentUserReference),
                                                     onIcon: Icon(
-                                                      Icons.thumb_up,
-                                                      color: Color(0xFF11CD01),
-                                                      size: 25.0,
-                                                    ),
-                                                    offIcon: Icon(
-                                                      Icons.thumb_up_outlined,
+                                                      Icons.favorite_sharp,
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .warning,
+                                                              .alternate,
+                                                      size: 25.0,
+                                                    ),
+                                                    offIcon: Icon(
+                                                      Icons.favorite_border,
+                                                      color: Colors.white,
                                                       size: 20.0,
                                                     ),
                                                   ).animateOnPageLoad(animationsMap[
@@ -620,7 +656,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                                   width: 2.0,
                                                 ),
                                                 borderRadius:
-                                                    BorderRadius.circular(8.0),
+                                                    BorderRadius.circular(20.0),
                                               ),
                                             ),
                                           ),
@@ -676,7 +712,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                                   width: 2.0,
                                                 ),
                                                 borderRadius:
-                                                    BorderRadius.circular(8.0),
+                                                    BorderRadius.circular(20.0),
                                               ),
                                             ),
                                           ),
@@ -813,14 +849,14 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                               height: 143.0,
                               decoration: BoxDecoration(
                                 color: Color(0x1E95A1AC),
-                                borderRadius: BorderRadius.circular(10.0),
+                                borderRadius: BorderRadius.circular(20.0),
                               ),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        10.0, 5.0, 0.0, 0.0),
+                                        10.0, 10.0, 0.0, 0.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
@@ -1055,10 +1091,10 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                             children: [
                               Container(
                                 width: 340.7,
-                                height: 160.0,
+                                height: 170.0,
                                 decoration: BoxDecoration(
                                   color: Color(0x1E95A1AC),
-                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
@@ -1070,114 +1106,61 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                            MainAxisAlignment.start,
                                         children: [
-                                          StreamBuilder<UsersRecord>(
-                                            stream: UsersRecord.getDocument(
-                                                productDetailsProductsRecord
-                                                    .sellerid!),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 30.0,
-                                                    height: 30.0,
-                                                    child: SpinKitDualRing(
-                                                      color: Color(0xFFFFCA00),
-                                                      size: 30.0,
-                                                    ),
-                                                  ),
-                                                );
-                                              }
-                                              final textUsersRecord =
-                                                  snapshot.data!;
-                                              return GradientText(
-                                                'Seller: ${textUsersRecord.displayName}',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'Montserrat',
-                                                          fontSize: 16.0,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily),
-                                                        ),
-                                                colors: [
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondary
-                                                ],
-                                                gradientDirection:
-                                                    GradientDirection.ltr,
-                                                gradientType:
-                                                    GradientType.linear,
-                                              );
-                                            },
-                                          ),
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 10.0, 0.0),
-                                            child: FFButtonWidget(
-                                              onPressed: () async {
-                                                context.pushNamed(
-                                                  'SellerStore',
-                                                  queryParams: {
-                                                    'sellerstoreid':
-                                                        serializeParam(
-                                                      productDetailsProductsRecord
-                                                          .reference,
-                                                      ParamType
-                                                          .DocumentReference,
+                                            child: StreamBuilder<UsersRecord>(
+                                              stream: UsersRecord.getDocument(
+                                                  productDetailsProductsRecord
+                                                      .sellerid!),
+                                              builder: (context, snapshot) {
+                                                // Customize what your widget looks like when it's loading.
+                                                if (!snapshot.hasData) {
+                                                  return Center(
+                                                    child: SizedBox(
+                                                      width: 30.0,
+                                                      height: 30.0,
+                                                      child: SpinKitDualRing(
+                                                        color:
+                                                            Color(0xFFFFCA00),
+                                                        size: 30.0,
+                                                      ),
                                                     ),
-                                                  }.withoutNulls,
-                                                );
-                                              },
-                                              text: 'Visit Store',
-                                              options: FFButtonOptions(
-                                                width: 115.0,
-                                                height: 21.0,
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        24.0, 0.0, 24.0, 0.0),
-                                                iconPadding:
-                                                    EdgeInsetsDirectional
-                                                        .fromSTEB(
-                                                            0.0, 0.0, 0.0, 0.0),
-                                                color:
+                                                  );
+                                                }
+                                                final textUsersRecord =
+                                                    snapshot.data!;
+                                                return GradientText(
+                                                  'Seller: ${textUsersRecord.displayName}',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Montserrat',
+                                                        fontSize: 16.0,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMediumFamily),
+                                                      ),
+                                                  colors: [
                                                     FlutterFlowTheme.of(context)
                                                         .primary,
-                                                textStyle:
                                                     FlutterFlowTheme.of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmallFamily,
-                                                          color: Colors.white,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .titleSmallFamily),
-                                                        ),
-                                                elevation: 3.0,
-                                                borderSide: BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                              ),
+                                                        .secondary
+                                                  ],
+                                                  gradientDirection:
+                                                      GradientDirection.ltr,
+                                                  gradientType:
+                                                      GradientType.linear,
+                                                );
+                                              },
                                             ),
                                           ),
                                         ],
@@ -1413,6 +1396,56 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                             children: [
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 10.0, 0.0),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    context.pushNamed(
+                                      'SellerStore',
+                                      queryParams: {
+                                        'sellerstoreid': serializeParam(
+                                          productDetailsProductsRecord
+                                              .reference,
+                                          ParamType.DocumentReference,
+                                        ),
+                                      }.withoutNulls,
+                                    );
+                                  },
+                                  text: 'Visit Store',
+                                  icon: Icon(
+                                    Icons.shopping_bag,
+                                    size: 15.0,
+                                  ),
+                                  options: FFButtonOptions(
+                                    width: 146.0,
+                                    height: 40.0,
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        24.0, 0.0, 24.0, 0.0),
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmallFamily,
+                                          color: Colors.white,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmallFamily),
+                                        ),
+                                    elevation: 3.0,
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     15.0, 0.0, 0.0, 0.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
@@ -1458,7 +1491,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                       color: Colors.transparent,
                                       width: 1.0,
                                     ),
-                                    borderRadius: BorderRadius.circular(8.0),
+                                    borderRadius: BorderRadius.circular(20.0),
                                   ),
                                 ),
                               ),
@@ -1641,42 +1674,12 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                                                     .infinity,
                                                                 decoration:
                                                                     BoxDecoration(
-                                                                  boxShadow: [
-                                                                    BoxShadow(
-                                                                      blurRadius:
-                                                                          3.0,
-                                                                      color: Color(
-                                                                          0x411D2429),
-                                                                      offset: Offset(
-                                                                          0.0,
-                                                                          1.0),
-                                                                    )
-                                                                  ],
-                                                                  gradient:
-                                                                      LinearGradient(
-                                                                    colors: [
-                                                                      FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
-                                                                      FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .secondary
-                                                                    ],
-                                                                    stops: [
-                                                                      0.0,
-                                                                      1.0
-                                                                    ],
-                                                                    begin:
-                                                                        AlignmentDirectional(
-                                                                            0.0,
-                                                                            -1.0),
-                                                                    end: AlignmentDirectional(
-                                                                        0, 1.0),
-                                                                  ),
+                                                                  color: Color(
+                                                                      0x1E95A1AC),
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
-                                                                              8.0),
+                                                                              20.0),
                                                                 ),
                                                                 child: Padding(
                                                                   padding: EdgeInsetsDirectional
@@ -1699,10 +1702,11 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                                                         child:
                                                                             ClipRRect(
                                                                           borderRadius:
-                                                                              BorderRadius.circular(6.0),
+                                                                              BorderRadius.circular(20.0),
                                                                           child:
-                                                                              Image.network(
-                                                                            listViewProductsRecord.thumb,
+                                                                              CachedNetworkImage(
+                                                                            imageUrl:
+                                                                                listViewProductsRecord.thumb,
                                                                             width:
                                                                                 80.0,
                                                                             height:
@@ -1748,7 +1752,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                                                                   textAlign: TextAlign.start,
                                                                                   style: FlutterFlowTheme.of(context).bodySmall.override(
                                                                                         fontFamily: FlutterFlowTheme.of(context).bodySmallFamily,
-                                                                                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                        color: FlutterFlowTheme.of(context).primaryText,
                                                                                         useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
                                                                                       ),
                                                                                 ),
@@ -1760,7 +1764,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                                                                   textAlign: TextAlign.start,
                                                                                   style: FlutterFlowTheme.of(context).bodySmall.override(
                                                                                         fontFamily: FlutterFlowTheme.of(context).bodySmallFamily,
-                                                                                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                        color: FlutterFlowTheme.of(context).primaryText,
                                                                                         useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
                                                                                       ),
                                                                                 ),
@@ -2040,44 +2044,12 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                                                 double.infinity,
                                                             decoration:
                                                                 BoxDecoration(
-                                                              boxShadow: [
-                                                                BoxShadow(
-                                                                  blurRadius:
-                                                                      3.0,
-                                                                  color: Color(
-                                                                      0x411D2429),
-                                                                  offset:
-                                                                      Offset(
-                                                                          0.0,
-                                                                          1.0),
-                                                                )
-                                                              ],
-                                                              gradient:
-                                                                  LinearGradient(
-                                                                colors: [
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primary,
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondary
-                                                                ],
-                                                                stops: [
-                                                                  0.0,
-                                                                  1.0
-                                                                ],
-                                                                begin:
-                                                                    AlignmentDirectional(
-                                                                        0.0,
-                                                                        -1.0),
-                                                                end:
-                                                                    AlignmentDirectional(
-                                                                        0, 1.0),
-                                                              ),
+                                                              color: Color(
+                                                                  0x1E95A1AC),
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
-                                                                          8.0),
+                                                                          20.0),
                                                             ),
                                                             child: Padding(
                                                               padding:
@@ -2103,11 +2075,11 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                                                         ClipRRect(
                                                                       borderRadius:
                                                                           BorderRadius.circular(
-                                                                              6.0),
-                                                                      child: Image
-                                                                          .network(
-                                                                        listViewProductsRecord
-                                                                            .thumb,
+                                                                              20.0),
+                                                                      child:
+                                                                          CachedNetworkImage(
+                                                                        imageUrl:
+                                                                            listViewProductsRecord.thumb,
                                                                         width:
                                                                             80.0,
                                                                         height:
@@ -2159,7 +2131,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                                                               textAlign: TextAlign.start,
                                                                               style: FlutterFlowTheme.of(context).bodySmall.override(
                                                                                     fontFamily: FlutterFlowTheme.of(context).bodySmallFamily,
-                                                                                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                    color: FlutterFlowTheme.of(context).primaryText,
                                                                                     useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
                                                                                   ),
                                                                             ),
@@ -2176,7 +2148,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                                                               textAlign: TextAlign.start,
                                                                               style: FlutterFlowTheme.of(context).bodySmall.override(
                                                                                     fontFamily: FlutterFlowTheme.of(context).bodySmallFamily,
-                                                                                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                    color: FlutterFlowTheme.of(context).primaryText,
                                                                                     useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodySmallFamily),
                                                                                   ),
                                                                             ),
@@ -2319,8 +2291,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                       .override(
                                         fontFamily: FlutterFlowTheme.of(context)
                                             .bodyMediumFamily,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
+                                        color: Colors.white,
                                         fontSize: 24.0,
                                         useGoogleFonts: GoogleFonts.asMap()
                                             .containsKey(
@@ -2339,8 +2310,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                       .override(
                                         fontFamily: FlutterFlowTheme.of(context)
                                             .displaySmallFamily,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
+                                        color: Colors.white,
                                         useGoogleFonts: GoogleFonts.asMap()
                                             .containsKey(
                                                 FlutterFlowTheme.of(context)
@@ -2371,16 +2341,24 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                         lastMessage:
                                             'Re: ${productDetailsProductsRecord.name}',
                                         lastMessageTime: getCurrentTimestamp,
-                                        createdAt: getCurrentTimestamp,
+                                        expiredAt: getCurrentTimestamp,
                                       ),
                                       'users': functions.createChatUserList(
                                           productDetailsProductsRecord
                                               .sellerid!,
                                           currentUserReference!),
                                     };
-                                    await ChatsRecord.collection
-                                        .doc()
+                                    var chatsRecordReference =
+                                        ChatsRecord.collection.doc();
+                                    await chatsRecordReference
                                         .set(chatsCreateData);
+                                    _model.createdDocumentId =
+                                        ChatsRecord.getDocumentFromData(
+                                            chatsCreateData,
+                                            chatsRecordReference);
+                                    await actions.updateExpiredAt(
+                                      _model.createdDocumentId!.reference.id,
+                                    );
 
                                     context.pushNamed(
                                       'all_chats',
@@ -2406,6 +2384,8 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget>
                                       initialPageName: 'all_chats',
                                       parameterData: {},
                                     );
+
+                                    setState(() {});
                                   },
                             text: 'Chat Now',
                             icon: Icon(

@@ -157,28 +157,28 @@ class _TestLoginWidgetState extends State<TestLoginWidget>
                                     color: FlutterFlowTheme.of(context).primary,
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(8.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(8.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(8.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(8.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 filled: true,
                                 fillColor: Color(0xE6090F13),
@@ -245,28 +245,28 @@ class _TestLoginWidgetState extends State<TestLoginWidget>
                                           FlutterFlowTheme.of(context).primary,
                                       width: 1.0,
                                     ),
-                                    borderRadius: BorderRadius.circular(8.0),
+                                    borderRadius: BorderRadius.circular(20.0),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
-                                    borderRadius: BorderRadius.circular(8.0),
+                                    borderRadius: BorderRadius.circular(20.0),
                                   ),
                                   errorBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
-                                    borderRadius: BorderRadius.circular(8.0),
+                                    borderRadius: BorderRadius.circular(20.0),
                                   ),
                                   focusedErrorBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
-                                    borderRadius: BorderRadius.circular(8.0),
+                                    borderRadius: BorderRadius.circular(20.0),
                                   ),
                                   filled: true,
                                   fillColor: Color(0xE3090F13),
@@ -351,6 +351,7 @@ class _TestLoginWidgetState extends State<TestLoginWidget>
                                       color: Colors.transparent,
                                       width: 1.0,
                                     ),
+                                    borderRadius: BorderRadius.circular(20.0),
                                   ),
                                 ),
                               ],
@@ -394,7 +395,7 @@ class _TestLoginWidgetState extends State<TestLoginWidget>
                                       decoration: BoxDecoration(
                                         color: Color(0xFFFFCA00),
                                         borderRadius:
-                                            BorderRadius.circular(10.0),
+                                            BorderRadius.circular(20.0),
                                       ),
                                       alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Padding(
@@ -521,6 +522,7 @@ class _TestLoginWidgetState extends State<TestLoginWidget>
                               color: Colors.transparent,
                               width: 1.0,
                             ),
+                            borderRadius: BorderRadius.circular(20.0),
                           ),
                         ),
                       ],

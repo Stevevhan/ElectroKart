@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'sellersdb_model.dart';
 export 'sellersdb_model.dart';
 
@@ -58,7 +57,12 @@ class _SellersdbWidgetState extends State<SellersdbWidget> {
             children: [
               Text(
                 'New Ad',
-                style: FlutterFlowTheme.of(context).bodyMedium,
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                      color: Colors.white,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          FlutterFlowTheme.of(context).bodyMediumFamily),
+                    ),
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
@@ -100,39 +104,39 @@ class _SellersdbWidgetState extends State<SellersdbWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(16.0, 20.0, 16.0, 0.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GradientText(
-                        'Manage your Ads here',
-                        style: FlutterFlowTheme.of(context).bodySmall.override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).bodySmallFamily,
-                              color: Color(0xFFFFCA00),
-                              fontSize: 20.0,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context).bodySmallFamily),
-                            ),
-                        colors: [
-                          FlutterFlowTheme.of(context).primary,
-                          FlutterFlowTheme.of(context).secondary
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                  child: Container(
+                    width: 323.0,
+                    height: 46.0,
+                    decoration: BoxDecoration(
+                      color: Color(0x1E95A1AC),
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Manage your Ads here',
+                            style: FlutterFlowTheme.of(context)
+                                .bodySmall
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .bodySmallFamily,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  fontSize: 20.0,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .bodySmallFamily),
+                                ),
+                          ),
                         ],
-                        gradientDirection: GradientDirection.ltr,
-                        gradientType: GradientType.linear,
                       ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(16.0, 10.0, 16.0, 0.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [],
+                    ),
                   ),
                 ),
                 SingleChildScrollView(
@@ -278,27 +282,9 @@ class _SellersdbWidgetState extends State<SellersdbWidget> {
                                         child: Container(
                                           width: double.infinity,
                                           decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                blurRadius: 3.0,
-                                                color: Color(0x411D2429),
-                                                offset: Offset(0.0, 1.0),
-                                              )
-                                            ],
-                                            gradient: LinearGradient(
-                                              colors: [
-                                                FlutterFlowTheme.of(context)
-                                                    .primary,
-                                                FlutterFlowTheme.of(context)
-                                                    .secondary
-                                              ],
-                                              stops: [0.0, 1.0],
-                                              begin: AlignmentDirectional(
-                                                  0.0, -1.0),
-                                              end: AlignmentDirectional(0, 1.0),
-                                            ),
+                                            color: Color(0x1E95A1AC),
                                             borderRadius:
-                                                BorderRadius.circular(8.0),
+                                                BorderRadius.circular(20.0),
                                           ),
                                           child: Padding(
                                             padding:
@@ -314,7 +300,7 @@ class _SellersdbWidgetState extends State<SellersdbWidget> {
                                                   child: ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            6.0),
+                                                            10.0),
                                                     child: CachedNetworkImage(
                                                       imageUrl:
                                                           menuItemProductsRecord
@@ -380,7 +366,7 @@ class _SellersdbWidgetState extends State<SellersdbWidget> {
                                                                       .bodySmallFamily,
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .secondaryBackground,
+                                                                      .primaryText,
                                                                   useGoogleFonts: GoogleFonts
                                                                           .asMap()
                                                                       .containsKey(
@@ -408,7 +394,7 @@ class _SellersdbWidgetState extends State<SellersdbWidget> {
                                                                             .bodyMediumFamily,
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .secondaryBackground,
+                                                                        .primaryText,
                                                                     useGoogleFonts: GoogleFonts
                                                                             .asMap()
                                                                         .containsKey(

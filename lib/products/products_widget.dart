@@ -98,7 +98,7 @@ class _ProductsWidgetState extends State<ProductsWidget>
                   kTransitionInfoKey: TransitionInfo(
                     hasTransition: true,
                     transitionType: PageTransitionType.fade,
-                    duration: Duration(milliseconds: 10),
+                    duration: Duration(milliseconds: 40),
                   ),
                 },
               );
@@ -110,7 +110,13 @@ class _ProductsWidgetState extends State<ProductsWidget>
               children: [
                 Text(
                   'Refresh',
-                  style: FlutterFlowTheme.of(context).bodyMedium,
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily:
+                            FlutterFlowTheme.of(context).bodyMediumFamily,
+                        color: Colors.white,
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            FlutterFlowTheme.of(context).bodyMediumFamily),
+                      ),
                 ),
                 Icon(
                   Icons.refresh,
@@ -124,7 +130,7 @@ class _ProductsWidgetState extends State<ProductsWidget>
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             automaticallyImplyLeading: false,
             title: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 20.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 80.0, 20.0),
               child: InkWell(
                 splashColor: Colors.transparent,
                 focusColor: Colors.transparent,
@@ -145,8 +151,8 @@ class _ProductsWidgetState extends State<ProductsWidget>
                 child: Image.asset(
                   'assets/images/LogoMakr-6UzfuU.png',
                   width: 254.7,
-                  height: 65.2,
-                  fit: BoxFit.scaleDown,
+                  height: 56.0,
+                  fit: BoxFit.contain,
                 ),
               ),
             ),
@@ -321,7 +327,7 @@ class _ProductsWidgetState extends State<ProductsWidget>
                             onChanged: (val) =>
                                 setState(() => _model.dropDownValue1 = val),
                             width: 140.0,
-                            height: 50.0,
+                            height: 39.0,
                             textStyle: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
@@ -362,7 +368,7 @@ class _ProductsWidgetState extends State<ProductsWidget>
                           onChanged: (val) =>
                               setState(() => _model.dropDownValue2 = val),
                           width: 140.0,
-                          height: 50.0,
+                          height: 39.0,
                           textStyle: FlutterFlowTheme.of(context)
                               .bodyMedium
                               .override(
@@ -395,52 +401,67 @@ class _ProductsWidgetState extends State<ProductsWidget>
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 2.0, 0.0),
-                          child: GradientText(
-                            'Welcome:',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyMediumFamily,
-                                  fontWeight: FontWeight.w800,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .bodyMediumFamily),
-                                ),
-                            colors: [
-                              FlutterFlowTheme.of(context).primary,
-                              FlutterFlowTheme.of(context).secondary
-                            ],
-                            gradientDirection: GradientDirection.ltr,
-                            gradientType: GradientType.linear,
+                        Container(
+                          width: 221.0,
+                          height: 42.0,
+                          decoration: BoxDecoration(
+                            color: Color(0x1E95A1AC),
+                            borderRadius: BorderRadius.circular(20.0),
                           ),
-                        ),
-                        AuthUserStreamWidget(
-                          builder: (context) => InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              context.pushNamed('edit_profile');
-                            },
-                            child: Text(
-                              currentUserDisplayName,
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
-                                    fontSize: 16.0,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyMediumFamily),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 2.0, 0.0),
+                                child: GradientText(
+                                  'Welcome:',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .bodyMediumFamily,
+                                        fontWeight: FontWeight.w800,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMediumFamily),
+                                      ),
+                                  colors: [
+                                    FlutterFlowTheme.of(context).primary,
+                                    FlutterFlowTheme.of(context).secondary
+                                  ],
+                                  gradientDirection: GradientDirection.ltr,
+                                  gradientType: GradientType.linear,
+                                ),
+                              ),
+                              AuthUserStreamWidget(
+                                builder: (context) => InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    context.pushNamed('edit_profile');
+                                  },
+                                  child: Text(
+                                    currentUserDisplayName,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily,
+                                          fontSize: 16.0,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMediumFamily),
+                                        ),
                                   ),
-                            ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         Padding(
@@ -465,6 +486,7 @@ class _ProductsWidgetState extends State<ProductsWidget>
                                     fontFamily: FlutterFlowTheme.of(context)
                                         .titleSmallFamily,
                                     color: Colors.white,
+                                    fontSize: 13.0,
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey(
                                             FlutterFlowTheme.of(context)
@@ -472,10 +494,10 @@ class _ProductsWidgetState extends State<ProductsWidget>
                                   ),
                               elevation: 2.0,
                               borderSide: BorderSide(
-                                color: Color(0xFFFFCA00),
+                                color: Color(0x00FFCA00),
                                 width: 2.0,
                               ),
-                              borderRadius: BorderRadius.circular(8.0),
+                              borderRadius: BorderRadius.circular(20.0),
                             ),
                           ),
                         ),
@@ -491,7 +513,7 @@ class _ProductsWidgetState extends State<ProductsWidget>
                       children: [
                         Container(
                           width: 352.3,
-                          height: 91.1,
+                          height: 63.0,
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
@@ -583,23 +605,8 @@ class _ProductsWidgetState extends State<ProductsWidget>
                                     width: MediaQuery.of(context).size.width *
                                         0.45,
                                     decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          blurRadius: 4.0,
-                                          color: Color(0x3600000F),
-                                          offset: Offset(0.0, 2.0),
-                                        )
-                                      ],
-                                      gradient: LinearGradient(
-                                        colors: [
-                                          FlutterFlowTheme.of(context).primary,
-                                          FlutterFlowTheme.of(context).secondary
-                                        ],
-                                        stops: [0.0, 1.0],
-                                        begin: AlignmentDirectional(0.0, -1.0),
-                                        end: AlignmentDirectional(0, 1.0),
-                                      ),
-                                      borderRadius: BorderRadius.circular(8.0),
+                                      color: Color(0x1E95A1AC),
+                                      borderRadius: BorderRadius.circular(10.0),
                                       shape: BoxShape.rectangle,
                                     ),
                                     child: Padding(
@@ -730,7 +737,7 @@ class _ProductsWidgetState extends State<ProductsWidget>
                                                                     ),
                                                                     borderRadius:
                                                                         BorderRadius.circular(
-                                                                            8.0),
+                                                                            20.0),
                                                                   ),
                                                                 ),
                                                               ),
@@ -804,7 +811,7 @@ class _ProductsWidgetState extends State<ProductsWidget>
                                                                     ),
                                                                     borderRadius:
                                                                         BorderRadius.circular(
-                                                                            8.0),
+                                                                            20.0),
                                                                   ),
                                                                 ),
                                                               ),
@@ -841,8 +848,9 @@ class _ProductsWidgetState extends State<ProductsWidget>
                                                         .override(
                                                           fontFamily:
                                                               'Lexend Deca',
-                                                          color:
-                                                              Color(0xFF090F13),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
                                                           fontSize: 14.0,
                                                           fontWeight:
                                                               FontWeight.normal,
@@ -884,7 +892,7 @@ class _ProductsWidgetState extends State<ProductsWidget>
                                                               'Lexend Deca',
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .secondaryBackground,
+                                                              .primaryText,
                                                           fontSize: 10.0,
                                                           fontWeight:
                                                               FontWeight.normal,
@@ -972,7 +980,7 @@ class _ProductsWidgetState extends State<ProductsWidget>
                                                               'Lexend Deca',
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .secondaryBackground,
+                                                              .primaryText,
                                                           fontSize: 10.0,
                                                           fontWeight:
                                                               FontWeight.normal,
@@ -1040,7 +1048,7 @@ class _ProductsWidgetState extends State<ProductsWidget>
                                                                       .bodyMediumFamily,
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .primaryBtnText,
+                                                                      .primaryText,
                                                                   fontSize:
                                                                       14.0,
                                                                   useGoogleFonts: GoogleFonts
@@ -1058,9 +1066,7 @@ class _ProductsWidgetState extends State<ProductsWidget>
                                                     currentUserReference)
                                                   Icon(
                                                     Icons.post_add,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryBtnText,
+                                                    color: Color(0xFFFFCA00),
                                                     size: 24.0,
                                                   ),
                                               ],

@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -134,9 +135,9 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                               child: Align(
                                 alignment: AlignmentDirectional(0.0, 0.0),
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(16.0),
-                                  child: Image.network(
-                                    editProductProductsRecord.thumb,
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  child: CachedNetworkImage(
+                                    imageUrl: editProductProductsRecord.thumb,
                                     width: double.infinity,
                                     height: double.infinity,
                                     fit: BoxFit.cover,
@@ -185,28 +186,28 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                     color: Color(0x004B39EF),
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(5.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(5.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(5.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(5.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 filled: true,
                                 fillColor: FlutterFlowTheme.of(context)
@@ -220,7 +221,7 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                           ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                28.0, 30.0, 0.0, 0.0),
+                                28.0, 20.0, 0.0, 0.0),
                             child: StreamBuilder<List<SoldRecord>>(
                               stream: querySoldRecord(
                                 singleRecord: true,
@@ -271,7 +272,8 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                       .override(
                                         fontFamily: FlutterFlowTheme.of(context)
                                             .bodyMediumFamily,
-                                        color: Color(0xFF4E5153),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
                                         useGoogleFonts: GoogleFonts.asMap()
                                             .containsKey(
                                                 FlutterFlowTheme.of(context)
@@ -283,7 +285,7 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                   elevation: 2.0,
                                   borderColor: Color(0x004B39EF),
                                   borderWidth: 1.0,
-                                  borderRadius: 5.0,
+                                  borderRadius: 20.0,
                                   margin: EdgeInsetsDirectional.fromSTEB(
                                       12.0, 4.0, 12.0, 4.0),
                                   hidesUnderline: true,
@@ -294,7 +296,7 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                           ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                28.0, 30.0, 0.0, 0.0),
+                                28.0, 20.0, 0.0, 0.0),
                             child: StreamBuilder<List<SoldRecord>>(
                               stream: querySoldRecord(
                                 singleRecord: true,
@@ -346,7 +348,8 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                       .override(
                                         fontFamily: FlutterFlowTheme.of(context)
                                             .bodyMediumFamily,
-                                        color: Color(0xFF4E5153),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
                                         useGoogleFonts: GoogleFonts.asMap()
                                             .containsKey(
                                                 FlutterFlowTheme.of(context)
@@ -358,7 +361,7 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                   elevation: 2.0,
                                   borderColor: Color(0x004B39EF),
                                   borderWidth: 1.0,
-                                  borderRadius: 5.0,
+                                  borderRadius: 20.0,
                                   margin: EdgeInsetsDirectional.fromSTEB(
                                       12.0, 4.0, 12.0, 4.0),
                                   hidesUnderline: true,
@@ -369,7 +372,7 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                           ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                28.0, 30.0, 0.0, 0.0),
+                                28.0, 20.0, 0.0, 0.0),
                             child: FlutterFlowDropDown<String>(
                               controller:
                                   _model.categoryDropDownValueController ??=
@@ -395,7 +398,8 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                   .override(
                                     fontFamily: FlutterFlowTheme.of(context)
                                         .bodyMediumFamily,
-                                    color: Color(0xFF4E5153),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey(
                                             FlutterFlowTheme.of(context)
@@ -407,7 +411,7 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                               elevation: 2.0,
                               borderColor: Color(0x004B39EF),
                               borderWidth: 1.0,
-                              borderRadius: 5.0,
+                              borderRadius: 20.0,
                               margin: EdgeInsetsDirectional.fromSTEB(
                                   12.0, 4.0, 12.0, 4.0),
                               hidesUnderline: true,
@@ -416,7 +420,7 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                           ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                28.0, 30.0, 0.0, 0.0),
+                                28.0, 20.0, 0.0, 0.0),
                             child: FlutterFlowDropDown<String>(
                               controller:
                                   _model.parishDropDownValueController ??=
@@ -448,7 +452,8 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                   .override(
                                     fontFamily: FlutterFlowTheme.of(context)
                                         .bodyMediumFamily,
-                                    color: Color(0xFF4E5153),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey(
                                             FlutterFlowTheme.of(context)
@@ -460,7 +465,7 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                               elevation: 2.0,
                               borderColor: Color(0x004B39EF),
                               borderWidth: 1.0,
-                              borderRadius: 5.0,
+                              borderRadius: 20.0,
                               margin: EdgeInsetsDirectional.fromSTEB(
                                   12.0, 4.0, 12.0, 4.0),
                               hidesUnderline: true,
@@ -469,7 +474,7 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                           ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                28.0, 30.0, 28.0, 0.0),
+                                28.0, 20.0, 28.0, 0.0),
                             child: TextFormField(
                               controller: _model.inputProductDescController ??=
                                   TextEditingController(
@@ -498,28 +503,28 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                     color: Color(0x004B39EF),
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(5.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(5.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(5.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(5.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 filled: true,
                                 fillColor: FlutterFlowTheme.of(context)
@@ -567,28 +572,28 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                       color: Color(0x00FFCA00),
                                       width: 1.0,
                                     ),
-                                    borderRadius: BorderRadius.circular(5.0),
+                                    borderRadius: BorderRadius.circular(20.0),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
-                                    borderRadius: BorderRadius.circular(5.0),
+                                    borderRadius: BorderRadius.circular(20.0),
                                   ),
                                   errorBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
-                                    borderRadius: BorderRadius.circular(5.0),
+                                    borderRadius: BorderRadius.circular(20.0),
                                   ),
                                   focusedErrorBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
-                                    borderRadius: BorderRadius.circular(5.0),
+                                    borderRadius: BorderRadius.circular(20.0),
                                   ),
                                   filled: true,
                                   fillColor: FlutterFlowTheme.of(context)
@@ -641,28 +646,28 @@ class _EditProductWidgetState extends State<EditProductWidget> {
                                       color: Color(0x00FFCA00),
                                       width: 1.0,
                                     ),
-                                    borderRadius: BorderRadius.circular(5.0),
+                                    borderRadius: BorderRadius.circular(20.0),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
-                                    borderRadius: BorderRadius.circular(5.0),
+                                    borderRadius: BorderRadius.circular(20.0),
                                   ),
                                   errorBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
-                                    borderRadius: BorderRadius.circular(5.0),
+                                    borderRadius: BorderRadius.circular(20.0),
                                   ),
                                   focusedErrorBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
-                                    borderRadius: BorderRadius.circular(5.0),
+                                    borderRadius: BorderRadius.circular(20.0),
                                   ),
                                   filled: true,
                                   fillColor: FlutterFlowTheme.of(context)

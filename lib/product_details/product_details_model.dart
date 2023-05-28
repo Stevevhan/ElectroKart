@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_toggle_icon.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -32,6 +33,9 @@ class ProductDetailsModel extends FlutterFlowModel {
   PagingController<DocumentSnapshot?, ProductsRecord>? pagingController;
   Query? pagingQuery;
   List<StreamSubscription?> streamSubscriptions = [];
+
+  // Stores action output result for [Backend Call - Create Document] action in Button widget.
+  ChatsRecord? createdDocumentId;
 
   /// Initialization and disposal methods.
 

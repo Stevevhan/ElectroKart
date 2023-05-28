@@ -131,7 +131,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                             child: Align(
                               alignment: AlignmentDirectional(0.0, 0.0),
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(16.0),
+                                borderRadius: BorderRadius.circular(20.0),
                                 child: Image.network(
                                   _model.uploadedFileUrl,
                                   width: double.infinity,
@@ -246,7 +246,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                                     color: Color(0x00FFCA00),
                                     width: 2.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(8.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                               ),
                             ],
@@ -282,28 +282,28 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(5.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(5.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(5.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(5.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 filled: true,
                                 fillColor: FlutterFlowTheme.of(context)
@@ -354,7 +354,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                               elevation: 2.0,
                               borderColor: Color(0x004B39EF),
                               borderWidth: 1.0,
-                              borderRadius: 5.0,
+                              borderRadius: 20.0,
                               margin: EdgeInsetsDirectional.fromSTEB(
                                   12.0, 4.0, 12.0, 4.0),
                               hidesUnderline: true,
@@ -396,7 +396,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                             elevation: 2.0,
                             borderColor: Color(0x004B39EF),
                             borderWidth: 1.0,
-                            borderRadius: 5.0,
+                            borderRadius: 20.0,
                             margin: EdgeInsetsDirectional.fromSTEB(
                                 12.0, 4.0, 12.0, 4.0),
                             hidesUnderline: true,
@@ -433,7 +433,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                               elevation: 2.0,
                               borderColor: Color(0x004B39EF),
                               borderWidth: 1.0,
-                              borderRadius: 5.0,
+                              borderRadius: 20.0,
                               margin: EdgeInsetsDirectional.fromSTEB(
                                   12.0, 4.0, 12.0, 4.0),
                               hidesUnderline: true,
@@ -474,7 +474,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                             elevation: 2.0,
                             borderColor: Color(0x004B39EF),
                             borderWidth: 1.0,
-                            borderRadius: 5.0,
+                            borderRadius: 20.0,
                             margin: EdgeInsetsDirectional.fromSTEB(
                                 12.0, 4.0, 12.0, 4.0),
                             hidesUnderline: true,
@@ -511,28 +511,28 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                                     color: Color(0x004B39EF),
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(5.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(5.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(5.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(5.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 filled: true,
                                 fillColor: FlutterFlowTheme.of(context)
@@ -567,28 +567,28 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                                       color: Color(0x004B39EF),
                                       width: 1.0,
                                     ),
-                                    borderRadius: BorderRadius.circular(5.0),
+                                    borderRadius: BorderRadius.circular(20.0),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
-                                    borderRadius: BorderRadius.circular(5.0),
+                                    borderRadius: BorderRadius.circular(20.0),
                                   ),
                                   errorBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
-                                    borderRadius: BorderRadius.circular(5.0),
+                                    borderRadius: BorderRadius.circular(20.0),
                                   ),
                                   focusedErrorBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
-                                    borderRadius: BorderRadius.circular(5.0),
+                                    borderRadius: BorderRadius.circular(20.0),
                                   ),
                                   filled: true,
                                   fillColor: FlutterFlowTheme.of(context)
@@ -625,28 +625,28 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                                     color: Color(0x004B39EF),
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(5.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(5.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(5.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(5.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 filled: true,
                                 fillColor: FlutterFlowTheme.of(context)
@@ -844,6 +844,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                               color: Colors.transparent,
                               width: 1.0,
                             ),
+                            borderRadius: BorderRadius.circular(20.0),
                           ),
                         ),
                       ],

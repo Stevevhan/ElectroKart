@@ -168,7 +168,7 @@ class _ReportWidgetState extends State<ReportWidget> {
                                               width: 2.0,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(8.0),
+                                                BorderRadius.circular(20.0),
                                           ),
                                           focusedBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
@@ -176,7 +176,7 @@ class _ReportWidgetState extends State<ReportWidget> {
                                               width: 2.0,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(8.0),
+                                                BorderRadius.circular(20.0),
                                           ),
                                           errorBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
@@ -184,7 +184,7 @@ class _ReportWidgetState extends State<ReportWidget> {
                                               width: 2.0,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(8.0),
+                                                BorderRadius.circular(20.0),
                                           ),
                                           focusedErrorBorder:
                                               OutlineInputBorder(
@@ -193,7 +193,7 @@ class _ReportWidgetState extends State<ReportWidget> {
                                               width: 2.0,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(8.0),
+                                                BorderRadius.circular(20.0),
                                           ),
                                           contentPadding:
                                               EdgeInsetsDirectional.fromSTEB(
@@ -258,6 +258,7 @@ class _ReportWidgetState extends State<ReportWidget> {
                           color: Colors.transparent,
                           width: 1.0,
                         ),
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
                     ),
                   ),

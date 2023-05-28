@@ -202,28 +202,28 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                             color: Color(0xFF2500FF),
                             width: 2.0,
                           ),
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(20.0),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Color(0x00000000),
                             width: 2.0,
                           ),
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(20.0),
                         ),
                         errorBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Color(0x00000000),
                             width: 2.0,
                           ),
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(20.0),
                         ),
                         focusedErrorBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Color(0x00000000),
                             width: 2.0,
                           ),
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(20.0),
                         ),
                         filled: true,
                         fillColor:
@@ -288,6 +288,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                             color: Colors.transparent,
                             width: 1.0,
                           ),
+                          borderRadius: BorderRadius.circular(20.0),
                         ),
                       ),
                     ),
