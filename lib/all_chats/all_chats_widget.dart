@@ -1,6 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/empty_chat_widget.dart';
 import '/flutter_flow/chat/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -44,6 +43,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget> {
       onWillPop: () async => false,
       child: Scaffold(
         key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
@@ -87,13 +87,6 @@ class _AllChatsWidgetState extends State<AllChatsWidget> {
                   );
                 }
                 List<ChatsRecord> listViewChatsRecordList = snapshot.data!;
-                if (listViewChatsRecordList.isEmpty) {
-                  return EmptyChatWidget(
-                    message1: 'No Messages Available',
-                    message2: 'Your Conversations Will Show Up Here',
-                    buttontext: '1',
-                  );
-                }
                 return ListView.builder(
                   padding: EdgeInsets.zero,
                   scrollDirection: Axis.vertical,
@@ -110,7 +103,7 @@ class _AllChatsWidgetState extends State<AllChatsWidget> {
                         return FFChatPreview(
                           onTap: () => context.pushNamed(
                             'chat_page',
-                            queryParams: {
+                            queryParameters: {
                               'chatUser': serializeParam(
                                 chatInfo.otherUsers.length == 1
                                     ? chatInfo.otherUsersList.first
@@ -134,23 +127,23 @@ class _AllChatsWidgetState extends State<AllChatsWidget> {
                               .contains(currentUserReference),
                           title: chatInfo.chatPreviewTitle(),
                           userProfilePic: chatInfo.chatPreviewPic(),
-                          color: Color(0xFFEEF0F5),
+                          color: FlutterFlowTheme.of(context).primaryBackground,
                           unreadColor: Color(0xFFFFCA00),
                           titleTextStyle: GoogleFonts.getFont(
                             'DM Sans',
-                            color: Colors.black,
+                            color: FlutterFlowTheme.of(context).primaryText,
                             fontWeight: FontWeight.bold,
                             fontSize: 14.0,
                           ),
                           dateTextStyle: GoogleFonts.getFont(
                             'DM Sans',
-                            color: Color(0x73000000),
+                            color: FlutterFlowTheme.of(context).primaryText,
                             fontWeight: FontWeight.normal,
                             fontSize: 14.0,
                           ),
                           previewTextStyle: GoogleFonts.getFont(
                             'DM Sans',
-                            color: Color(0x73000000),
+                            color: FlutterFlowTheme.of(context).primaryText,
                             fontWeight: FontWeight.normal,
                             fontSize: 14.0,
                           ),

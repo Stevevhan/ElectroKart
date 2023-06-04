@@ -55,13 +55,16 @@ class _ReportWidgetState extends State<ReportWidget> {
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
-          return Center(
-            child: SizedBox(
-              width: 30.0,
-              height: 30.0,
-              child: SpinKitDualRing(
-                color: Color(0xFFFFCA00),
-                size: 30.0,
+          return Scaffold(
+            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+            body: Center(
+              child: SizedBox(
+                width: 30.0,
+                height: 30.0,
+                child: SpinKitDualRing(
+                  color: Color(0xFFFFCA00),
+                  size: 30.0,
+                ),
               ),
             ),
           );

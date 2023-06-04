@@ -45,6 +45,9 @@ class TestSignUpModel extends FlutterFlowModel {
     return null;
   }
 
+  // State field(s) for sellerdesc widget.
+  TextEditingController? sellerdescController;
+  String? Function(BuildContext, String?)? sellerdescControllerValidator;
   // State field(s) for TOFcheck widget.
   bool? tOFcheckValue;
 
@@ -60,6 +63,7 @@ class TestSignUpModel extends FlutterFlowModel {
     emailAddressCreateController?.dispose();
     phoneNumberCreateController?.dispose();
     passwordCreateController?.dispose();
+    sellerdescController?.dispose();
   }
 
   /// Additional helper methods are added here.

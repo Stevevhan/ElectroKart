@@ -48,6 +48,9 @@ class NewProductModel extends FlutterFlowModel {
   // State field(s) for CategoryDropDown widget.
   String? categoryDropDownValue;
   FormFieldController<String>? categoryDropDownValueController;
+  // State field(s) for BrandDropDown widget.
+  String? brandDropDownValue;
+  FormFieldController<String>? brandDropDownValueController;
   // State field(s) for ParishDropDown widget.
   String? parishDropDownValue;
   FormFieldController<String>? parishDropDownValueController;

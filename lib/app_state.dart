@@ -14,8 +14,12 @@ class FFAppState extends ChangeNotifier {
 
   Future initializePersistedState() async {
     prefs = await SharedPreferences.getInstance();
-    _Likes = prefs.getInt('ff_Likes') ?? _Likes;
-    _Dislikes = prefs.getInt('ff_Dislikes') ?? _Dislikes;
+    _safeInit(() {
+      _Likes = prefs.getInt('ff_Likes') ?? _Likes;
+    });
+    _safeInit(() {
+      _Dislikes = prefs.getInt('ff_Dislikes') ?? _Dislikes;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -91,4 +95,16 @@ LatLng? _latLngFromString(String? val) {
   final lat = double.parse(split.first);
   final lng = double.parse(split.last);
   return LatLng(lat, lng);
+}
+
+void _safeInit(Function() initializeField) {
+  try {
+    initializeField();
+  } catch (_) {}
+}
+
+Future _safeInitAsync(Function() initializeField) async {
+  try {
+    await initializeField();
+  } catch (_) {}
 }

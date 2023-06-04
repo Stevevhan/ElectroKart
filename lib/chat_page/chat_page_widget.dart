@@ -1,4 +1,5 @@
 import '/backend/backend.dart';
+import '/components/empty_chat_widget.dart';
 import '/flutter_flow/chat/index.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -112,13 +113,15 @@ class _ChatPageWidgetState extends State<ChatPageWidget>
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
-          return Center(
-            child: SizedBox(
-              width: 30.0,
-              height: 30.0,
-              child: SpinKitDualRing(
-                color: Color(0xFFFFCA00),
-                size: 30.0,
+          return Scaffold(
+            body: Center(
+              child: SizedBox(
+                width: 30.0,
+                height: 30.0,
+                child: SpinKitDualRing(
+                  color: Color(0xFFFFCA00),
+                  size: 30.0,
+                ),
               ),
             ),
           );
@@ -217,7 +220,8 @@ class _ChatPageWidgetState extends State<ChatPageWidget>
                     ? FFChatPage(
                         chatInfo: snapshot.data!,
                         allowImages: true,
-                        backgroundColor: Color(0xFFF2F4F8),
+                        backgroundColor:
+                            FlutterFlowTheme.of(context).secondaryBackground,
                         timeDisplaySetting: TimeDisplaySetting.visibleOnTap,
                         currentUserBoxDecoration: BoxDecoration(
                           color: Color(0xFFFFCA00),
@@ -258,9 +262,10 @@ class _ChatPageWidgetState extends State<ChatPageWidget>
                           fontWeight: FontWeight.normal,
                           fontSize: 14.0,
                         ),
-                        emptyChatWidget: Image.asset(
-                          'assets/images/messagesEmpty@2x.png',
-                          width: MediaQuery.of(context).size.width * 0.76,
+                        emptyChatWidget: EmptyChatWidget(
+                          message1: 'No Messages',
+                          message2:
+                              'It seems you haven\'t messaged this user before. Start the chat below.',
                         ),
                       )
                     : Center(

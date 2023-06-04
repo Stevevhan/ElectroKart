@@ -33,9 +33,15 @@ class SellerStoreModel extends FlutterFlowModel {
   // State field(s) for searchField widget.
   TextEditingController? searchFieldController;
   String? Function(BuildContext, String?)? searchFieldControllerValidator;
-  // State field(s) for DropDown widget.
-  String? dropDownValue;
-  FormFieldController<String>? dropDownValueController;
+  // State field(s) for CatList widget.
+  String? catListValue;
+  FormFieldController<String>? catListValueController;
+  // State field(s) for ParishList widget.
+  String? parishListValue;
+  FormFieldController<String>? parishListValueController;
+  // State field(s) for BrandDropDown widget.
+  String? brandDropDownValue;
+  FormFieldController<String>? brandDropDownValueController;
   // State field(s) for ListView widget.
   PagingController<DocumentSnapshot?, ProductsRecord>? pagingController;
   Query? pagingQuery;

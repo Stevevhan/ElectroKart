@@ -34,6 +34,7 @@ class _TestSignUpWidgetState extends State<TestSignUpWidget> {
     _model.emailAddressCreateController ??= TextEditingController();
     _model.phoneNumberCreateController ??= TextEditingController();
     _model.passwordCreateController ??= TextEditingController();
+    _model.sellerdescController ??= TextEditingController();
   }
 
   @override
@@ -478,6 +479,88 @@ class _TestSignUpWidgetState extends State<TestSignUpWidget> {
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
+                              20.0, 20.0, 20.0, 0.0),
+                          child: TextFormField(
+                            controller: _model.sellerdescController,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              labelText: '(Optional)',
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .bodySmall
+                                  .override(
+                                    fontFamily: 'Outfit',
+                                    color: Color(0xFF57636C),
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.normal,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .bodySmallFamily),
+                                  ),
+                              hintText: 'Seller Description...',
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .bodySmall
+                                  .override(
+                                    fontFamily: 'Outfit',
+                                    color: FlutterFlowTheme.of(context).gray200,
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.normal,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .bodySmallFamily),
+                                  ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              filled: true,
+                              fillColor: Color(0xE4090F13),
+                              contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                  20.0, 24.0, 20.0, 24.0),
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Outfit',
+                                  color: Colors.white,
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.normal,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .bodyMediumFamily),
+                                ),
+                            maxLines: 3,
+                            validator: _model.sellerdescControllerValidator
+                                .asValidator(context),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 20.0, 0.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -599,6 +682,8 @@ class _TestSignUpWidgetState extends State<TestSignUpWidget> {
                                       _model.displayNameController.text,
                                   phoneNumber:
                                       _model.phoneNumberCreateController.text,
+                                  sellerDescription:
+                                      _model.sellerdescController.text,
                                 );
                                 await UsersRecord.collection
                                     .doc(user.uid)

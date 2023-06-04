@@ -26,9 +26,18 @@ class ProductsModel extends FlutterFlowModel {
   // State field(s) for searchField widget.
   TextEditingController? searchFieldController;
   String? Function(BuildContext, String?)? searchFieldControllerValidator;
+  // State field(s) for Minprice widget.
+  String? minpriceValue;
+  FormFieldController<String>? minpriceValueController;
+  // State field(s) for Maxprice widget.
+  String? maxpriceValue;
+  FormFieldController<String>? maxpriceValueController;
   // State field(s) for DropDown widget.
   String? dropDownValue1;
   FormFieldController<String>? dropDownValueController1;
+  // State field(s) for BrandDropDown widget.
+  String? brandDropDownValue;
+  FormFieldController<String>? brandDropDownValueController;
   // State field(s) for DropDown widget.
   String? dropDownValue2;
   FormFieldController<String>? dropDownValueController2;

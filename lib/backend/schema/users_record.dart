@@ -54,6 +54,11 @@ class UsersRecord extends FirestoreRecord {
   List<DocumentReference> get dislikedBy => _dislikedBy ?? const [];
   bool hasDislikedBy() => _dislikedBy != null;
 
+  // "seller_description" field.
+  String? _sellerDescription;
+  String get sellerDescription => _sellerDescription ?? '';
+  bool hasSellerDescription() => _sellerDescription != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -63,6 +68,7 @@ class UsersRecord extends FirestoreRecord {
     _phoneNumber = snapshotData['phone_number'] as String?;
     _likedBy = getDataList(snapshotData['Liked_by']);
     _dislikedBy = getDataList(snapshotData['Disliked_by']);
+    _sellerDescription = snapshotData['seller_description'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -97,6 +103,7 @@ Map<String, dynamic> createUsersRecordData({
   String? uid,
   DateTime? createdTime,
   String? phoneNumber,
+  String? sellerDescription,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -106,6 +113,7 @@ Map<String, dynamic> createUsersRecordData({
       'uid': uid,
       'created_time': createdTime,
       'phone_number': phoneNumber,
+      'seller_description': sellerDescription,
     }.withoutNulls,
   );
 

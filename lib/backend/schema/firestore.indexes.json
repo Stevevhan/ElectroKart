@@ -1,6 +1,28 @@
 {
   "indexes": [
     {
+      "collectionGroup": "Products",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "parish",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "Category",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "Brand",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "Cost",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
       "collectionGroup": "chats",
       "queryScope": "COLLECTION",
       "fields": [
@@ -19,29 +41,19 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "parish",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "Category",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "Cost",
-          "order": "ASCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "Products",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
           "fieldPath": "Category",
           "order": "ASCENDING"
         },
         {
           "fieldPath": "sellerid",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "parish",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "Brand",
           "order": "ASCENDING"
         },
         {

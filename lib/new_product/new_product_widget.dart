@@ -57,13 +57,16 @@ class _NewProductWidgetState extends State<NewProductWidget> {
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
-          return Center(
-            child: SizedBox(
-              width: 30.0,
-              height: 30.0,
-              child: SpinKitDualRing(
-                color: Color(0xFFFFCA00),
-                size: 30.0,
+          return Scaffold(
+            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+            body: Center(
+              child: SizedBox(
+                width: 30.0,
+                height: 30.0,
+                child: SpinKitDualRing(
+                  color: Color(0xFFFFCA00),
+                  size: 30.0,
+                ),
               ),
             ),
           );
@@ -334,7 +337,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                               ],
                               onChanged: (val) => setState(
                                   () => _model.statusDropDownValue = val),
-                              width: 180.0,
+                              width: 184.0,
                               height: 50.0,
                               textStyle: FlutterFlowTheme.of(context)
                                   .bodySmall
@@ -348,7 +351,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                                             FlutterFlowTheme.of(context)
                                                 .bodySmallFamily),
                                   ),
-                              hintText: 'Product status',
+                              hintText: 'Product Status',
                               fillColor: FlutterFlowTheme.of(context)
                                   .primaryBackground,
                               elevation: 2.0,
@@ -377,7 +380,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                             ],
                             onChanged: (val) => setState(
                                 () => _model.conditionDropDownValue = val),
-                            width: 180.0,
+                            width: 183.0,
                             height: 50.0,
                             textStyle: FlutterFlowTheme.of(context)
                                 .bodySmall
@@ -420,14 +423,16 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                                 'Desktop PC',
                                 'Game Console',
                                 'Accessories',
+                                'Smart TV',
+                                'Home Appliance',
                                 'Other'
                               ],
                               onChanged: (val) => setState(
                                   () => _model.categoryDropDownValue = val),
-                              width: 180.0,
+                              width: 185.0,
                               height: 50.0,
                               textStyle: FlutterFlowTheme.of(context).bodySmall,
-                              hintText: 'Product category',
+                              hintText: 'Product Category',
                               fillColor: FlutterFlowTheme.of(context)
                                   .primaryBackground,
                               elevation: 2.0,
@@ -439,6 +444,89 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                               hidesUnderline: true,
                               isSearchable: false,
                             ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              28.0, 20.0, 0.0, 0.0),
+                          child: FlutterFlowDropDown<String>(
+                            controller: _model.brandDropDownValueController ??=
+                                FormFieldController<String>(null),
+                            options: [
+                              'Apple',
+                              'Samsung',
+                              'Xiaomi',
+                              'Huawei',
+                              'Oppo',
+                              'Vivo',
+                              'OnePlus',
+                              'Google (Pixel)',
+                              'Motorola',
+                              'LG',
+                              'Sony',
+                              'Nokia',
+                              'HTC',
+                              'Lenovo',
+                              'ASUS',
+                              'BlackBerry',
+                              'Meizu',
+                              'ZTE',
+                              'Honor',
+                              'Realme',
+                              'Dell',
+                              'HP (Hewlett-Packard)',
+                              'Acer',
+                              'Microsoft',
+                              'MSI',
+                              'Toshiba',
+                              'Razer',
+                              'Alienware',
+                              'Gigabyte',
+                              'Fujitsu',
+                              'Huawei',
+                              'TCL',
+                              'Vizio',
+                              'Philips',
+                              'Panasonic',
+                              'Hisense',
+                              'Sharp',
+                              'Skyworth',
+                              'Haier',
+                              'RCA',
+                              'JVC',
+                              'Sanyo',
+                              'Hitachi',
+                              'Grundig',
+                              'Changhong',
+                              'Sony (PlayStation)',
+                              'Microsoft (Xbox)',
+                              'Nintendo',
+                              'Bluesonik',
+                              'Imperial',
+                              'Blackpoint',
+                              'Whirlpool',
+                              'Electrolux',
+                              'Bosch',
+                              'KitchenAid',
+                              'Frigidaire',
+                              'Dyson'
+                            ],
+                            onChanged: (val) =>
+                                setState(() => _model.brandDropDownValue = val),
+                            width: 186.0,
+                            height: 50.0,
+                            textStyle: FlutterFlowTheme.of(context).bodySmall,
+                            hintText: 'Product Brand',
+                            fillColor:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                            elevation: 2.0,
+                            borderColor: Color(0x004B39EF),
+                            borderWidth: 1.0,
+                            borderRadius: 20.0,
+                            margin: EdgeInsetsDirectional.fromSTEB(
+                                12.0, 4.0, 12.0, 4.0),
+                            hidesUnderline: true,
+                            isSearchable: true,
                           ),
                         ),
                         Padding(
@@ -465,7 +553,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                             ],
                             onChanged: (val) => setState(
                                 () => _model.parishDropDownValue = val),
-                            width: 180.0,
+                            width: 184.0,
                             height: 50.0,
                             textStyle: FlutterFlowTheme.of(context).bodySmall,
                             hintText: 'Parish',
@@ -793,6 +881,7 @@ class _NewProductWidgetState extends State<NewProductWidget> {
                               quantity: int.tryParse(
                                   _model.inputProductQuantityController.text),
                               condition: _model.conditionDropDownValue,
+                              brand: _model.brandDropDownValue,
                             );
                             var productsRecordReference =
                                 ProductsRecord.collection.doc();

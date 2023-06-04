@@ -19,7 +19,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -29,11 +28,6 @@ import 'package:url_launcher/url_launcher.dart';
 class ProductDetailsModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
-  // State field(s) for ListView widget.
-  PagingController<DocumentSnapshot?, ProductsRecord>? pagingController;
-  Query? pagingQuery;
-  List<StreamSubscription?> streamSubscriptions = [];
-
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
   ChatsRecord? createdDocumentId;
 
@@ -41,9 +35,7 @@ class ProductDetailsModel extends FlutterFlowModel {
 
   void initState(BuildContext context) {}
 
-  void dispose() {
-    streamSubscriptions.forEach((s) => s?.cancel());
-  }
+  void dispose() {}
 
   /// Additional helper methods are added here.
 

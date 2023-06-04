@@ -57,7 +57,7 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
         final parameterData = await parametersBuilder(initialParameterData);
         context.pushNamed(
           initialPageName,
-          params: parameterData.params,
+          pathParameters: parameterData.pathParameters,
           extra: parameterData.extra,
         );
       }
@@ -94,7 +94,7 @@ class ParameterData {
   final Map<String, String?> requiredParams;
   final Map<String, dynamic> allParams;
 
-  Map<String, String> get params => Map.fromEntries(
+  Map<String, String> get pathParameters => Map.fromEntries(
         requiredParams.entries
             .where((e) => e.value != null)
             .map((e) => MapEntry(e.key, e.value!)),
@@ -110,13 +110,13 @@ class ParameterData {
 final parametersBuilderMap =
     <String, Future<ParameterData> Function(Map<String, dynamic>)>{
   'Login': ParameterData.none(),
-  'Products': ParameterData.none(),
   'product_details': (data) async => ParameterData(
         allParams: {
           'productfid': getParameter<DocumentReference>(data, 'productfid'),
           'soldfid': getParameter<DocumentReference>(data, 'soldfid'),
         },
       ),
+  'Products': ParameterData.none(),
   'sellersdb': ParameterData.none(),
   'account': ParameterData.none(),
   'edit_product': (data) async => ParameterData(
@@ -126,7 +126,6 @@ final parametersBuilderMap =
         },
       ),
   'new_product': ParameterData.none(),
-  'edit_profile': ParameterData.none(),
   'change_password': ParameterData.none(),
   'chat_page': (data) async => ParameterData(
         allParams: {
@@ -150,8 +149,9 @@ final parametersBuilderMap =
   'SellerProducts': ParameterData.none(),
   'AllProducts': ParameterData.none(),
   'TestLogin': ParameterData.none(),
-  'TestSignUp': ParameterData.none(),
   'Chatnotice': ParameterData.none(),
+  'TestSignUp': ParameterData.none(),
+  'edit_profile': ParameterData.none(),
   'SellerStore': (data) async => ParameterData(
         allParams: {
           'sellerstoreid':

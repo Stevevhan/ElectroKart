@@ -48,9 +48,9 @@ class _AccountWidgetState extends State<AccountWidget> {
       onWillPop: () async => false,
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
           title: Padding(
             padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
@@ -231,7 +231,8 @@ class _AccountWidgetState extends State<AccountWidget> {
                             width: 341.0,
                             height: 51.0,
                             decoration: BoxDecoration(
-                              color: Color(0x1E95A1AC),
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
                               borderRadius: BorderRadius.circular(20.0),
                             ),
                             child: Align(
@@ -277,7 +278,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                         width: 100.0,
                         height: 51.0,
                         decoration: BoxDecoration(
-                          color: Color(0x1E95A1AC),
+                          color: FlutterFlowTheme.of(context).primaryBackground,
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: Padding(
@@ -354,7 +355,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                         width: 100.0,
                         height: 51.0,
                         decoration: BoxDecoration(
-                          color: Color(0x1E95A1AC),
+                          color: FlutterFlowTheme.of(context).primaryBackground,
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: Padding(
@@ -431,7 +432,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                         width: 100.0,
                         height: 51.0,
                         decoration: BoxDecoration(
-                          color: Color(0x1E95A1AC),
+                          color: FlutterFlowTheme.of(context).primaryBackground,
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: Padding(
@@ -504,7 +505,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                         width: 100.0,
                         height: 51.0,
                         decoration: BoxDecoration(
-                          color: Color(0x1E95A1AC),
+                          color: FlutterFlowTheme.of(context).primaryBackground,
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: Row(
@@ -763,12 +764,13 @@ class _AccountWidgetState extends State<AccountWidget> {
                               iconPadding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
                               color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
+                                  .primaryBackground,
                               textStyle: FlutterFlowTheme.of(context)
                                   .bodySmall
                                   .override(
                                     fontFamily: 'Lexend Deca',
-                                    color: FlutterFlowTheme.of(context).primary,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                     fontSize: 14.0,
                                     fontWeight: FontWeight.normal,
                                     useGoogleFonts: GoogleFonts.asMap()

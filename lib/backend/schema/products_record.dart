@@ -79,6 +79,11 @@ class ProductsRecord extends FirestoreRecord {
   List<DocumentReference> get postLikesBy => _postLikesBy ?? const [];
   bool hasPostLikesBy() => _postLikesBy != null;
 
+  // "Brand" field.
+  String? _brand;
+  String get brand => _brand ?? '';
+  bool hasBrand() => _brand != null;
+
   void _initializeFields() {
     _name = snapshotData['Name'] as String?;
     _category = snapshotData['Category'] as String?;
@@ -93,6 +98,7 @@ class ProductsRecord extends FirestoreRecord {
     _quantity = snapshotData['Quantity'] as int?;
     _condition = snapshotData['Condition'] as String?;
     _postLikesBy = getDataList(snapshotData['Post_likes_by']);
+    _brand = snapshotData['Brand'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -132,6 +138,7 @@ Map<String, dynamic> createProductsRecordData({
   String? status,
   int? quantity,
   String? condition,
+  String? brand,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -145,6 +152,7 @@ Map<String, dynamic> createProductsRecordData({
       'Status': status,
       'Quantity': quantity,
       'Condition': condition,
+      'Brand': brand,
     }.withoutNulls,
   );
 

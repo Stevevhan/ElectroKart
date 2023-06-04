@@ -1,4 +1,5 @@
 import '/backend/backend.dart';
+import '/components/empty_chat_widget.dart';
 import '/flutter_flow/chat/index.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';

@@ -381,7 +381,7 @@ class _SellerProductsWidgetState extends State<SellerProductsWidget> {
                                               onTap: () async {
                                                 context.pushNamed(
                                                   'product_details',
-                                                  queryParams: {
+                                                  queryParameters: {
                                                     'productfid':
                                                         serializeParam(
                                                       listViewProductsRecord

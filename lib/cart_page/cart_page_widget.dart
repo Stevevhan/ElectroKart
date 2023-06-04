@@ -46,9 +46,9 @@ class _CartPageWidgetState extends State<CartPageWidget> {
       onWillPop: () async => false,
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
           title: Row(
             mainAxisSize: MainAxisSize.max,
@@ -72,28 +72,39 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                   ),
                 ),
               ),
-              FlutterFlowIconButton(
-                borderColor: Colors.transparent,
-                borderRadius: 30.0,
-                borderWidth: 1.0,
-                buttonSize: 60.0,
-                fillColor: Color(0x00E0E3E7),
-                icon: Icon(
-                  Icons.search,
-                  color: Color(0xFFF5BC2E),
-                  size: 24.0,
-                ),
-                onPressed: () async {
-                  context.pushNamed(
-                    'searchpage',
-                    extra: <String, dynamic>{
-                      kTransitionInfoKey: TransitionInfo(
-                        hasTransition: true,
-                        transitionType: PageTransitionType.fade,
-                      ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                child: Container(
+                  width: 43.0,
+                  height: 43.0,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).primaryBackground,
+                    borderRadius: BorderRadius.circular(150.0),
+                  ),
+                  child: FlutterFlowIconButton(
+                    borderColor: Colors.transparent,
+                    borderRadius: 30.0,
+                    borderWidth: 1.0,
+                    buttonSize: 60.0,
+                    fillColor: Color(0x00E0E3E7),
+                    icon: Icon(
+                      Icons.search,
+                      color: Color(0xFFF5BC2E),
+                      size: 24.0,
+                    ),
+                    onPressed: () async {
+                      context.pushNamed(
+                        'searchpage',
+                        extra: <String, dynamic>{
+                          kTransitionInfoKey: TransitionInfo(
+                            hasTransition: true,
+                            transitionType: PageTransitionType.fade,
+                          ),
+                        },
+                      );
                     },
-                  );
-                },
+                  ),
+                ),
               ),
             ],
           ),
@@ -168,7 +179,7 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                                       onTap: () async {
                                         context.pushNamed(
                                           'product_details',
-                                          queryParams: {
+                                          queryParameters: {
                                             'productfid': serializeParam(
                                               productsItem,
                                               ParamType.DocumentReference,
@@ -179,7 +190,8 @@ class _CartPageWidgetState extends State<CartPageWidget> {
                                       child: Container(
                                         width: double.infinity,
                                         decoration: BoxDecoration(
-                                          color: Color(0x1E95A1AC),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBackground,
                                           borderRadius:
                                               BorderRadius.circular(20.0),
                                         ),

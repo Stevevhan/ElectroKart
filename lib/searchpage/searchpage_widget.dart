@@ -50,7 +50,7 @@ class _SearchpageWidgetState extends State<SearchpageWidget> {
       onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         body: SafeArea(
           top: true,
           child: SingleChildScrollView(
@@ -379,7 +379,7 @@ class _SearchpageWidgetState extends State<SearchpageWidget> {
                                               onTap: () async {
                                                 context.pushNamed(
                                                   'product_details',
-                                                  queryParams: {
+                                                  queryParameters: {
                                                     'productfid':
                                                         serializeParam(
                                                       listViewProductsRecord
@@ -393,7 +393,9 @@ class _SearchpageWidgetState extends State<SearchpageWidget> {
                                               child: Container(
                                                 width: double.infinity,
                                                 decoration: BoxDecoration(
-                                                  color: Color(0x1E95A1AC),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryBackground,
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           8.0),
@@ -665,7 +667,7 @@ class _SearchpageWidgetState extends State<SearchpageWidget> {
                                           onTap: () async {
                                             context.pushNamed(
                                               'product_details',
-                                              queryParams: {
+                                              queryParameters: {
                                                 'productfid': serializeParam(
                                                   productsItem.reference,
                                                   ParamType.DocumentReference,
@@ -676,7 +678,9 @@ class _SearchpageWidgetState extends State<SearchpageWidget> {
                                           child: Container(
                                             width: double.infinity,
                                             decoration: BoxDecoration(
-                                              color: Color(0x1E95A1AC),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
                                               borderRadius:
                                                   BorderRadius.circular(8.0),
                                             ),

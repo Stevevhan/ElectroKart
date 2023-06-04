@@ -95,3 +95,11 @@ bool? combinedSearchResult(
 
   return false;
 }
+
+int? priceFilterMethod(String? priceFilterValue) {
+  if (priceFilterValue == null || priceFilterValue.isEmpty) {
+    return 0;
+  } else {
+    return int.parse(priceFilterValue);
+  }
+}

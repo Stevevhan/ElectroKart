@@ -24,6 +24,9 @@ class AllProductsModel extends FlutterFlowModel {
   // State field(s) for DropDown widget.
   String? dropDownValue1;
   FormFieldController<String>? dropDownValueController1;
+  // State field(s) for BrandDropDown widget.
+  String? brandDropDownValue;
+  FormFieldController<String>? brandDropDownValueController;
   // State field(s) for DropDown widget.
   String? dropDownValue2;
   FormFieldController<String>? dropDownValueController2;
